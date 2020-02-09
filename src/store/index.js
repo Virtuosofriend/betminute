@@ -1,15 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import auth from './modules/auth';
+import user from './modules/user';
+import notifications from './modules/notifications';
+import axios from 'axios';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+
+axios.defaults.baseURL = 'https://www.bet-minute.com/';
+
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-  }
-})
+    auth,
+    user,
+    notifications
+  },
+});
