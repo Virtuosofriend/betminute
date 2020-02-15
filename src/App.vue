@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { bus } from './main';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -53,6 +52,7 @@ export default {
   :root {
     --theme-black: #000;
     --theme-dark: #495059;
+    --theme-dark-subtitle: #727c86;
     --theme-orange: #ff6768;
     --theme-dark-border: #2b3339;
     --theme-dark-60: #181e23;
@@ -105,107 +105,52 @@ export default {
 
   .main {
     background-color: var(--theme-dark-60);
+    padding: 2em;
   }
   .sidebar {
     align-self: stretch;
     background-color: var(--theme-dark-sidebar);
   }
 
-  .container-top {
-    padding-top: 0px !important;
-    height: 100vh;
-    display: flex;
-    align-items: flex-start;
-  }
-
   .main--wrapper {
-    padding: 1em 1em;
-    height: 100%;
+    margin-top: 0;
+    padding: 0em 1em 0 1em;
   }
 
-  .main--card {
-    background-color: var(--theme-dark-10) !important;
+  .main--title {
+    margin: 1em 0;
+     text-transform: capitalize;
   }
 
-  .main--card-title {
-    padding: 20px 1em;
-    color: var(--theme-dark-30);
-    font-size: 20px;
-  }
-  
-  .main--card-title::before {
-    display: block;
-    content: '';
-    font-weight: 900;
-  }
-
-  .main--card-body {
-    background-color: var(--theme-dark-60);
-    padding: 1.5em 2em;
-    margin-top: .2em;
-    border-radius: 15px;
-    min-height: 350px;
-  }
-
-  .main--card-modal {
-    min-height: 300px;
-  }
-
-  .main--card-modal .modal-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 300px;
-  }
-
-  .main--card-modal img {
-    height: 180px;
-    margin-bottom: 2em;
-    opacity: .6;
-  }
-
-  .theme--dark.v-list {
+  /* General Compns */
+  .theme--dark.v-tabs-items {
     background-color: transparent !important;
-    margin: auto 1em;
+  }
+  .v-progress-circular__underlay {
+    z-index: 1;
+    stroke: #2c343a !important;
   }
 
-  .v-list-item.theme--dark {
-   background-color: #0a3a53;
-   border-radius: 5px;
-  }
-  .v-list-item.theme--dark:not(:last-of-type) {
-    border-bottom: 2px solid var(--theme-darkblue);
-    
-  }
-
-  .theme--dark.v-data-table {
-    background-color: var(--theme-dark-60) !important;
+  /*** Cards  ***/
+  .card--box {
+    display: flex;
+    width: 100%;
+    background-color: var(--theme-dark-10);
+    border-radius: 15px;
+    flex-wrap: wrap;
+    margin: .5em auto;
+    min-height: 50px;
   }
 
-  .table--card header {
-    background-color: var(--theme-dark-60) !important;
-  }
-
-  .theme--light.v-list {
-    background-color: var(--theme-dark-30) !important;
-  }
-
-  .theme--light.v-list .v-list-item .v-list-item__title {
-    font-size: 14px;
-  }
-
-  .error-messages-box {
+  .card--content {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    padding: .5em 1em;
   }
 
-  .error-messages-box .error-messages-success {
-    color: var(--theme-dark-success);
-  }
-
-  .error-messages-box .error-messages-fail {
-    color: var(--theme-dark-warning);
+  .card--content div {
+    width: 100%;
   }
 </style>

@@ -8,23 +8,23 @@ const socket = new WebSocket(`wss://dbsrv.bet-minute.com:${PORT}`);
 // Have to wait for a few ms for the connection to be live
 
 let waitForSocketConnection = (socket, callback) => {
-  setTimeout(
-    function () {
-      if (socket.readyState === 1) {
-        if (callback != null) {
-          callback()
+  if (socket.readyState != 1) {
+    setTimeout(
+      function () {
+        if (socket.readyState != 1) {
+          return waitForSocketConnection(socket, callback)
         }
-      } else {
-        waitForSocketConnection(socket, callback)
-      }
-    }, 5)
+        return callback();
+      }, 5);
+  }
+  
 }
 
 let sendWaiting = msg  => {
   waitForSocketConnection(socket, () => {
-    socket.send(msg)
-  })
-}
+    socket.send(msg);
+  });
+};
 
 
 const emitter = new Vue({
@@ -41,7 +41,11 @@ const emitter = new Vue({
 
     storeUserBanka(data) {
       this.$store.commit("user/banka", data);
-    }
+    },
+
+    storeDashboardLists(data) {
+      this.$store.commit("dashboard/overgoalslists", data);
+    },
   }
 })
 
@@ -57,6 +61,10 @@ socket.onmessage = response => {
 
   if ( socketResponse.action == "getusertipinfo" ) {
     return emitter.storeUserBanka(socketResponse.data);
+  }
+
+  if ( socketResponse.action == "fetchdata" ) {
+    return emitter.storeDashboardLists(socketResponse.data);
   }
 }
 

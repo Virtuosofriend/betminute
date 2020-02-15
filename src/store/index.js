@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import auth from './modules/auth';
 import user from './modules/user';
 import notifications from './modules/notifications';
+import dashboard from './modules/dashboard';
 import axios from 'axios';
 
 Vue.use(Vuex);
@@ -14,6 +15,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     user,
-    notifications
+    notifications,
+    dashboard
   },
 });

@@ -63,7 +63,7 @@ export default {
                 {
                     label: "Dashboard",
                     icon: "",
-                    path: "/"
+                    path: "/dashboard"
                 },{
                     label: "My feed",
                     icon: "",
