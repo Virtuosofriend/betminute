@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
 import '@fortawesome/fontawesome-free/css/all.css'
+import './assets/css/flag-css.min.css';
 
 Vue.config.productionTip = false;
 

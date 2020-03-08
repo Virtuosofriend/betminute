@@ -13,74 +13,89 @@
                 </div>
               </div>
             </div>
-
-            <!-- Card component -->
-                  <div 
-                    class="card--box"
-                    v-for="(game,index) in feed"
+            <v-tabs
+                fixed-tabs
+                background-color="background"
+                dark
+                v-model="tabs"
+                slider-color="#2c343a"
+                slider-size="1"
+              >
+                <v-tab 
+                  class="tab--title"
+                  
+                >
+                  Live feed ({{ feedCalculated.length }})
+                    
+                </v-tab>
+                <v-tab 
+                  class="tab--title"
+                >
+                  Timeline
+                </v-tab>
+                <v-tab 
+                  class="tab--title"
+                >
+                  Favorites
+                </v-tab>
+              </v-tabs>
+              <v-tabs-items
+                v-model="tabs"
+                dark
+                class="tabs--wrapper"
+              >
+                <v-tab-item
+                  style="background-color: transparent"
+                  class="scrollable"
+                >
+                <!-- <code>{{ feed }}</code> -->
+                  <!-- Card component -->
+                <div 
+                    class="feed--box"
+                    v-for="(country,index) in feedCalculated"
                     :key="index"
-                  >
-                  <div class="card--content">
-                    <div class="game--starts">
-                      <p class="game--starts-date">
-                        {{ game.starting_at | properStartingTime }}
-                      </p>
-                      <p class="game--starts-status">
-                        <span 
-                          v-if="game.status == 'FT'"
-                        > Finished</span>
-                        <span 
-                          v-if="game.status == 'LIVE' || game.status == 'HT'"
+                >
+                    <div 
+                        class="feed--box-league"
+                        v-for="(league, index) in country.league_matches"
+                        :key="index"
+                    >
+                        
+                        <div
+                            class="feed--box-header"
                         >
-                          Live now
-                        </span>
-                        <span 
-                          v-if="game.status == 'NS'"
-                        >
-                            Starts {{ displaytime(game.starting_at) }}
-                        </span>
-                      </p>
-                    </div>
-                    <div class="game--tipping">
-                      <p class="game--tipping-result">
-                        {{ game.result }}
-                      </p>
-                      <p class="game--tipping-status" v-if="game.odd">
-                        {{ game.odd }}
-                      </p>
-                      <p class="game--tipping-status" v-else>
-                        Open
-                      </p>
-                    </div>
-                    <div>
-                      <h5 class="team-names">{{ game.home }}</h5>
-                    </div>
-                    <div class="game--score">
-                      <v-progress-circular
-                        :rotate="minuteBar.rotate"
-                        :size="minuteBar.size"
-                        :width="minuteBar.width"
-                        :value="game.minute"
-                        color="#a72693"
-                      >
-                        <span>{{ game.home_score }}:{{ game.away_score }}</span>
-                      </v-progress-circular>
-                    </div>
-                    <div>
-                      <h5 class="team-names">{{ game.away }}</h5>
-                    </div>
-                    <div class="game--country">
-                      <p class="game--country-cntry">
-                        {{ game.country }}
-                      </p>
-                      <p class="game--country-league">
-                        {{ game.league }}
-                      </p>
-                    </div>
 
+                            <div class="country">
+                                <span
+                                :class="`flag flag-fifa-${ country.code.toLowerCase().slice(0,3) }`"
+                                ></span>
+                                <p class="country-name">
+                                    {{ country.country }}
+                                </p> 
+                            </div>
+                            <div class="league">
+                                <p
+                                    class="league-name"
+                                >
+                                    {{ league.league_name }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div 
+                            class="card--box"
+                            v-for="(match, index) in league.match_data"
+                            :key="index"
+                        >
+                            <singleCard v-bind:games="match"></singleCard>
+                        </div>
                     </div>
-                  </div>
+                </div>
                 <!-- ./Card Componenet -->
+                </v-tab-item>
+
+                
+              </v-tabs-items>
           </div>
         </v-col>
 
@@ -93,43 +108,31 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import moment from 'moment';
 import topTipsters from '../views/Dashboard/PanelTopTipsters.vue';
+import singleCard from '../components/SingleCard';
 
 export default {
   name: 'myfeed',
   components: {
-      topTipsters
+      topTipsters,
+      singleCard
   },
   computed: {
     ...mapGetters({
-        feed: "myFeed/livescore"
-    })
+        feed: "myFeed/livescore",
+        tobestarted: "myFeed/notStarted"
+    }),
+
+    feedCalculated() {      
+      return this.feed.concat(this.tobestarted);
+    }
   },
   data() {
         return {
-          tabOver05: null,
-          minuteBar: {
-              rotate: -90,
-              size: 50,
-              width: 4
-          }
+            tabs: null,
         }
     },
-    methods: {
-        displaytime(time) {
-        let offset =  moment().utcOffset();
-        let gametime = moment(time).add(offset, 'minutes');
-        return moment(gametime).fromNow();
-        }
-    },
-    filters: {
-        properStartingTime(value) {
-        let offset =  moment().utcOffset();
-        let date = moment(value).add(offset, 'minutes');
-        return date.format("HH:mm")
-        }
-    },
+
   
   mounted() {    
       this.$store.dispatch("myFeed/fetchLivescore");
@@ -172,51 +175,47 @@ export default {
   font-weight: 400;
 }
 
-.game--starts,
-.game--tipping,
-.game--country {
-  font-size: 12px;
+.scrollable {
+  max-height: 960px;
+  overflow-y: scroll;
+  scrollbar-color: var(--theme-dark-border) var(--theme-dark-60);
+  scrollbar-width: none;
 }
 
-.game--starts .game--starts-date {
-  color: var(--theme-dark-30);
-  margin-bottom: 0;
-}
-.game--starts .game--starts-status {
-  color: var(--theme-dark-subtitle);
-  margin-bottom: 0;
+.feed--box {
+    margin: 2em auto;
 }
 
-.game--tipping .game--tipping-result {
-  color: var(--theme-dark-30);
-  margin-bottom: 0;
-  padding: .2em 0;
+.feed--box-league {
+    padding: 1em auto;
 }
 
-.game--tipping .game--tipping-status {
-  margin-bottom: 0;
-  color: var(--theme-dark-subtitle);
+.feed--box-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0;
 }
 
-.game--country-cntry {
-  margin-bottom: 0;
-  color: var(--theme-dark-30);
+.feed--box-header div {
+    width: 100%;
 }
 
-.game--country-league {
-  margin-bottom: 0;
-  color: var(--theme-dark-subtitle);
+.country {
+    margin-left: 2em;
+}
+.feed--box-header p {
+    margin-bottom: 0;
+    display: inline-flex;
+    font-size: 13px;
 }
 
-.game--score {
-  width: 50px;
-  margin: 0 auto;
-  background-color:#38424b;
-  border-radius: 50%;
-  margin-right: 5em;
+p.country-name {
+    color: var(--theme-dark-subtitle);
+    margin-left: 1em;
 }
-.game--score span {
-  color: var(--theme-dark-30);
-  font-size: 12px;
+
+p.league-name {
+    color: var(--theme-dark-30);
 }
 </style>

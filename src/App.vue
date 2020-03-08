@@ -23,17 +23,17 @@ export default {
   }
   :root {
     --theme-black: #000;
-    --theme-dark: #495059;
+    --theme-dark: #363D44;
     --theme-dark-subtitle: #727c86;
-    --theme-orange: #ff6768;
     --theme-dark-border: #2b3339;
     --theme-dark-60: #181e23;
     --theme-dark-30: #fff;
     --theme-dark-10: #2c343a;
     --theme-dark-sidebar: #16191c;
     --theme-dark-active: #fff;
-    --theme-dark-warning: #EA665D;
-    --theme-dark-success: #97e899;
+    --theme-dark-orange: #A24E3D;
+    --theme-dark-brow: #59291E;
+    --theme-dark-light: #5F86A3;
   }
 
   body,html {

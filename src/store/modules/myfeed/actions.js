@@ -4,7 +4,7 @@ const fetchLivescore = async ({ commit }, payload) => {
     try {
         let message = `{
             "fetchdata":{
-                "globaldata": ["new_livescore"]
+                "globaldata": ["livescore", "notstarted_livescore", "finished_livescore"]
                 }
             }
         `;       

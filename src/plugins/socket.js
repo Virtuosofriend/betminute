@@ -54,6 +54,14 @@ const emitter = new Vue({
     storeLivescore(data) {
       this.$store.commit("myFeed/saveLivescore", data);
     },
+
+    storeNotStarted(data) {
+      this.$store.commit("myFeed/saveNotStarted", data);
+    },
+
+    storeFinished(data) {
+      this.$store.commit("myFeed/saveFinished", data);
+    },
   }
 })
 
@@ -84,8 +92,14 @@ socket.onmessage = response => {
     }
 
     // Livescore
-    if ( socketResponse.data.new_livescore ) {
-      return emitter.storeLivescore(socketResponse.data.new_livescore);
+    if ( socketResponse.data.livescore ) {
+      emitter.storeLivescore(socketResponse.data.livescore);
+    }
+    if ( socketResponse.data.notstarted_livescore ) {
+      emitter.storeNotStarted(socketResponse.data.notstarted_livescore);
+    }
+    if ( socketResponse.data.finished_livescore ) {
+      emitter.storeFinished(socketResponse.data.finished_livescore);
     }
   }
 }
