@@ -4,6 +4,7 @@ import auth from './modules/auth';
 import user from './modules/user';
 import notifications from './modules/notifications';
 import dashboard from './modules/dashboard';
+import myFeed from './modules/myfeed';
 import axios from 'axios';
 
 Vue.use(Vuex);
@@ -15,6 +16,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     user,
+    myFeed,
     notifications,
     dashboard
   },

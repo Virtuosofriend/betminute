@@ -1,11 +1,10 @@
-import moment from 'moment';
 import Socket from '../../../plugins/socket'
 
-const fetchLists = async ({ commi }, payload) => {    
+const fetchLists = async ({ commit }, payload) => {    
     try {
         let message = `{
             "fetchdata":{
-                "globaldata": ["dashboard"]
+                "globaldata": ["dashboard", "top_20_tipsters"]
                 }
             }
         `;
@@ -17,7 +16,24 @@ const fetchLists = async ({ commi }, payload) => {
     }
 };
 
+const fetchTopTipsters = async ({ commit }) => {
+    try {
+        let global_data = ["top_20_tipsters"];
+        let message = `{
+            "fetchdata": {
+              "globaldata": ["top_20_tipsters"]
+              }
+            }
+          `;          
+          Socket.send(message);
+    } catch(e) {
+        console.log(e);
+        
+    }
+};
+
 export default {
-    fetchLists
+    fetchLists,
+    fetchTopTipsters
   };
 

@@ -6,6 +6,7 @@ import Layout from '../layout/Layout.vue';
 import Sidebar from '../layout/Sidebar.vue';
 import Login from '../views/Login.vue';
 import Home from '../views/Dashboard.vue';
+import MyFeed from '../views/MyFeed.vue';
 
 import store from '../store';
 import socket from '../plugins/socket';
@@ -27,6 +28,13 @@ const routes = [
         main: Home,
         sidebar: Sidebar
       },
+    },{
+      name: 'myFeed',
+      path: '/my-feed',
+      components: {
+        main: MyFeed,
+        sidebar: Sidebar
+      },
     }]
   },
   {
@@ -39,7 +47,10 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 });
 
 router.beforeEach((to, from, next) => {  

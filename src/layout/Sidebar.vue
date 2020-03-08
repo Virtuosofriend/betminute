@@ -41,7 +41,7 @@
                 <div class="sidebar--menu">
                     <router-link 
                         v-for="links in menubar" :key="links.label" 
-                        :to="links.path"
+                        :to="{ name: links.path }"
                         exact
                     >
                         {{ links.label }}
@@ -63,23 +63,23 @@ export default {
                 {
                     label: "Dashboard",
                     icon: "",
-                    path: "/dashboard"
+                    path: "dashboard"
                 },{
                     label: "My feed",
                     icon: "",
-                    path: "/myreports"
+                    path: "myFeed"
                 },{
                     label: "BM Center",
                     icon: "",
-                    path: "/addnewreport"
+                    path: "addnewreport"
                 },{
                     label: "Payments",
                     icon: "",
-                    path: "/contact"
+                    path: "contact"
                 },{
                     label: "Settings",
                     icon: "",
-                    path: "/contact"
+                    path: "contact"
                 }
             ]
         }

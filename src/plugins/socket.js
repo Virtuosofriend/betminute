@@ -7,7 +7,7 @@ const socket = new WebSocket(`wss://dbsrv.bet-minute.com:${PORT}`);
 // A little magic to make socket work properly
 // Have to wait for a few ms for the connection to be live
 
-let waitForSocketConnection = (socket, callback) => {
+let waitForSocketConnection = (socket, callback) => {  
   if (socket.readyState != 1) {
     setTimeout(
       function () {
@@ -17,11 +17,11 @@ let waitForSocketConnection = (socket, callback) => {
         return callback();
       }, 5);
   }
-  
+  return callback();
 }
 
 let sendWaiting = msg  => {
-  waitForSocketConnection(socket, () => {
+  waitForSocketConnection(socket, () => {    
     socket.send(msg);
   });
 };
@@ -31,8 +31,8 @@ const emitter = new Vue({
   store,
   methods: {
 
-    send(message) {
-      sendWaiting(message)
+    send(message) {      
+      sendWaiting(message);
     },
 
     storeUser(data) {      
@@ -45,6 +45,14 @@ const emitter = new Vue({
 
     storeDashboardLists(data) {
       this.$store.commit("dashboard/overgoalslists", data);
+    },
+
+    storeTopTipsters(data) {
+      this.$store.commit("dashboard/topTipsters", data);
+    },
+
+    storeLivescore(data) {
+      this.$store.commit("myFeed/saveLivescore", data);
     },
   }
 })
@@ -64,7 +72,21 @@ socket.onmessage = response => {
   }
 
   if ( socketResponse.action == "fetchdata" ) {
-    return emitter.storeDashboardLists(socketResponse.data);
+
+    // dashboard lists
+    if ( socketResponse.data.dashboard ) {
+      emitter.storeDashboardLists(socketResponse.data.dashboard);
+    }
+    
+    // top20 tipsters
+    if ( socketResponse.data.top_20_tipsters ) {      
+      return emitter.storeTopTipsters(socketResponse.data.top_20_tipsters);
+    }
+
+    // Livescore
+    if ( socketResponse.data.new_livescore ) {
+      return emitter.storeLivescore(socketResponse.data.new_livescore);
+    }
   }
 }
 

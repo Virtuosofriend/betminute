@@ -16,7 +16,7 @@ const userPrefs = async ({ commit }, data) => {
     }
 };
 
-const userBanka = async ({ commi }, payload) => {
+const userBanka = async ({ commit }, payload) => {
     
     try {
         let message = `{

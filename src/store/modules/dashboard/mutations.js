@@ -1,5 +1,5 @@
 const overgoalslists = (state, payload) => {    
-    for ( let data of payload.dashboard ) {      
+    for ( let data of payload ) {      
       if ( data.dashboard.bm_market_id == 12 ) {
          state.listsOver1_5ft = data.dashboard;
       }
@@ -16,6 +16,11 @@ const overgoalslists = (state, payload) => {
     }
 };
   
+const topTipsters = (state, list) => {  
+  state.topTipsters = list;
+};
+
 export default {
   overgoalslists,
+  topTipsters
 };

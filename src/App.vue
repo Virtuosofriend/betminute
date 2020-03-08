@@ -11,36 +11,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
   name: 'App',
-  computed: {
-    ...mapGetters({
-      notifications: 'notifications/notifications',
-      confirmDialog: 'notifications/dialog',
-      loggedIn: 'auth/isLoggedIn',
-      userInformation: 'auth/userInformation'
-    })
-  },
-
-  data: () => ({
-  }),
-
-  methods: {
-  },
-
-  mounted() {
-    if (this.loggedIn) {
-      this.$store.dispatch('auth/socketLogin').then(res => {
-        if (res) {
-          this.$store.dispatch('user/userBanka', {...this.userInformation})
-        }
-      });
-    }
-    
-  }
-  
 };
 </script>
 
@@ -119,10 +91,18 @@ export default {
 
   .main--title {
     margin: 1em 0;
-     text-transform: capitalize;
+    text-transform: capitalize;
+  }
+
+  .subtitle {
+    font-weight: 400;
+    text-transform: capitalize;
   }
 
   /* General Compns */
+  .v-slide-group__wrapper {
+    background-color: #181e23 !important;
+  }
   .theme--dark.v-tabs-items {
     background-color: transparent !important;
   }
@@ -130,7 +110,9 @@ export default {
     z-index: 1;
     stroke: #2c343a !important;
   }
-
+  .v-slide-group__content.v-tabs-bar__content {
+    background-color: #181e23 !important;
+  }
   /*** Cards  ***/
   .card--box {
     display: flex;
@@ -153,4 +135,5 @@ export default {
   .card--content div {
     width: 100%;
   }
+
 </style>
