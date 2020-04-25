@@ -1,0 +1,33 @@
+{
+    "Sidebar": {
+        "dashboard":        "Αρχική",
+        "myFeed":           "Ροή αγώνων",
+        "bmcenter":         "Κέντρο BM",
+        "payments":         "Πληρωμές",
+        "settings":         "Επιλογές"
+    },
+    "General": {
+        "continue":         "Continue",
+        "ok":               "OK",
+        "previous":         "Previous step",
+        "listSelect":       "Select one from the list",
+        "pickDate":         "Pick date",
+        "Yes":              "Yes",
+        "No":               "No",
+        "addDocuments":     "Add documents",
+        "cancel":           "Cancel",
+        "save":             "Save",
+        "update":           "Update",
+        "send":             "Send",
+        "saveApplication":  "Save application",
+        "saveFiles":        "Save files",
+        "page":             "Page",
+        "of":               "of",
+        "itemsPerPage":     "Items per page",
+        "search":           "Search",
+        "filesUploaded":    "Files were uploaded successfully",
+        "sortBy":           "Sort by",
+        "back":             "Back",
+        "logout":           "Logout"
+    }
+}

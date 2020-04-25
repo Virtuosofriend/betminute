@@ -28,17 +28,21 @@
                   Live feed ({{ feedCalculated.length }})
                     
                 </v-tab>
+
                 <v-tab 
                   class="tab--title"
                 >
                   Timeline
                 </v-tab>
+
                 <v-tab 
                   class="tab--title"
                 >
                   Favorites
                 </v-tab>
+
               </v-tabs>
+
               <v-tabs-items
                 v-model="tabs"
                 dark
@@ -48,50 +52,9 @@
                   style="background-color: transparent"
                   class="scrollable"
                 >
-                <!-- <code>{{ feed }}</code> -->
-                  <!-- Card component -->
-                <div 
-                    class="feed--box"
-                    v-for="(country,index) in feedCalculated"
-                    :key="index"
-                >
-                    <div 
-                        class="feed--box-league"
-                        v-for="(league, index) in country.league_matches"
-                        :key="index"
-                    >
-                        
-                        <div
-                            class="feed--box-header"
-                        >
-
-                            <div class="country">
-                                <span
-                                :class="`flag flag-fifa-${ country.code.toLowerCase().slice(0,3) }`"
-                                ></span>
-                                <p class="country-name">
-                                    {{ country.country }}
-                                </p> 
-                            </div>
-                            <div class="league">
-                                <p
-                                    class="league-name"
-                                >
-                                    {{ league.league_name }}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div 
-                            class="card--box"
-                            v-for="(match, index) in league.match_data"
-                            :key="index"
-                        >
-                            <singleCard v-bind:games="match"></singleCard>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./Card Componenet -->
+                  <livescore
+                    :data="feedCalculated"
+                  ></livescore>                  
                 </v-tab-item>
 
                 
@@ -109,14 +72,16 @@
 <script>
 import { mapGetters } from 'vuex';
 import topTipsters from '../views/Dashboard/PanelTopTipsters.vue';
-import singleCard from '../components/SingleCard';
+import livescore from '../components/MyFeed/Livescore';
 
 export default {
   name: 'myfeed',
+
   components: {
       topTipsters,
-      singleCard
+      livescore
   },
+
   computed: {
     ...mapGetters({
         feed: "myFeed/livescore",
@@ -127,20 +92,20 @@ export default {
       return this.feed.concat(this.tobestarted);
     }
   },
+
   data() {
         return {
             tabs: null,
         }
     },
 
-  
   mounted() {    
       this.$store.dispatch("myFeed/fetchLivescore");
   }
 }
 </script>
 
-<style scoped>
+<style>
 .daily--tip {
   background: url("../assets/dashboard/dailytip.jpg") no-repeat 50% 30%;
   background-size: cover;
