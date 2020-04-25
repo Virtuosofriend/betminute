@@ -24,13 +24,13 @@
                             <div class="stats--box">
                                 <i class="fas fa-piggy-bank"></i> 
                                 <p>
-                                    {{ banka.banka_info.balance }} <span>Total</span>
+                                    {{ banka.banka_info.balance }} <span> {{ $t( `Banka.total` ) }}</span>
                                 </p> 
                             </div>
                             <div class="stats--box">
                                 <i class="fas fa-balance-scale"></i>
                                 <p>
-                                    {{ banka.banka_info.balance_daily }} <span>Daily</span>
+                                    {{ banka.banka_info.balance_daily }} <span>{{ $t( `Banka.daily` ) }}</span>
                                 </p> 
                             </div> 
                         </div>
@@ -40,11 +40,12 @@
 
                 <div class="sidebar--menu">
                     <router-link 
-                        v-for="links in menubar" :key="links.label" 
+                        v-for="links in menubar" 
+                        :key="links.label" 
                         :to="{ name: links.path }"
                         exact
                     >
-                        {{ links.label }}
+                        {{ $t( `Sidebar.${links.path}` ) }}
                     </router-link>
                 </div>  
             </div>
@@ -55,33 +56,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import menu from '../components/General/Menu';
 
 export default {
     data() {
         return {
-            menubar: [
-                {
-                    label: "Dashboard",
-                    icon: "",
-                    path: "dashboard"
-                },{
-                    label: "My feed",
-                    icon: "",
-                    path: "myFeed"
-                },{
-                    label: "BM Center",
-                    icon: "",
-                    path: "addnewreport"
-                },{
-                    label: "Payments",
-                    icon: "",
-                    path: "contact"
-                },{
-                    label: "Settings",
-                    icon: "",
-                    path: "contact"
-                }
-            ]
+            menubar: menu.menubar
         }
     },
     computed: {
@@ -97,7 +77,10 @@ export default {
             });
         },
     },
+
     mounted() {
+
+        
     }
 }
 </script>

@@ -8,9 +8,9 @@ const fetchLivescore = async ({ commit }, payload) => {
                 }
             }
         `;       
-        Socket.send(message);
+        // Socket.send(message);
     } catch(e) {
-        console.log(e);
+        console.log(e.response);
         
     }
 };
