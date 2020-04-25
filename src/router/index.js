@@ -15,26 +15,33 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    component: Layout,
+    path:       "/",
+    component:  Layout,
     meta: {
       authentication: true,
     },
-    redirect: "/dashboard",
+    redirect:   "/dashboard",
     children: [{
-      name: 'dashboard',
-      path: '/dashboard',
+      name:     "dashboard",
+      path:     "/dashboard",
       components: {
-        main: Home,
-        sidebar: Sidebar
+        main:     Home,
+        sidebar:  Sidebar
       },
     },{
-      name: 'myFeed',
-      path: '/my-feed',
+      name:       "myFeed",
+      path:       "/my-feed",
       components: {
-        main: MyFeed,
-        sidebar: Sidebar
+        main:     MyFeed,
+        sidebar:  Sidebar
       },
+    },{
+      name:       "gameCard",
+      path:       "/:status/game/:gameID",
+      components: {
+        main:     MyFeed,
+        sidebar:  Sidebar
+      }
     }]
   },
   {

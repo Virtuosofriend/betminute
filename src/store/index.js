@@ -5,6 +5,8 @@ import user from './modules/user';
 import notifications from './modules/notifications';
 import dashboard from './modules/dashboard';
 import myFeed from './modules/myfeed';
+import game from './modules/game';
+
 import axios from 'axios';
 
 Vue.use(Vuex);
@@ -18,6 +20,7 @@ export default new Vuex.Store({
     user,
     myFeed,
     notifications,
-    dashboard
+    dashboard,
+    game
   },
 });

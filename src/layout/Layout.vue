@@ -1,18 +1,32 @@
 <template>
   <v-row>
-      <v-col class="col-2 sidebar">
+      <v-col 
+        class="col-md-2 sidebar">
         <router-view name="sidebar" />
       </v-col>
-      <v-col class="col-10 main">
+      <v-col 
+        class="col-md-8 main">
         <router-view name="main" />
+      </v-col>
+      <v-col
+        class="col-md-2"
+      >
+        <topTipsters></topTipsters>
       </v-col>
     </v-row>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import topTipsters from '../views/Dashboard/PanelTopTipsters.vue';
+
 export default {
   name: "layout",
+
+  components: {
+    topTipsters
+  },
+
   computed: {
     ...mapGetters({
         loggedIn: 'auth/isLoggedIn',
