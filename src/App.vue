@@ -11,8 +11,37 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'App',
+
+  computed: {
+    ...mapGetters({
+        loggedIn: "auth/isLoggedIn",
+        userInfo: "auth/userInformation",
+        user:     "feed/information"
+    }),
+  },
+
+  methods: {
+    sendGlobalData() {         
+        this.$store.dispatch("feed/globaldata", {...this.userInfo})
+      }
+  },
+
+  watch: {
+    user(newValue, oldValue) {
+      
+      if ( newValue.paid ) {
+        this.sendGlobalData();
+      }
+    }
+  },
+
+  created() {
+    this.$store.dispatch("auth/socketLogin");
+  }
 };
 </script>
 

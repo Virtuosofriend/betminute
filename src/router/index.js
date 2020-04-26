@@ -7,11 +7,13 @@ import Sidebar from '../layout/Sidebar.vue';
 import Login from '../views/Login.vue';
 import Home from '../views/Dashboard.vue';
 import MyFeed from '../views/MyFeed.vue';
+import GameCard from '../views/GameCard.vue';
 
 import store from '../store';
 import socket from '../plugins/socket';
 
 Vue.use(VueRouter)
+
 
 const routes = [
   {
@@ -39,7 +41,7 @@ const routes = [
       name:       "gameCard",
       path:       "/:status/game/:gameID",
       components: {
-        main:     MyFeed,
+        main:     GameCard,
         sidebar:  Sidebar
       }
     }]

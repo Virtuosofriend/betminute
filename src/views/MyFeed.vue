@@ -92,9 +92,9 @@ export default {
 
   computed: {
     ...mapGetters({
-        feed:         "myFeed/livescore",
-        tobestarted:  "myFeed/notStarted",
-        finished:     "myFeed/finished"
+        feed:         "feed/livescore",
+        tobestarted:  "feed/notStarted",
+        finished:     "feed/finished"
     }),
 
     feedCalculated() {      
@@ -107,10 +107,6 @@ export default {
             tabs: null,
         }
     },
-
-  mounted() {    
-      this.$store.dispatch("myFeed/fetchLivescore");
-  }
 }
 </script>
 

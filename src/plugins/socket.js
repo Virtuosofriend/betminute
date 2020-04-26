@@ -1,13 +1,14 @@
 import Vue from "vue";
 import store from '../store';
 
-const PORT = 8080;
+const PORT = 8081;
 const socket = new WebSocket(`wss://dbsrv.bet-minute.com:${PORT}`);
 
 // A little magic to make socket work properly
 // Have to wait for a few ms for the connection to be live
 
-let waitForSocketConnection = (socket, callback) => {  
+let waitForSocketConnection = (socket, callback) => {
+   
   if (socket.readyState != 1) {
     setTimeout(
       function () {
@@ -21,7 +22,8 @@ let waitForSocketConnection = (socket, callback) => {
 }
 
 let sendWaiting = msg  => {
-  waitForSocketConnection(socket, () => {    
+  waitForSocketConnection(socket, () => {   
+    console.log(msg)
     socket.send(msg);
   });
 };
@@ -31,36 +33,36 @@ const emitter = new Vue({
   store,
   methods: {
 
-    send(message) {      
+    send(message) { 
       sendWaiting(message);
     },
 
     storeUser(data) {      
-      this.$store.dispatch("user/userPrefs", data);
+      this.$store.dispatch("feed/userPrefs", data);
     },
 
     storeUserBanka(data) {
-      this.$store.commit("user/banka", data);
+      this.$store.commit("feed/banka", data);
     },
 
     storeDashboardLists(data) {
-      this.$store.commit("dashboard/overgoalslists", data);
+      this.$store.commit("feed/overgoalslists", data);
     },
 
     storeTopTipsters(data) {
-      this.$store.commit("dashboard/topTipsters", data);
+      this.$store.commit("feed/topTipsters", data);
     },
 
     storeLivescore(data) {
-      this.$store.commit("myFeed/saveLivescore", data);
+      this.$store.commit("feed/saveLivescore", data);
     },
 
     storeNotStarted(data) {
-      this.$store.commit("myFeed/saveNotStarted", data);
+      this.$store.commit("feed/saveNotStarted", data);
     },
 
     storeFinished(data) {
-      this.$store.commit("myFeed/saveFinished", data);
+      this.$store.commit("feed/saveFinished", data);
     },
   }
 })

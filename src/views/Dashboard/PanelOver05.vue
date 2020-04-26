@@ -202,8 +202,8 @@ export default {
     computed: {
         ...mapGetters({
             user:          'user/information',
-            listOver05ht:  'dashboard/listsOver0_5ht',
-            listOver05sec: 'dashboard/listsOver0_5secondhalf'
+            listOver05ht:  'feed/listsOver0_5ht',
+            listOver05sec: 'feed/listsOver0_5secondhalf'
         })
     },
     data() {
