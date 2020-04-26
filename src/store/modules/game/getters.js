@@ -1,9 +1,5 @@
-const livescore = state => state.livescore;
-const notStarted = state => state.notStarted;
-const finished = state => state.finished;
+const fetchgame = state => state.game;
 
 export default {
-  livescore,
-  notStarted,
-  finished
+  fetchgame
 };

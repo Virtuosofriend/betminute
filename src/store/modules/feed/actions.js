@@ -3,22 +3,39 @@ import Socket from '../../../plugins/socket'
 
 const globaldata = async ({ commit } , payload) => {    
     try {
-        let message = `{
-            "fetchdata":{
-                "globaldata": ["livescore", "notstarted_livescore", "finished_livescore", "dashboard", "top_20_tipsters"]
+        const message = [
+            `{
+                "fetchdata":{
+                    "globaldata": ["livescore", "notstarted_livescore", "finished_livescore", "dashboard", "top_20_tipsters"]
+                    }
                 }
-            }
-        `;
-
-        let message2 = `{
-            "getusertipinfo": {
-                "user_id": ${ payload.id }
+            `,
+            `{
+                "getusertipinfo": {
+                    "user_id": ${ payload.id }
+                    }
                 }
-            }
-        `;
-        Socket.send(message);
+            `
+        ];
+        // let message = `{
+        //     "fetchdata":{
+        //         "globaldata": ["livescore", "notstarted_livescore", "finished_livescore", "dashboard", "top_20_tipsters"]
+        //         }
+        //     }
+        // `;
 
-        Socket.send(message2);
+        // let message2 = `{
+        //     "getusertipinfo": {
+        //         "user_id": ${ payload.id }
+        //         }
+        //     }
+        // `;
+        for (let i =0; i < message.length; i++) {
+            Socket.send(message[i]);
+        }
+        // Socket.send(message);
+
+        // Socket.send(message2);
     } catch(e) {
         return e.response;
     }

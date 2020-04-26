@@ -165,4 +165,8 @@ export default {
     width: 100%;
   }
 
+  /** Helpers **/
+  .w-100 {
+    width: 100%;
+  }
 </style>

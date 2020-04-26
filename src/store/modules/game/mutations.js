@@ -1,17 +1,8 @@
-const saveLivescore = (state, payload) => {
-  state.livescore = payload;
+const saveGame = (state, payload) => {  
+  state.game = payload;
 };
 
-const saveNotStarted = (state, payload) => {  
-  state.notStarted = payload;
-};
-
-const saveFinished = (state, payload) => {
-  state.finished = payload;
-};
 
 export default {
-  saveLivescore,
-  saveNotStarted,
-  saveFinished
+  saveGame
 };

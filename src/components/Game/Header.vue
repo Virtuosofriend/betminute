@@ -1,10 +1,149 @@
 <template>
     <div class="daily--tip">
         <div class="daily--tip-wrapper">
-            <div class="overlay"></div>
-            <h2>
-                {{ $t( `Sidebar.myFeed` ) }}
-             </h2>
+          <div class="overlay"></div>
+          <div
+            class="header"
+          >
+            <div class="w-100">
+              <div class="d-flex">
+                <div 
+                  class="weather--icon"
+                >
+                  <v-img
+                    :src="dataLineup.condition.icon"
+                  >
+                  </v-img>                
+                </div>
+
+                <div
+                  class="weather--info"
+                >
+                  <h6>
+                    {{ dataLineup.condition.temp }}°C <span style="opacity:.2">|</span> {{ dataLineup.condition.humidity }}
+                  </h6>
+                  <p class="mb-0">
+                     {{ dataLineup.condition.type | uppercase }}
+                  </p>
+                </div>
+              </div>
+              
+              
+            </div>
+
+            <div class="w-100">
+              <div class="game--score">
+
+                <div class="league">
+                  <h3>
+                    {{ dataLineup.country }}
+                    <span>
+                      {{ dataLineup.league }}
+                    </span>
+                  </h3>
+                </div>
+
+                <div class="score">
+                  <h1>
+                    {{ dataHome.goals }} - {{ dataAway.goals }}
+                    <small class="text-center d-block">
+                      {{ dataLineup.minute }}'
+                      <span
+                        v-show="dataLineup.injury_time != null"
+                      >
+                        {{ dataLineup.injury_time }}
+                      </span>
+                    </small>
+                  </h1>
+                </div>
+                
+              </div>
+              
+            </div>
+
+            <!-- Right Side -->
+
+            <div class="w-100">
+              <div class="cta-button">
+                <v-btn
+                  color="primary"
+                  depressed
+                  small
+                >
+                  Add tips
+                </v-btn>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="team--wrapper">
+            <v-row>
+              <v-col
+                sm="6"
+              >
+                <div class="team--box home">
+
+                  <div 
+                    class="team--logo"
+                  >
+
+                    <v-img
+                      :src="dataHome.logo"
+                    >
+
+                    </v-img>
+
+                  </div>
+
+                  <div
+                    class="team--text"
+                  >
+                    <h4>
+                      {{ dataHome.name }}
+
+                      <small>
+                        {{ dataHome.recent_form }}
+                      </small>
+                    </h4>
+                  </div>
+                  
+                </div>
+              </v-col>
+
+              <v-col
+                sm="6"
+              >
+                <div class="team--box away">
+
+                  <div 
+                    class="team--logo"
+                  >
+
+                    <v-img
+                      :src="dataAway.logo"
+                    >
+
+                    </v-img>
+
+                  </div>
+
+                  <div
+                    class="team--text"
+                  >
+                    <h4>
+                      {{ dataAway.name }}
+
+                      <small>
+                        {{ dataAway.recent_form }}
+                      </small>
+                    </h4>
+                  </div>
+                       
+                </div>
+              </v-col>
+            </v-row>
+          </div>
         </div>
     </div>
 </template>
@@ -13,12 +152,23 @@
 export default {
     name: "GameHeader",
 
+    props: {
+      dataLineup: {
+        type: Object
+      },
+      dataHome: {
+        type: Object
+      },
+      dataAway: {
+        type: Object
+      }
+    }
 }
 </script>
 
 <style scoped>
 .daily--tip {
-  background: url("../../assets/dashboard/dailytip.jpg") no-repeat 50% 30%;
+  background: url("../../assets/games/back.jpg") no-repeat 50% 30%;
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -41,15 +191,121 @@ export default {
 .daily--tip-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100%;
   padding: 1em;
   position: relative;
 }
 
-.daily--tip-wrapper h2 {
-  font-weight: 400;
+.header {
+  display: flex;
+  width: 100%;
   z-index: 10;
+}
+
+.weather--icon {
+  object-fit: contain;
+  width: 40px;
+  height: 40px;
+  padding: .2em;
+  border-radius: 10px;
+  background-color: var(--theme-dark-10);
+}
+
+.weather--info {
+  margin-left: 1em;
+}
+
+.weather--info h6 {
+  font-weight: 600;
+  font-size: 14px;
+}
+.weather--info p {
+  font-size: 12px;
+  color: var(--theme-dark-30);
+  opacity: .5;
+  text-transform: uppercase;
+}
+.team--wrapper {
+  margin-top: auto;
+  width: 100%;
+}
+
+.team--box {
+  display: flex;
+  width: 100%;
+  margin-top: auto;
+  flex-direction: column;
+}
+
+.team--box.home {
+   align-items: flex-start;
+     padding-left: 1em;
+}
+
+.team--box.away {
+  align-items: flex-end;
+  padding-right: 1em;
+}
+
+.team--logo {
+  object-fit: contain;
+  width: 50px;
+  height: 50px;
+  padding: .6em;
+  border-radius: 50%;
+  background-color: var(--theme-dark-60);
+}
+
+.team--text {
+  z-index: 10;
+}
+
+.team--text h4 {
+  font-weight: 400;
+}
+
+.team--text h4 > small {
+  display: block;
+  opacity: .5;
+}
+
+.game--score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.league h3 {
+  font-weight: 600;
+  opacity: 1;
+  text-align: center;
+  font-size: 16px;
+}
+
+.league h3 > span {
+  font-weight: 400;
+  opacity: .6;
+  display: block;
+  margin-bottom: 1em;
+  font-size: 14px;
+}
+
+.score h1 small {
+  font-size: 60%;
+  font-weight: 400;
+}
+
+.score h1 small > span{
+  font-size: 12px;
+  font-weight: 400;
+  opacity: .6;
+}
+
+.cta-button {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1em;
 }
 </style>

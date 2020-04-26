@@ -23,7 +23,6 @@ let waitForSocketConnection = (socket, callback) => {
 
 let sendWaiting = msg  => {
   waitForSocketConnection(socket, () => {   
-    console.log(msg)
     socket.send(msg);
   });
 };
@@ -64,12 +63,16 @@ const emitter = new Vue({
     storeFinished(data) {
       this.$store.commit("feed/saveFinished", data);
     },
+
+    storeGame(data) {      
+      this.$store.commit("game/saveGame", data);
+    },
   }
 })
 
 socket.onmessage = response => { 
   let socketResponse = JSON.parse(response.data); 
-  console.log(socketResponse);
+  // console.log(socketResponse);
   
   if ( socketResponse.action == "authenticateuser" ) {
     if ( socketResponse.data.status == "OK" ) {
@@ -90,7 +93,7 @@ socket.onmessage = response => {
     
     // top20 tipsters
     if ( socketResponse.data.top_20_tipsters ) {      
-      return emitter.storeTopTipsters(socketResponse.data.top_20_tipsters);
+      emitter.storeTopTipsters(socketResponse.data.top_20_tipsters);
     }
 
     // Livescore
@@ -102,6 +105,16 @@ socket.onmessage = response => {
     }
     if ( socketResponse.data.finished_livescore ) {
       emitter.storeFinished(socketResponse.data.finished_livescore);
+    }
+
+    // Game Data
+    if ( socketResponse.data.livescore_lineup ) {
+      let obj = {
+        lineup:       socketResponse.data.livescore_lineup || "",
+        bm_live_data: socketResponse.data.bm_live_data || "",
+        match_stats:  socketResponse.data.match_stats || ""
+      };      
+      emitter.storeGame(obj);
     }
   }
 }

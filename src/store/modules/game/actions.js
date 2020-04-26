@@ -1,14 +1,24 @@
 import Socket from '../../../plugins/socket'
 
-const fetchLivescore = async ({ commit }, payload) => {    
+const gameInfo = async ({ commit }, payload) => {    
     try {
+
+        const odds = (payload.status == "LIVE" || payload.status == "HT" ) ? "livegame_odds" : "pregame_odds";
+
         let message = `{
             "fetchdata":{
-                "globaldata": ["livescore", "notstarted_livescore", "finished_livescore"]
-                }
+                "matchview": {
+                    "id": ${payload.gameID},
+                    "data": ["bm_pregame_data", "bm_static_data", "match_stats", "bm_live_data", "livescore_lineup", "${odds}"]
+                } 
             }
-        `;       
-        // Socket.send(message);
+        }`;     
+
+        setTimeout(() =>{
+            Socket.send(message);
+        }, 500)
+        
+
     } catch(e) {
         console.log(e.response);
         
@@ -17,6 +27,6 @@ const fetchLivescore = async ({ commit }, payload) => {
 
 
 export default {
-    fetchLivescore
+    gameInfo
 };
 
