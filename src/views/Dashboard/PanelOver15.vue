@@ -121,7 +121,7 @@ export default {
     computed: {
         ...mapGetters({
             user:          'user/information',
-            listOver15ft:  'dashboard/listsOver1_5ft'
+            listOver15ft:  'feed/listsOver1_5ft'
         })
     },
     data() {

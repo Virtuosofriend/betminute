@@ -1,4 +1,4 @@
-const session = (state, data) => {
+const session = (state, data) => {    
     state.user = data;
   };
   

@@ -38,9 +38,9 @@ export default {
 <style scoped>
 .event-icon {
     opacity: .5;
-    width: 15px;
+    width: 14px;
     object-fit: cover;
-    height: 15px;
+    height: 14px;
     margin: .3em;
 }
 

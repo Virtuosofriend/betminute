@@ -21,8 +21,7 @@ export default {
     name: 'topTipsters',
     computed: {
         ...mapGetters({
-            user:           "user/information",
-            topTipsters:    "dashboard/topTipsters"
+            topTipsters:    "feed/topTipsters"
         })
     },
     data() {
@@ -34,9 +33,6 @@ export default {
     methods: {
         
     },
-    mounted() {               
-        this.$store.dispatch("dashboard/fetchTopTipsters");
-  }
 }
 </script>
 

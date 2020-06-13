@@ -6,8 +6,10 @@ import vuetify from './plugins/vuetify';
 import '@fortawesome/fontawesome-free/css/all.css'
 import './assets/css/flag-css.min.css';
 import i18n from './plugins/i18n';
+import HighchartsVue from 'highcharts-vue'
 
 Vue.config.productionTip = false;
+Vue.use(HighchartsVue);
 
 new Vue({
   router,

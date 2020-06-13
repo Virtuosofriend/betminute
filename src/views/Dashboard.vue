@@ -3,7 +3,7 @@
       fluid
     >
       <v-row>
-        <v-col md="8">
+        <v-col md="12">
           <div class="main--wrapper">
             <div class="daily--tip">
               
@@ -21,9 +21,6 @@
           </div>
         </v-col>
 
-        <v-col md="4">
-          <topTipsters></topTipsters>
-        </v-col>
       </v-row>
     </v-container>
 </template>
@@ -33,22 +30,19 @@ import { mapGetters } from 'vuex';
 
 import panelOver05 from '../views/Dashboard/PanelOver05.vue';
 import panelOver15 from '../views/Dashboard/PanelOver15.vue';
-import topTipsters from '../views/Dashboard/PanelTopTipsters.vue';
 
 export default {
   name: 'dashboard',
+
   components: {
     panelOver05,
-    panelOver15,
-    topTipsters
+    panelOver15
   },
+  
   data() {
     return {      
     }
   },
-  mounted() {
-    this.$store.dispatch("dashboard/fetchLists");
-  }
 }
 </script>
 

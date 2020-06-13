@@ -51,19 +51,19 @@
 </template>
 
 <script>
-import singleCard from '../SingleCard';
 
 export default {
     name: "Livescore",
 
-    components: {
-        singleCard
-    },
-
     props: {
         data: {
-            type: Array
+            type:       Array,
+            required:   true
         }
+    },
+
+    components: {
+        singleCard: () => import("../SingleCard")
     }
 }
 </script>

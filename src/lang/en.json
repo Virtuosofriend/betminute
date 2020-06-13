@@ -33,5 +33,29 @@
         "sortBy":           "Sort by",
         "back":             "Back",
         "logout":           "Logout"
+    },
+    "myFeed": {
+        "livefeed":         "Live feed",
+        "timeline":         "Timeline",
+        "favorites":        "Favorites"
+    },
+    "Games": {
+        "finished":         "Finished",
+        "live":             "Live now",
+        "starts":           "Starts",
+        "minute":           "Minute",
+        "gameEvents": {
+            "match_mobility_1": "Match mobility 1",
+            "match_mobility_2": "Match mobility 2",
+            "match_mobility_3": "Match mobility 3",
+            "hot70":            "Goal to be scored after 70'",
+            "hot30":            "First goal to be scored after 30'",
+            "wait_goal":        "Late goal to be scored",
+            "missed_penalty":   "Missed penalty",
+            "redcard":          "Red card",
+            "yellowcard":       "Yellow card",
+            "event_corner":     "Corner kick",
+            "event_goal":       "Goal scored"
+        }
     }
 }

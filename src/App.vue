@@ -11,8 +11,37 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'App',
+
+  computed: {
+    ...mapGetters({
+        loggedIn: "auth/isLoggedIn",
+        userInfo: "auth/userInformation",
+        user:     "feed/information"
+    }),
+  },
+
+  methods: {
+    sendGlobalData() {         
+        this.$store.dispatch("feed/globaldata", {...this.userInfo})
+      }
+  },
+
+  watch: {
+    user(newValue, oldValue) {
+      
+      if ( newValue.paid ) {
+        this.sendGlobalData();
+      }
+    }
+  },
+
+  created() {
+    this.$store.dispatch("auth/socketLogin");
+  }
 };
 </script>
 
@@ -33,7 +62,10 @@ export default {
     --theme-dark-active: #fff;
     --theme-dark-orange: #A24E3D;
     --theme-dark-brow: #59291E;
-    --theme-dark-light: #5F86A3;
+    --theme-dark-accent: #5F86A3;
+    --theme-dark-success: #4bb288;
+    --theme-dark-error: #aa2e38;
+    --theme-dark-warning: #eb9a28;
   }
 
   body,html {
@@ -136,4 +168,8 @@ export default {
     width: 100%;
   }
 
+  /** Helpers **/
+  .w-100 {
+    width: 100%;
+  }
 </style>

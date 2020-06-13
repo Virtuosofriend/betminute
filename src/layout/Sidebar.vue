@@ -66,8 +66,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            user:    "user/information",
-            banka:   "user/banka"
+            user:    "feed/information",
+            banka:   "feed/banka"
         })
     },
     methods: {

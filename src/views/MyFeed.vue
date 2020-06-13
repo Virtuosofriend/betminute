@@ -3,13 +3,15 @@
       fluid
     >
       <v-row>
-        <v-col md="8">
+        <v-col md="12">
           <div class="main--wrapper">
             <div class="daily--tip">
               
               <div class="daily--tip-wrapper">
                 <div>
-                  <h2>My Feed</h2>
+                  <h2>
+                    {{ $t( `Sidebar.myFeed` ) }}
+                  </h2>
                 </div>
               </div>
             </div>
@@ -23,22 +25,23 @@
               >
                 <v-tab 
                   class="tab--title"
-                  
+                  href="#live"
                 >
-                  Live feed ({{ feedCalculated.length }})
-                    
+                  {{ $t( `myFeed.livefeed` ) }}({{ feed.length }})
                 </v-tab>
 
                 <v-tab 
                   class="tab--title"
+                  href="#timeline"
                 >
-                  Timeline
+                  {{ $t( `myFeed.timeline` ) }}
                 </v-tab>
 
                 <v-tab 
                   class="tab--title"
+                  href="#favs"
                 >
-                  Favorites
+                  {{ $t( `myFeed.favorites` ) }}
                 </v-tab>
 
               </v-tabs>
@@ -51,19 +54,25 @@
                 <v-tab-item
                   style="background-color: transparent"
                   class="scrollable"
+                  value="live"
                 >
                   <livescore
-                    :data="feedCalculated"
+                    :data="feed"
                   ></livescore>                  
                 </v-tab-item>
 
+                <v-tab-item
+                  style="background-color: transparent"
+                  class="scrollable"
+                  value="timeline"
+                >
+                  <livescore
+                    :data="finished"
+                  ></livescore>                  
+                </v-tab-item>
                 
               </v-tabs-items>
           </div>
-        </v-col>
-
-        <v-col md="4">
-          <topTipsters></topTipsters>
         </v-col>
       </v-row>
     </v-container>
@@ -71,37 +80,26 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import topTipsters from '../views/Dashboard/PanelTopTipsters.vue';
-import livescore from '../components/MyFeed/Livescore';
 
 export default {
-  name: 'myfeed',
+    name: 'myfeed',
 
-  components: {
-      topTipsters,
-      livescore
-  },
-
-  computed: {
-    ...mapGetters({
-        feed: "myFeed/livescore",
-        tobestarted: "myFeed/notStarted"
-    }),
-
-    feedCalculated() {      
-      return this.feed.concat(this.tobestarted);
-    }
-  },
-
-  data() {
+    data() {
         return {
             tabs: null,
         }
     },
 
-  mounted() {    
-      this.$store.dispatch("myFeed/fetchLivescore");
-  }
+    computed: {
+        ...mapGetters({
+            feed:         "feed/livescore",
+            finished:     "feed/finished"
+        })
+    },
+
+    components: {
+        livescore: () => import("../components/MyFeed/Livescore")
+    },  
 }
 </script>
 

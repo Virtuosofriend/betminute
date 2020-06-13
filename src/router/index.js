@@ -7,34 +7,43 @@ import Sidebar from '../layout/Sidebar.vue';
 import Login from '../views/Login.vue';
 import Home from '../views/Dashboard.vue';
 import MyFeed from '../views/MyFeed.vue';
+import GameCard from '../views/GameCard.vue';
 
 import store from '../store';
 import socket from '../plugins/socket';
 
 Vue.use(VueRouter)
 
+
 const routes = [
   {
-    path: '/',
-    component: Layout,
+    path:       "/",
+    component:  Layout,
     meta: {
       authentication: true,
     },
-    redirect: "/dashboard",
+    redirect:   "/dashboard",
     children: [{
-      name: 'dashboard',
-      path: '/dashboard',
+      name:     "dashboard",
+      path:     "/dashboard",
       components: {
-        main: Home,
-        sidebar: Sidebar
+        main:     Home,
+        sidebar:  Sidebar
       },
     },{
-      name: 'myFeed',
-      path: '/my-feed',
+      name:       "myFeed",
+      path:       "/my-feed",
       components: {
-        main: MyFeed,
-        sidebar: Sidebar
+        main:     MyFeed,
+        sidebar:  Sidebar
       },
+    },{
+      name:       "gameCard",
+      path:       "/:status/game/:gameID",
+      components: {
+        main:     GameCard,
+        sidebar:  Sidebar
+      }
     }]
   },
   {
