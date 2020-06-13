@@ -27,7 +27,7 @@
                   class="tab--title"
                   href="#live"
                 >
-                  {{ $t( `myFeed.livefeed` ) }}({{ feedCalculated.length }})
+                  {{ $t( `myFeed.livefeed` ) }}({{ feed.length }})
                 </v-tab>
 
                 <v-tab 
@@ -57,7 +57,7 @@
                   value="live"
                 >
                   <livescore
-                    :data="feedCalculated"
+                    :data="feed"
                   ></livescore>                  
                 </v-tab-item>
 
@@ -81,32 +81,25 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import livescore from '../components/MyFeed/Livescore';
-
 export default {
-  name: 'myfeed',
+    name: 'myfeed',
 
-  components: {
-      livescore
-  },
-
-  computed: {
-    ...mapGetters({
-        feed:         "feed/livescore",
-        tobestarted:  "feed/notStarted",
-        finished:     "feed/finished"
-    }),
-
-    feedCalculated() {      
-      return this.feed.concat(this.tobestarted);
-    }
-  },
-
-  data() {
+    data() {
         return {
             tabs: null,
         }
     },
+
+    computed: {
+        ...mapGetters({
+            feed:         "feed/livescore",
+            finished:     "feed/finished"
+        })
+    },
+
+    components: {
+        livescore: () => import("../components/MyFeed/Livescore")
+    },  
 }
 </script>
 

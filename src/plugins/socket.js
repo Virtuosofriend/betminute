@@ -1,7 +1,7 @@
 import Vue from "vue";
 import store from '../store';
 
-const PORT = 8081;
+const PORT = 8080;
 const socket = new WebSocket(`wss://dbsrv.bet-minute.com:${PORT}`);
 
 // A little magic to make socket work properly
@@ -72,7 +72,7 @@ const emitter = new Vue({
 
 socket.onmessage = response => { 
   let socketResponse = JSON.parse(response.data); 
-  // console.log(socketResponse);
+  console.log(socketResponse);
   
   if ( socketResponse.action == "authenticateuser" ) {
     if ( socketResponse.data.status == "OK" ) {

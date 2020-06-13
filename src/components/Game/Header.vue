@@ -23,11 +23,30 @@
                     {{ dataLineup.condition.temp }}°C <span style="opacity:.2">|</span> {{ dataLineup.condition.humidity }}
                   </h6>
                   <p class="mb-0">
-                     {{ dataLineup.condition.type | uppercase }}
+                     {{ dataLineup.condition.type }}
                   </p>
                 </div>
               </div>
-              
+            
+            <!-- Stadium details -->
+              <div class="d-flex mt-6">
+                <div 
+                  class="weather--icon stadium"
+                >
+                  <img src="../../assets/games/stadium.png" style="width: 25px">          
+                </div>
+
+                <div
+                  class="weather--info"
+                >
+                  <h6>
+                    {{ dataLineup.venue.name }}
+                  </h6>
+                  <p class="mb-0">
+                     {{ dataLineup.venue.capacity }}
+                  </p>
+                </div>
+              </div>
               
             </div>
 
@@ -44,7 +63,7 @@
                 </div>
 
                 <div class="score">
-                  <h1>
+                  <h1 class="text-center">
                     {{ dataHome.goals }} - {{ dataAway.goals }}
                     <small class="text-center d-block">
                       {{ dataLineup.minute }}'
@@ -54,6 +73,10 @@
                         {{ dataLineup.injury_time }}
                       </span>
                     </small>
+
+                    <span class="d-block referre">
+                        {{ dataLineup.referee }}
+                    </span>
                   </h1>
                 </div>
                 
@@ -91,7 +114,6 @@
                     <v-img
                       :src="dataHome.logo"
                     >
-
                     </v-img>
 
                   </div>
@@ -100,11 +122,10 @@
                     class="team--text"
                   >
                     <h4>
-                      {{ dataHome.name }}
-
-                      <small>
-                        {{ dataHome.recent_form }}
-                      </small>
+                        {{ dataHome.name }}
+                        <team-form
+                            :form="dataHome.recent_form"
+                        ></team-form>
                     </h4>
                   </div>
                   
@@ -123,7 +144,6 @@
                     <v-img
                       :src="dataAway.logo"
                     >
-
                     </v-img>
 
                   </div>
@@ -132,11 +152,10 @@
                     class="team--text"
                   >
                     <h4>
-                      {{ dataAway.name }}
-
-                      <small>
-                        {{ dataAway.recent_form }}
-                      </small>
+                        {{ dataAway.name }}
+                        <team-form
+                            :form="dataAway.recent_form"
+                        ></team-form>
                     </h4>
                   </div>
                        
@@ -162,6 +181,10 @@ export default {
       dataAway: {
         type: Object
       }
+    },
+
+    components: {
+        teamForm: () => import("../General/TeamFormGraphic")
     }
 }
 </script>
@@ -211,8 +234,12 @@ export default {
   padding: .2em;
   border-radius: 10px;
   background-color: var(--theme-dark-10);
+  text-align: center;
 }
 
+.weather--icon.stadium {
+    padding: .5em;
+}
 .weather--info {
   margin-left: 1em;
 }
@@ -251,8 +278,8 @@ export default {
 
 .team--logo {
   object-fit: contain;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   padding: .6em;
   border-radius: 50%;
   background-color: var(--theme-dark-60);
@@ -307,5 +334,12 @@ export default {
   display: flex;
   justify-content: flex-end;
   padding-right: 1em;
+}
+
+.referre {
+    font-size: 12px;
+    text-transform: initial;
+    font-weight: 300;
+    margin-top: 1em;
 }
 </style>

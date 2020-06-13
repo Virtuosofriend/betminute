@@ -2,16 +2,47 @@
     <v-container 
       fluid
     >
-        <v-row>
-            <v-col md="12">
+        <v-row
+            v-if="game.lineup"
+        >
+            <v-col 
+                md="12"
+            >
                 <Game-header
                     :dataLineup="game.lineup"
                     :dataHome="homeTeam"
                     :dataAway="awayTeam"
                 ></Game-header>
-                <code>
+            </v-col>
+
+            <v-col cols="12" md="4">
+                <div class="card--box">
+                    pregame suggestions
+                </div>
+                
+            </v-col>
+
+            <v-col cols="12" md="8">
+                <div class="card--box">
+                    <game-live-stats
+                        :gameData="game.bm_live_data"
+                        :homeTeam="homeTeam.logo"
+                        :awayTeam="awayTeam.logo"
+                    >
+                    </game-live-stats>
+                </div>
+                
+            </v-col>
+                
+                <!-- <code>
                     {{ game }}
-                </code>
+                </code> -->
+            
+        </v-row>
+
+        <v-row v-else>
+            <v-col cols="12">
+                <h2>No data available</h2>
             </v-col>
         </v-row>
     </v-container>
@@ -25,18 +56,12 @@ import GameHeader from '../components/Game/Header';
 export default {
     name: "GameCard",
 
-    components: {
-        GameHeader
-    },
-
     computed: {
         ...mapGetters({
             game: "game/fetchgame"
         }),
 
-        homeTeam() {
-            console.log(this.game);
-            
+        homeTeam() {            
             return {
                 name:           this.game.lineup.home.name,
                 logo:           this.game.lineup.home.logo,
@@ -53,6 +78,11 @@ export default {
                 recent_form:    this.game.lineup.away.recent_form,
             }
         }
+    },
+
+    components: {
+        GameHeader,
+        gameLiveStats: () => import("../components/Game/LiveGameStatsBelowHeader")
     },
 
     mounted() {

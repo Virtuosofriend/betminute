@@ -121,14 +121,8 @@ import yellowcard from '../assets/livescore/yellowcard.png';
 import event_corner from '../assets/livescore/event_corner.png';
 import event_goal from '../assets/livescore/event_goal.png';
 
-import tooltip from './General/Tooltip';
-
 export default {
     name: "singleCard",
-
-    components: {
-        tooltip
-    },
 
     props: {
         games: {
@@ -220,6 +214,10 @@ export default {
                 }
             });
         }
+    },
+
+    components: {
+        tooltip: () => import("./General/Tooltip")
     },
 
     filters: {

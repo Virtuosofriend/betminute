@@ -62,7 +62,10 @@ export default {
     --theme-dark-active: #fff;
     --theme-dark-orange: #A24E3D;
     --theme-dark-brow: #59291E;
-    --theme-dark-light: #5F86A3;
+    --theme-dark-accent: #5F86A3;
+    --theme-dark-success: #4bb288;
+    --theme-dark-error: #aa2e38;
+    --theme-dark-warning: #eb9a28;
   }
 
   body,html {

@@ -8,6 +8,9 @@ const topTipsters = state => state.topTipsters;
 
 const livescore = state => state.livescore;
 const notStarted = state => state.notStarted;
+const liveAndnotStarted = state => {
+  return state.livescore.concat(state.notStarted);
+}
 const finished = state => state.finished;
 
 export default {
@@ -19,5 +22,6 @@ export default {
   topTipsters,
   livescore,
   notStarted,
-  finished
+  finished,
+  liveAndnotStarted
 };

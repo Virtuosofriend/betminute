@@ -33,7 +33,7 @@
               >
                 <v-tab-item
                   style="background-color: transparent"
-                  v-if="listOver05ht.open != null"
+                  v-if="listOver05ht.open != null || listOver05ht.open.length > 0"
                 >
                   <!-- Card component -->
                   <div 
