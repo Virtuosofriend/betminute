@@ -1,5 +1,4 @@
 <template>
-    <!-- Card component -->
     <div>
         <div 
             class="feed--box"
@@ -45,7 +44,6 @@
                 </div>
             </div>
         </div>
-    <!-- ./Card Componenet -->
     </div>
                 
 </template>

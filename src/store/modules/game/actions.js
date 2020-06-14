@@ -5,7 +5,7 @@ const gameInfo = async ({ commit }, payload) => {
 
         const odds = (payload.status == "LIVE" || payload.status == "HT" ) ? "livegame_odds" : "pregame_odds";
 
-        let message = `{
+        const message = `{
             "fetchdata":{
                 "matchview": {
                     "id": ${payload.gameID},
@@ -13,7 +13,7 @@ const gameInfo = async ({ commit }, payload) => {
                 } 
             }
         }`;     
-
+          
         setTimeout(() =>{
             Socket.send(message);
         }, 500)

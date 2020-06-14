@@ -156,6 +156,13 @@ export default {
     min-height: 50px;
   }
 
+  .card--box__title {
+    padding-left: .5em;
+    margin: .5em 0;
+    font-weight: 600;
+    text-transform: initial;
+  }
+
   .card--content {
     display: flex;
     justify-content: center;
