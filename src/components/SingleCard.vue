@@ -1,110 +1,120 @@
 <template>
-    <div 
-        class="card--content cursor"
-        @click="goToGame()"
+     <v-lazy
+        v-model="isActive"
+        :options="{
+          threshold: .5
+        }"
+        transition="fade-transition"
+        class="card--content"
     >
         <div 
-            class="game--starts"
-        >
-            <p 
-                class="game--starts-date"
-            >
-                {{ games.starting_at | properStartingTime }}
-             </p>
-            <p 
-                class="game--starts-status"
-            >
-                <span 
-                    v-if="games.status == 'FT'"
-                > 
-                    {{ $t( `Games.finished` ) }}
-                </span>
-                <span 
-                    v-if="games.status == 'LIVE' || games.status == 'HT'"
-                >
-                    {{ $t( `Games.live` ) }}
-                </span>
-                <span 
-                    v-if="games.status == 'NS'"
-                >
-                    {{ $t( `Games.starts` ) }} {{ displaytime(games.starting_at) }}
-                </span>
-            </p>
-        </div>
-        <div 
-            class="w-100"
-        >
-            <h5 
-                class="team-names"
-            >
-                {{ games.home_team }}
-                    <span> {{ games.local_pos }} </span>
-            </h5>
-        </div>
-        <div 
-            class="game--score w-100"
-        >
-            <v-tooltip 
-                bottom
-                color="sidebar"
-            >
-                <template v-slot:activator="{ on }">
-                    <v-progress-circular
-                        :rotate="minuteBar.rotate"
-                        :size="minuteBar.size"
-                        :width="minuteBar.width"
-                        :value="games.minute || 0"
-                        color="#a72693"
-                        v-on="on"
-                    >
-                        <p>
-                            {{ games.local_scr }}
-                            :
-                            {{ games.visit_scr }}
-
-                            <small 
-                                class="extra-time"
-                                v-if="games.added_time > 0 && games.added_time <= 10"
-                            >
-                                {{ `+${games.added_time}'` }}
-                            </small>
-                        </p>
-                    </v-progress-circular>
-                </template>
-
-                <span
-                    class="tooltip--message"
-                >
-                    {{ $t( `Games.minute` ) }}: {{ games.minute }}'
-                </span>
-            </v-tooltip>
-            
-        </div>
-        <div 
-            class="w-100"
-        >
-            <h5 class="team-names">
-                {{ games.away_team }}
-                    <span> {{ games.visitor_pos }} </span>
-            </h5>
-        </div>
-        <div 
-            class="events-box"
+            class="card--content cursor"
+            @click="goToGame()"
         >
             <div 
-                class="events-wrapper"
-                v-for="(value, key , index) in events"
-                :key="index"
-                v-show="value.status"
-            >        
-                <tooltip
-                    :image="events[key].image"
-                    :tooltip="events[key].tooltip"
+                class="game--starts"
+            >
+                <p 
+                    class="game--starts-date"
                 >
-                </tooltip>
+                    {{ games.starting_at | properStartingTime }}
+                </p>
+                <p 
+                    class="game--starts-status"
+                >
+                    <span 
+                        v-if="games.status == 'FT'"
+                    > 
+                        {{ $t( `Games.finished` ) }}
+                    </span>
+                    <span 
+                        v-if="games.status == 'LIVE' || games.status == 'HT'"
+                    >
+                        {{ $t( `Games.live` ) }}
+                    </span>
+                    <span 
+                        v-if="games.status == 'NS'"
+                    >
+                        {{ $t( `Games.starts` ) }} {{ displaytime(games.starting_at) }}
+                    </span>
+                </p>
+            </div>
+            <div 
+                class="w-100"
+            >
+                <h5 
+                    class="team-names"
+                >
+                    {{ games.home_team }}
+                        <span> {{ games.local_pos }} </span>
+                </h5>
+            </div>
+            <div 
+                class="game--score w-100"
+            >
+                <v-tooltip 
+                    bottom
+                    color="sidebar"
+                >
+                    <template v-slot:activator="{ on }">
+                        <v-progress-circular
+                            :rotate="minuteBar.rotate"
+                            :size="minuteBar.size"
+                            :width="minuteBar.width"
+                            :value="games.minute || 0"
+                            color="#a72693"
+                            v-on="on"
+                        >
+                            <p>
+                                {{ games.local_scr }}
+                                :
+                                {{ games.visit_scr }}
+
+                                <small 
+                                    class="extra-time"
+                                    v-if="games.added_time > 0 && games.added_time <= 10"
+                                >
+                                    {{ `+${games.added_time}'` }}
+                                </small>
+                            </p>
+                        </v-progress-circular>
+                    </template>
+
+                    <span
+                        class="tooltip--message"
+                    >
+                        {{ $t( `Games.minute` ) }}: {{ games.minute }}'
+                    </span>
+                </v-tooltip>
+                
+            </div>
+            <div 
+                class="w-100"
+            >
+                <h5 class="team-names">
+                    {{ games.away_team }}
+                        <span> {{ games.visitor_pos }} </span>
+                </h5>
+            </div>
+            <div 
+                class="events-box"
+            >
+                <div 
+                    class="events-wrapper"
+                    v-for="(value, key , index) in events"
+                    :key="index"
+                    v-show="value.status"
+                >
+
+                    <tooltip
+                        :image="events[key].image"
+                        :tooltip="events[key].tooltip"
+                    >
+                    </tooltip>
+                </div>
             </div>
         </div>
-    </div>
+     </v-lazy>
 </template>
 
 <script>
@@ -126,12 +136,14 @@ export default {
 
     props: {
         games: {
-            type: Object
+            type:       Object,
+            required:   true
         }
     },
 
     data() {
         return {
+            isActive:   false,
             minuteBar: {
               rotate: -90,
               size: 50,

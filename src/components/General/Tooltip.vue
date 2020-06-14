@@ -2,6 +2,7 @@
     <v-tooltip
         color="sidebar"
         bottom
+        open-on-click
     >
         <template 
             v-slot:activator="{ on }"

@@ -17,7 +17,12 @@
 
             <v-col cols="12" md="4">
                 <div class="card--box">
-                    pregame suggestions
+                    <h3 class="card--box__title">
+                        Suggestions
+                    </h3>
+                    <game-suggestions
+                        :suggestions="game.bm_static.suggestion"
+                    ></game-suggestions>
                 </div>
                 
             </v-col>
@@ -28,8 +33,15 @@
                         :gameData="game.bm_live_data"
                         :homeTeam="homeTeam.logo"
                         :awayTeam="awayTeam.logo"
+                        v-if="game.bm_live_data"
                     >
                     </game-live-stats>
+
+                    <no-data v-else 
+                        class="pa-2 text-center"
+                        data-text="No live data available"
+                    >
+                    </no-data>
                 </div>
                 
             </v-col>
@@ -82,7 +94,9 @@ export default {
 
     components: {
         GameHeader,
-        gameLiveStats: () => import("../components/Game/LiveGameStatsBelowHeader")
+        gameLiveStats: () => import("../components/Game/LiveGameStatsBelowHeader"),
+        gameSuggestions: () => import("../components/Game/PreGameSuggestions"),
+        noData: () => import("../components/General/NoData/GenericNoData")
     },
 
     mounted() {

@@ -27,6 +27,9 @@ let sendWaiting = msg  => {
   });
 };
 
+// To be deleted
+let tmp_static = "";
+//
 
 const emitter = new Vue({
   store,
@@ -72,7 +75,7 @@ const emitter = new Vue({
 
 socket.onmessage = response => { 
   let socketResponse = JSON.parse(response.data); 
-  console.log(socketResponse);
+//   console.log(socketResponse);
   
   if ( socketResponse.action == "authenticateuser" ) {
     if ( socketResponse.data.status == "OK" ) {
@@ -108,11 +111,19 @@ socket.onmessage = response => {
     }
 
     // Game Data
+    
     if ( socketResponse.data.livescore_lineup ) {
+                
+      if ( socketResponse.data.bm_static_data != null ) {
+          tmp_static = socketResponse.data.bm_static_data;
+           
+      }
+          
       let obj = {
         lineup:       socketResponse.data.livescore_lineup || "",
         bm_live_data: socketResponse.data.bm_live_data || "",
-        match_stats:  socketResponse.data.match_stats || ""
+        match_stats:  socketResponse.data.match_stats || "",
+        bm_static:    socketResponse.data.bm_static_data != null ? socketResponse.data.bm_static_data : tmp_static
       };      
       emitter.storeGame(obj);
     }

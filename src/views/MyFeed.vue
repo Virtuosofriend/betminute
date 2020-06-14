@@ -27,7 +27,7 @@
                   class="tab--title"
                   href="#live"
                 >
-                  {{ $t( `myFeed.livefeed` ) }}({{ feed.length }})
+                  {{ $t( `myFeed.livefeed` ) }} 
                 </v-tab>
 
                 <v-tab 
@@ -53,17 +53,22 @@
               >
                 <v-tab-item
                   style="background-color: transparent"
-                  class="scrollable"
                   value="live"
                 >
-                  <livescore
-                    :data="feed"
-                  ></livescore>                  
+                    <v-responsive
+                        class="overflow-y-auto"
+                        max-height="960"
+                    >
+                        <livescore
+                            :data="feed"
+                        ></livescore>
+                    </v-responsive>
+                               
                 </v-tab-item>
 
                 <v-tab-item
                   style="background-color: transparent"
-                  class="scrollable"
+                  class="scrollable overflow-y-auto"
                   value="timeline"
                 >
                   <livescore
@@ -92,7 +97,7 @@ export default {
 
     computed: {
         ...mapGetters({
-            feed:         "feed/livescore",
+            feed:         "feed/liveAndnotStarted",
             finished:     "feed/finished"
         })
     },

@@ -56,6 +56,16 @@
             "yellowcard":       "Yellow card",
             "event_corner":     "Corner kick",
             "event_goal":       "Goal scored"
+        },
+        "suggestions":  {
+            "overmisoimixrono":     "Over 0.5",
+            "overenamisiagona":     "Over 1.5",
+            "overdiomisiagona":     "Over 2.5",
+            "goalgoal":             "Both teams to score",
+            "hot30":                "At least one goal to be scored before 30'",
+            "hot70":                "At least one goal to be scored before 70'",
+            "late":                 "At least one goal to be scored after 75'",
+            "simeio":               "Suggested match outcome"
         }
     }
 }
