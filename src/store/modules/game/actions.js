@@ -16,7 +16,7 @@ const gameInfo = async ({ commit }, payload) => {
           
         setTimeout(() =>{
             Socket.send(message);
-        }, 500)
+        }, 500);
         
 
     } catch(e) {
@@ -25,8 +25,27 @@ const gameInfo = async ({ commit }, payload) => {
     }
 };
 
+const sendGameTip = async ({ commit }, payload) => {    
+    try {
+        const message = `{
+            "pushslip":
+                ${JSON.stringify(payload)}
+            
+        }`;
+
+        setTimeout(() =>{
+            Socket.send(message);
+        }, 500);
+        
+
+    } catch(e) {
+        console.log(e.response);
+        
+    }
+};
 
 export default {
+    sendGameTip,
     gameInfo
 };
 

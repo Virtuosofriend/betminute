@@ -8,23 +8,21 @@ const socket = new WebSocket(`wss://dbsrv.bet-minute.com:${PORT}`);
 // Have to wait for a few ms for the connection to be live
 
 let waitForSocketConnection = (socket, callback) => {
-   
-  if (socket.readyState != 1) {
-    setTimeout(
-      function () {
-        if (socket.readyState != 1) {
-          return waitForSocketConnection(socket, callback)
-        }
-        return callback();
-      }, 5);
-  }
-  return callback();
+	if (socket.readyState != 1) {
+		setTimeout(() => {
+				if (socket.readyState != 1) {
+					return waitForSocketConnection(socket, callback)
+				}
+					return callback();
+			}, 5);
+	}
+  	return callback();
 }
 
 let sendWaiting = msg  => {
-  waitForSocketConnection(socket, () => {   
-    socket.send(msg);
-  });
+	waitForSocketConnection(socket, () => {   
+		socket.send(msg);
+	});
 };
 
 // To be deleted
@@ -69,13 +67,17 @@ const emitter = new Vue({
 
     storeGame(data) {      
       this.$store.commit("game/saveGame", data);
-    },
+	},
+	
+	storeOdds(data) {
+		this.$store.commit("game/saveOdds", data);
+	}
   }
 })
 
 socket.onmessage = response => { 
   let socketResponse = JSON.parse(response.data); 
-//   console.log(socketResponse);
+  console.log(socketResponse);
   
   if ( socketResponse.action == "authenticateuser" ) {
     if ( socketResponse.data.status == "OK" ) {
@@ -126,13 +128,20 @@ socket.onmessage = response => {
         bm_static:    socketResponse.data.bm_static_data != null ? socketResponse.data.bm_static_data : tmp_static
       };      
       emitter.storeGame(obj);
-    }
+	}
+	
+	// Odds
+
+	if ( socketResponse.data.livegame_odds || socketResponse.data.pregame_odds ) {
+		const odds = socketResponse.data.livegame_odds || socketResponse.data.pregame_odds || [];
+
+		emitter.storeOdds(odds);
+	}
   }
 }
 
 socket.onerror = error => {
-  console.log(error);
-  
+  console.log("Error in socket:", error);
 }
 
 

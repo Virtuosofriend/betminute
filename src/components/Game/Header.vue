@@ -125,6 +125,7 @@
                         {{ dataHome.name }}
                         <team-form
                             :form="dataHome.recent_form"
+							v-if="dataHome.recent_form"
                         ></team-form>
                     </h4>
                   </div>
@@ -155,6 +156,7 @@
                         {{ dataAway.name }}
                         <team-form
                             :form="dataAway.recent_form"
+							v-if="dataAway.recent_form"
                         ></team-form>
                     </h4>
                   </div>

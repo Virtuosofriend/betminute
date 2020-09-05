@@ -16,19 +16,20 @@
             </v-col>
 
             <v-col cols="12" md="4">
-                <div class="card--box">
-                    <h3 class="card--box__title">
+                <div class="card__box">
+                    <h3 class="card__box-title">
                         Suggestions
                     </h3>
                     <game-suggestions
                         :suggestions="game.bm_static.suggestion"
+                        v-if="game.bm_static.suggestion"
                     ></game-suggestions>
                 </div>
                 
             </v-col>
 
             <v-col cols="12" md="8">
-                <div class="card--box">
+                <div class="card__box">
                     <game-live-stats
                         :gameData="game.bm_live_data"
                         :homeTeam="homeTeam.logo"
@@ -45,11 +46,18 @@
                 </div>
                 
             </v-col>
+
+            <v-col
+                cols="12"
+            >
+                <div class="card__box">
+                    <h3 class="card__box-title text-center">
+                        Tipping
+                    </h3>
+                    <game-odds></game-odds>
+                </div>
                 
-                <!-- <code>
-                    {{ game }}
-                </code> -->
-            
+            </v-col>            
         </v-row>
 
         <v-row v-else>
@@ -61,9 +69,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
-import GameHeader from '../components/Game/Header';
+import GameHeader from "../components/Game/Header";
 
 export default {
     name: "GameCard",
@@ -94,18 +102,32 @@ export default {
 
     components: {
         GameHeader,
-        gameLiveStats: () => import("../components/Game/LiveGameStatsBelowHeader"),
-        gameSuggestions: () => import("../components/Game/PreGameSuggestions"),
-        noData: () => import("../components/General/NoData/GenericNoData")
+        gameLiveStats:      () => import("../components/Game/LiveGameStatsBelowHeader"),
+        gameSuggestions:    () => import("../components/Game/PreGameSuggestions"),
+        gameOdds:           () => import("../components/Game/GameOdds"),
+        noData:             () => import("../components/General/NoData/GenericNoData")
     },
 
     mounted() {
-        let payload = this.$route.params;
+        const payload = this.$route.params;
         this.$store.dispatch("game/gameInfo", payload);
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.card__box {
+    width: 100%;
+    background-color: var(--theme-dark-10);
+    border-radius: 15px;
+    margin: .5em auto;
+    min-height: 50px;
+}
 
+.card__box-title {
+    padding-left: .6em;
+    padding-top: .5em;
+    font-weight: 600;
+    text-transform: initial;
+}
 </style>

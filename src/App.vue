@@ -14,34 +14,35 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'App',
+	name: "App",
+	
+	computed: {
+		...mapGetters({
+			loggedIn: "auth/isLoggedIn",
+			userInfo: "auth/userInformation",
+			user:     "feed/information"
+		}),
+  	},
 
-  computed: {
-    ...mapGetters({
-        loggedIn: "auth/isLoggedIn",
-        userInfo: "auth/userInformation",
-        user:     "feed/information"
-    }),
-  },
+	methods: {
+		sendGlobalData() {         
+			this.$store.dispatch("feed/globaldata", {...this.userInfo})
+		}
+	},
 
-  methods: {
-    sendGlobalData() {         
-        this.$store.dispatch("feed/globaldata", {...this.userInfo})
-      }
-  },
+	watch: {
+		user(newValue, oldValue) {
+		
+			if ( newValue.paid ) {
+				this.sendGlobalData();
+			}
+		}
+	},
 
-  watch: {
-    user(newValue, oldValue) {
-      
-      if ( newValue.paid ) {
-        this.sendGlobalData();
-      }
-    }
-  },
-
-  created() {
-    this.$store.dispatch("auth/socketLogin");
-  }
+	mounted() {
+		this.$store.dispatch("auth/socketLogin");
+		console.log(`Bet minute - v${process.env.VUE_APP_VERSION}`);
+	}
 };
 </script>
 
@@ -145,6 +146,7 @@ export default {
   .v-slide-group__content.v-tabs-bar__content {
     background-color: #181e23 !important;
   }
+
   /*** Cards  ***/
   .card--box {
     display: flex;
@@ -178,5 +180,11 @@ export default {
   /** Helpers **/
   .w-100 {
     width: 100%;
+  }
+  .letter-spacing-initial {
+	  letter-spacing: initial !important;
+  }
+  .text-transform-initial {
+	  text-transform: initial !important;
   }
 </style>
