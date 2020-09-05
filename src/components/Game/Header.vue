@@ -2,168 +2,170 @@
     <div class="daily--tip">
         <div class="daily--tip-wrapper">
           <div class="overlay"></div>
-          <div
-            class="header"
-          >
-            <div class="w-100">
-              <div class="d-flex">
-                <div 
-                  class="weather--icon"
-                >
-                  <v-img
-                    :src="dataLineup.condition.icon"
-                  >
-                  </v-img>                
-                </div>
+			<div
+				class="header"
+			>
+				<div class="w-100">
+					<div class="d-flex" v-if="dataLineup.condition">
+						<div 
+							class="weather--icon"
+						>
+							<v-img
+								:src="dataLineup.condition.icon"
+							>
+							</v-img>                
+						</div>
 
-                <div
-                  class="weather--info"
-                >
-                  <h6>
-                    {{ dataLineup.condition.temp }}°C <span style="opacity:.2">|</span> {{ dataLineup.condition.humidity }}
-                  </h6>
-                  <p class="mb-0">
-                     {{ dataLineup.condition.type }}
-                  </p>
-                </div>
-              </div>
-            
-            <!-- Stadium details -->
-              <div class="d-flex mt-6">
-                <div 
-                  class="weather--icon stadium"
-                >
-                  <img src="../../assets/games/stadium.png" style="width: 25px">          
-                </div>
+						<div
+							class="weather--info"
+						>
+							<h6>
+								{{ dataLineup.condition.temp }}°C 
+									<span style="opacity:.2">|</span> 
+								{{ dataLineup.condition.humidity }}
+							</h6>
+							<p class="mb-0">
+								{{ dataLineup.condition.type }}
+							</p>
+						</div>
+					</div>
+				
+					<!-- Stadium details -->
+					<div class="d-flex mt-6">
+						<div 
+							class="weather--icon stadium"
+						>
+							<img src="../../assets/games/stadium.png" style="width: 25px">          
+						</div>
 
-                <div
-                  class="weather--info"
-                >
-                  <h6>
-                    {{ dataLineup.venue.name }}
-                  </h6>
-                  <p class="mb-0">
-                     {{ dataLineup.venue.capacity }}
-                  </p>
-                </div>
-              </div>
-              
-            </div>
+						<div
+							class="weather--info"
+						>
+							<h6>
+								{{ dataLineup.venue.name }}
+							</h6>
+							<p class="mb-0">
+								{{ dataLineup.venue.capacity }}
+							</p>
+						</div>
+					</div>
+				
+				</div>
 
-            <div class="w-100">
-              <div class="game--score">
+				<div class="w-100">
+					<div class="game--score">
 
-                <div class="league">
-                  <h3>
-                    {{ dataLineup.country }}
-                    <span>
-                      {{ dataLineup.league }}
-                    </span>
-                  </h3>
-                </div>
+						<div class="league">
+							<h3>
+								{{ dataLineup.country }}
+								<span>
+								{{ dataLineup.league }}
+								</span>
+							</h3>
+						</div>
 
-                <div class="score">
-                  <h1 class="text-center">
-                    {{ dataHome.goals }} - {{ dataAway.goals }}
-                    <small class="text-center d-block">
-                      {{ dataLineup.minute }}'
-                      <span
-                        v-show="dataLineup.injury_time != null"
-                      >
-                        {{ dataLineup.injury_time }}
-                      </span>
-                    </small>
+						<div class="score">
+							<h1 class="text-center">
+								{{ dataHome.goals }} - {{ dataAway.goals }}
+								<small class="text-center d-block">
+								{{ dataLineup.minute }}'
+								<span
+									v-show="dataLineup.injury_time != null"
+								>
+									{{ dataLineup.injury_time }}
+								</span>
+								</small>
 
-                    <span class="d-block referre">
-                        {{ dataLineup.referee }}
-                    </span>
-                  </h1>
-                </div>
-                
-              </div>
-              
-            </div>
+								<span class="d-block referre">
+									{{ dataLineup.referee }}
+								</span>
+							</h1>
+						</div>
+						
+					</div>
+				
+				</div>
 
-            <!-- Right Side -->
+				<!-- Right Side -->
 
-            <div class="w-100">
-              <div class="cta-button">
-                <v-btn
-                  color="primary"
-                  depressed
-                  small
-                >
-                  Add tips
-                </v-btn>
-              </div>
-            </div>
+				<div class="w-100">
+					<div class="cta-button">
+						<v-btn
+							color="primary"
+							depressed
+							small
+						>
+							Add tips
+						</v-btn>
+					</div>
+				</div>
 
-          </div>
+			</div>
 
-          <div class="team--wrapper">
-            <v-row>
-              <v-col
-                sm="6"
-              >
-                <div class="team--box home">
+          	<div class="team--wrapper">
+				<v-row>
+					<v-col
+						sm="6"
+					>
+						<div class="team--box home">
 
-                  <div 
-                    class="team--logo"
-                  >
+						<div 
+							class="team--logo"
+						>
 
-                    <v-img
-                      :src="dataHome.logo"
-                    >
-                    </v-img>
+							<v-img
+								:src="dataHome.logo"
+							>
+							</v-img>
 
-                  </div>
+						</div>
 
-                  <div
-                    class="team--text"
-                  >
-                    <h4>
-                        {{ dataHome.name }}
-                        <team-form
-                            :form="dataHome.recent_form"
-							v-if="dataHome.recent_form"
-                        ></team-form>
-                    </h4>
-                  </div>
-                  
-                </div>
-              </v-col>
+						<div
+							class="team--text"
+						>
+							<h4>
+								{{ dataHome.name }}
+								<team-form
+									:form="dataHome.recent_form"
+									v-if="dataHome.recent_form"
+								></team-form>
+							</h4>
+						</div>
+						
+						</div>
+					</v-col>
 
-              <v-col
-                sm="6"
-              >
-                <div class="team--box away">
+					<v-col
+						sm="6"
+					>
+						<div class="team--box away">
 
-                  <div 
-                    class="team--logo"
-                  >
+							<div 
+								class="team--logo"
+							>
 
-                    <v-img
-                      :src="dataAway.logo"
-                    >
-                    </v-img>
+								<v-img
+									:src="dataAway.logo"
+								>
+								</v-img>
 
-                  </div>
+							</div>
 
-                  <div
-                    class="team--text"
-                  >
-                    <h4>
-                        {{ dataAway.name }}
-                        <team-form
-                            :form="dataAway.recent_form"
-							v-if="dataAway.recent_form"
-                        ></team-form>
-                    </h4>
-                  </div>
-                       
-                </div>
-              </v-col>
-            </v-row>
+							<div
+								class="team--text"
+							>
+								<h4>
+									{{ dataAway.name }}
+									<team-form
+										:form="dataAway.recent_form"
+										v-if="dataAway.recent_form"
+									></team-form>
+								</h4>
+							</div>
+							
+						</div>
+					</v-col>
+				</v-row>
           </div>
         </div>
     </div>

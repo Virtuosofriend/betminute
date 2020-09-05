@@ -89,7 +89,7 @@
                         color="primary"
                         background-color="info"
                         width="50"
-                        v-model="slip_units"
+                        v-model.number="slip_units"
                         dark
                     >
                         <template v-slot:label>
@@ -106,6 +106,8 @@
                     block
                     color="transparent"
                     depressed
+                    :disabled="$v.$invalid"
+                    @click="sendTip()"
                 >
                     Send tip
                 </v-btn>
@@ -116,6 +118,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { required, integer } from 'vuelidate/lib/validators'
 
 export default {
     name:   "Odds__button",
@@ -148,6 +151,13 @@ export default {
         },
     },
 
+    validations: {
+        slip_units: {
+            required,
+            integer
+        }
+    },
+
     data() {
         return {
             sheet:      false,
@@ -168,11 +178,16 @@ export default {
             const tip_body = {
                 fixture_id,
                 bm_market_id: this.oddsId,
-                slip_units: 1,
+                slip_units: this.slip_units,
                 battle_id:  -1
             };
 
-            this.$store.dispatch("game/sendGameTip", tip_body);
+            this.$store.dispatch("game/sendGameTip", tip_body)
+                .then( () => {
+                    return  setTimeout(() => {
+                        this.sheet = !this.sheet;
+                    }, 1000);
+                });
         }
     }
 }
