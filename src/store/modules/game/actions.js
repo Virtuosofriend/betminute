@@ -32,7 +32,7 @@ const sendGameTip = async ({ commit }, payload) => {
                 ${JSON.stringify(payload)}
             
         }`;
-
+ 
         setTimeout(() =>{
             Socket.send(message);
         }, 500);

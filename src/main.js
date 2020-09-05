@@ -7,9 +7,11 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import './assets/css/flag-css.min.css';
 import i18n from './plugins/i18n';
 import HighchartsVue from 'highcharts-vue'
+import Vuelidate from 'vuelidate'
 
 Vue.config.productionTip = false;
 Vue.use(HighchartsVue);
+Vue.use(Vuelidate);
 
 new Vue({
   router,
