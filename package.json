@@ -1,6 +1,6 @@
 {
   "name": "betmin",
-  "version": "0.2.0",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -48,7 +48,8 @@
     "rules": {
       "no-console": 0,
       "no-unused-vars": 0,
-      "vue/no-unused-components": 0
+      "vue/no-unused-components": 0,
+      "no-mixed-spaces-and-tabs": 0
     },
     "parserOptions": {
       "parser": "babel-eslint"
