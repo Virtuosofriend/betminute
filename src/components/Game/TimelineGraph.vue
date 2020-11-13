@@ -1,9 +1,9 @@
 <template>
-	<span>
+	<div class="timeline">
 		<highcharts 
 			:options="chartOptions"
 		></highcharts>
-	</span>
+	</div>
 </template>
 
 <script>
@@ -58,13 +58,19 @@ export default {
 
     methods: {
         init() {
-			const injury = 0;
-			const extraTime = 0;
+			const injury = this.injury || 0;
+			const extraTime = this.extraTime || 0;
 			const match = this.stats.match_stats;
 			const minute = this.minute;
 			const publicPath = this.publicPath;
-			const HomeLogo = this.stats.lineup.home.logo;
-			const AwayLogo = this.stats.lineup.away.logo;
+			const Home = {
+				logo: 	this.stats.lineup.home.logo,
+				name:	this.stats.lineup.home.name
+			};
+			const Away = {
+				logo: 	this.stats.lineup.away.logo,
+				name:	this.stats.lineup.away.name
+			};
 
 			let { home , away } = match;
 			delete home.stats;
@@ -72,19 +78,37 @@ export default {
 	
 			let home_data = [];
 			let away_data = [];
-
+		
 			for (let home_val in home) {
 				if (home[home_val] != null ) {
-		
-					home[home_val].forEach( elem => {
 
+					home[home_val].forEach( elem => {
+						let player_name = (home_val != "corner") ? elem.player_name : "";
+						let icon = home_val;
+						let position = 0;
+						
+						if (home_val === "goal_count") {
+                          let tmp_player = player_name[0];
+                          tmp_player = tmp_player.split(",");
+                          player_name = tmp_player[0];
+                          icon = tmp_player[2];
+                          let status = tmp_player[1];
+                          if (icon === "goal" && status == "true") {
+                            icon = "own-goal";
+                          }
+                          if (icon == "penalty" && status == "false") {
+                            icon = "missedpenalty";
+                          }
+                          position = 10;
+                        }
+						  
 						let obj = {
 							x: elem.min,
-							y: 30,
+							y: 30 - position,
 							marker: {
-								enabled: true,
-								player: home_val != "corner" ? elem.player_name : "",
-								width: 10,
+								enabled: 	true,
+								player: 	player_name,
+								width: 		10,
 								symbol: `url(${ this.publicPath }img/timeline/${home_val}.png)`
 							}
 						};
@@ -102,16 +126,36 @@ export default {
 
 					away[away_val].forEach( elem => {
 
+						let player_name = (away_val != "corner") ? elem.player_name : "";
+						let icon = away_val;
+						let position = 0;
+						
+						if (away_val === "goal_count") {
+                          let tmp_player = player_name[0];
+                          tmp_player = tmp_player.split(",");
+                          player_name = tmp_player[0];
+                          icon = tmp_player[2];
+                          let status = tmp_player[1];
+                          if (icon === "goal" && status == "true") {
+                            icon = "own-goal";
+                          }
+                          if (icon == "penalty" && status == "false") {
+                            icon = "missedpenalty";
+                          }
+                          position = -10;
+                        }
+						  
 						let obj = {
 							x: elem.min,
-							y: -30,
+							y: -30 - position,
 							marker: {
-								enabled: true,
-								player: away_val != "corner" ? elem.player_name : "",
-								width: 10,
+								enabled: 	true,
+								player: 	player_name,
+								width: 		10,
 								symbol: `url(${ this.publicPath }img/timeline/${away_val}.png)`
 							}
 						};
+
 						away_data.push(obj);
 					});
 				}
@@ -121,9 +165,10 @@ export default {
 
 			const data = {
 				chart: {
-					backgroundColor:      'rgba(38,44,63, 0.5)',
-					height:               70,
-					animation:            false
+					backgroundColor:    "transparent",
+					height:             70,
+					animation:          false,
+					borderRadius:		"15px",
 				},
 				title: {
 					enabled:	false,
@@ -143,7 +188,7 @@ export default {
 					allowDecimals:        false,
 					visible:              false,
 					min:                  -3,
-					max:                  90 + injury + extraTime,
+					max:                  92 + injury + extraTime,
 					labels: {
 						format:             '{value}',
 						style: {
@@ -319,252 +364,44 @@ export default {
 				}],
 				annotations: [{
 					labels: (function() {
-						console.log(HomeLogo)
+
 						let data_array = [{
-							y: -10,
-							x: 0,
-							point: "home",
-							useHTML: true,
-							text: '<img src="' + HomeLogo + '" style="width: 20px; height: 20px">',
-							backgroundColor: null,
-							borderWidth: 0
+							y: 					-15,
+							x: 					0,
+							point: 				"home",
+							useHTML: 			true,
+							text: 				`<img src="${ Home.logo }" style="width: 24px; height: 24px; object-fit: contain;">`,
+							backgroundColor: 	null,
+							borderWidth: 		0
 						}, {
-							y: 0,
-							x: 0,
-							point: "away",
-							useHTML: true,
-							text: '<img src="' + AwayLogo + '" style="width: 20px; height: 20px">',
-							backgroundColor: null,
-							borderWidth: 0
+							y: 					5,
+							x: 					0,
+							point: 				"away",
+							useHTML: 			true,
+							text: 				`<img src="${ Away.logo }" style="width: 24px; height: 24px; object-fit: contain;">`,
+							backgroundColor: 	null,
+							borderWidth: 		0
 						}, {
-							y: 10,
-							x: 0,
-							point: "ht",
-							useHTML: true,
-							text: 'HT',
-							backgroundColor: "#7b7b7b",
-							borderWidth: 1
+							y: 					10,
+							x: 					0,
+							point: 				"ht",
+							useHTML: 			true,
+							text: 				"HT",
+							backgroundColor: 	"#7b7b7b",
+							borderWidth: 		1
 						}, {
-							y: 12,
-							x: 0,
-							point: "ft",
-							useHTML: true,
-							text: `<img src="${ publicPath }img/timeline/referee_small.png" style="width: 17px; height: 20px">`,
-							backgroundColor: null,
-							borderWidth: 0
+							y: 					12,
+							x: 					0,
+							point: 				"ft",
+							useHTML:		 	true,
+							text: 				`<img src="${ publicPath }img/timeline/referee_small.png" style="width: 17px; height: 20px">`,
+							backgroundColor: 	null,
+							borderWidth: 		0
 						}];
 
 						return data_array;
               		}()),
 				}]
-				// series: [{
-				// 	name:                 "Home",
-				// 	type:                 'spline',
-				// 	turboThreshold:       0,
-				// 	enableMouseTracking:  true,
-				// 	lineWidth:            0,
-				// 	data: (function() {
-				// 		/****** Structure for goal *****
-				// 		 ****  player_name, ispenalty, type
-				// 		***                         ****/
-
-				// 		let data_array = [];
-				// 		if (home != null) {
-				// 		for (let i = 0; i < data_home.length; i++) {
-				// 			let position = 0;
-
-				// 			let tmp = data_home[i];
-				// 			if (tmp != null) {
-				// 			for (j = 0; j < tmp.length; j++) {
-				// 				let data_new = tmp[j];
-				// 				let min = Number(data_new.min);
-				// 				let tmpobj = Object.keys(data_new);
-				// 				let icon = tmpobj[1];
-				// 				let name = data_new.player_name;
-
-				// 				if (tmpobj[1] === "goal_count") {
-				// 				let player_name = data_new.player_name[0];
-				// 				player_name = player_name.split(",");
-				// 				name = player_name[0];
-				// 				let status = player_name[1];
-				// 				icon = player_name[2];
-				// 				if (icon === "goal" && status == "true") {
-				// 					icon = "own-goal";
-				// 				}
-				// 				if (icon == "penalty" && status == "false") {
-				// 					icon = "missedpenalty";
-				// 				}
-				// 				position = 10;
-				// 				}
-
-				// 				let obj = {
-				// 				x: min,
-				// 				y: 30 - position,
-				// 				marker: {
-				// 					enabled: true,
-				// 					player: name,
-				// 					width: 10,
-				// 					symbol: 'url(lib/img/match/' + icon + '.png)'
-				// 				}
-				// 				};
-				// 				data_array.splice(min + 3, 1, obj);
-				// 			}
-				// 			}
-
-				// 		}
-				// 		}
-				// 		return data_array;
-				// 	}())
-				// 	}, {
-				// 	name:                             "away",
-				// 	type:                             'spline',
-				// 	turboThreshold:                   0,
-				// 	enableMouseTracking:              true,
-				// 	lineWidth:                        0,
-				// 	data: (function() {
-				// 		let data_array = [];
-				// 		if (data_away != null) {
-				// 		for (let i = 0; i < data_away.length; i++) {
-				// 			let position = 0;
-				// 			let tmp = data_away[i];
-
-				// 			if (tmp != null) {
-				// 			for (j = 0; j < tmp.length; j++) {
-				// 				let data_new = tmp[j];
-				// 				let min = Number(data_new.min);
-				// 				let tmpobj = Object.keys(data_new);
-				// 				let icon = tmpobj[1];
-				// 				let name = data_new.player_name;
-
-				// 				if (tmpobj[1] === "goal_count") {
-				// 				let player_name = data_new.player_name[0];
-				// 				player_name = player_name.split(",");
-				// 				name = player_name[0];
-				// 				icon = player_name[2];
-				// 				let status = player_name[1];
-				// 				if (icon === "goal" && status == "true") {
-				// 					icon = "own-goal";
-				// 				}
-				// 				if (icon == "penalty" && status == "false") {
-				// 					icon = "missedpenalty";
-				// 				}
-				// 				position = -10;
-				// 				}
-
-				// 				let obj = {
-				// 				x: min,
-				// 				y: -30 - position,
-				// 				marker: {
-				// 					enabled: true,
-				// 					player: name,
-				// 					width: 10,
-				// 					symbol: 'url(lib/img/match/' + icon + '.png)'
-				// 				}
-				// 				};
-				// 				data_array.splice(min + 3, 1, obj);
-				// 			}
-				// 			}
-				// 		}
-				// 		}
-				// 		return data_array;
-				// 	}())
-				// 	}, { // Game minutes markers
-				// 	name:                                     "More",
-				// 	type:                                     'spline',
-				// 	turboThreshold:                           0,
-				// 	enableMouseTracking:                      false,
-				// 	lineWidth:                                0,
-				// 	yAxis:                                    2,
-				// 	data: () => {
-				// 		let data_array = [{
-				// 		x: -1,
-				// 		y: 30,
-				// 		id: "home",
-				// 		}, {
-				// 		x: -1,
-				// 		y: 0,
-				// 		id: "away",
-				// 		}, {
-				// 		x: 45,
-				// 		y: 0,
-				// 		id: "ht",
-				// 		/*
-				// 		marker: {
-				// 			enabled: true,
-				// 			width: 29,
-				// 			height: 15,
-				// 			symbol: "url(lib/img/match/ht.png)"
-				// 		}*/
-				// 		}, {
-				// 		x: 90,
-				// 		y: 0,
-				// 		id: "ft"
-				// 		}];
-				// 		for (let k = 0; k <= (90 + this.injury + this.extraTime); k++) {
-				// 		if (k <= minute && k != 90) {
-				// 			var marker = {
-				// 			enabled: true,
-				// 			width: 20,
-				// 			height: 5,
-				// 			symbol: "url(lib/img/match/green.png)"
-				// 			};
-				// 		} else {
-
-				// 			let marker = {
-				// 			enabled: true,
-				// 			width: 20,
-				// 			height: 5,
-				// 			symbol: "url(lib/img/match/gray.png)"
-				// 			};
-
-				// 		}
-				// 		data_array.push({
-				// 			x: k,
-				// 			y: 0,
-				// 			marker: marker
-				// 		});
-				// 		}
-				// 		return data_array;
-				// 	}
-				// }],
-				// annotations: [{
-				// 	labels: (() => {
-				// 		let data_array = [{
-				// 		y: -10,
-				// 		x: 0,
-				// 		point: "home",
-				// 		useHTML: true,
-				// 		text: '<img src="' + this.homeLogo + '" style="width: 20px; height: 20px">',
-				// 		backgroundColor: null,
-				// 		borderWidth: 0
-				// 		}, {
-				// 		y: 0,
-				// 		x: 0,
-				// 		point: "away",
-				// 		useHTML: true,
-				// 		text: '<img src="' + this.awayLogo + '" style="width: 20px; height: 20px">',
-				// 		backgroundColor: null,
-				// 		borderWidth: 0
-				// 		}, {
-				// 		y: 10,
-				// 		x: 0,
-				// 		point: "ht",
-				// 		useHTML: true,
-				// 		text: 'HT',
-				// 		backgroundColor: "#7b7b7b",
-				// 		borderWidth: 1
-				// 		}, {
-				// 		y: 12,
-				// 		x: 0,
-				// 		point: "ft",
-				// 		useHTML: true,
-				// 		text: '<img src="lib/img/match/referee_small.png" style="width: 17px; height: 20px">',
-				// 		backgroundColor: null,
-				// 		borderWidth: 0
-				// 		}];
-				// 		return data_array;
-				// 	}),
-				// }]
 			};
 			
 			this.chartOptions = Object.assign({}, this.chartOptions, data);
@@ -579,5 +416,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.timeline {
+	border-radius: 15px;
+	padding: 12px 0;
+	background-color: rgba(44, 52, 58, .5);
+	position: relative;
+	z-index: 10;
+}
 </style>
