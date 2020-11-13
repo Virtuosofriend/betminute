@@ -105,7 +105,7 @@
           	<div class="team--wrapper">
 				<v-row>
 					<v-col
-						sm="6"
+						md="3"
 					>
 						<div class="team--box home">
 
@@ -136,7 +136,18 @@
 					</v-col>
 
 					<v-col
-						sm="6"
+						md="6"
+					>
+
+						<timeline-graph
+							:minute="dataLineup.minute"
+							:injury="dataLineup.injury_time"
+							:extraTime="dataLineup.extra_time"
+						></timeline-graph>
+					</v-col>
+
+					<v-col
+						md="3"
 					>
 						<div class="team--box away">
 
@@ -188,7 +199,8 @@ export default {
     },
 
     components: {
-        teamForm: () => import("../General/TeamFormGraphic")
+		teamForm: () => import("../General/TeamFormGraphic"),
+		timelineGraph: () => import("./TimelineGraph")
     }
 }
 </script>
