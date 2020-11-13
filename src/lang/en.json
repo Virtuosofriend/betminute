@@ -59,6 +59,7 @@
             "event_goal":       "Goal scored"
         },
         "suggestions":  {
+            "title":                "Suggestions",
             "overmisoimixrono":     "Over 0.5",
             "overenamisiagona":     "Over 1.5",
             "overdiomisiagona":     "Over 2.5",
@@ -67,6 +68,12 @@
             "hot70":                "At least one goal to be scored before 70'",
             "late":                 "At least one goal to be scored after 75'",
             "simeio":               "Suggested match outcome"
+        },
+        "textbot": {
+            "title":                "System suggestions"
+        },
+        "tipping": {
+            "title":                "Tipping"
         }
     }
 }

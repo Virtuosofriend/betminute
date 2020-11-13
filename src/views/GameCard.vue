@@ -18,7 +18,7 @@
             <v-col cols="12" md="4">
                 <div class="card__box">
                     <h3 class="card__box-title">
-                        Suggestions
+                        {{ $t( `Games.suggestions.title` ) }}
                     </h3>
 
                     <game-suggestions
@@ -29,6 +29,16 @@
                         class="pa-2 text-center"
                         :data-text="`${ $t('General.noContent')}`"
                     ></no-data>
+                </div>
+
+                <div class="card__box">
+                    <h3 class="card__box-title">
+                        {{ $t( `Games.textbot.title` ) }}
+                    </h3>
+                    <game-textbot
+                        :textbotValues="game.textbot"
+                        v-if="game.textbot != null"
+                    ></game-textbot>
                 </div>
                 
             </v-col>
@@ -56,7 +66,7 @@
             >
                 <div class="card__box">
                     <h3 class="card__box-title text-center">
-                        Tipping
+                        {{ $t( `Games.tipping.title` ) }}
                     </h3>
                     <game-odds></game-odds>
                 </div>
@@ -66,7 +76,10 @@
 
         <v-row v-else>
             <v-col cols="12">
-                <h2>No data available</h2>
+                <no-data 
+                    class="pa-2 text-center"
+                    :data-text="`${ $t('General.noContent')}`"
+                ></no-data>
             </v-col>
         </v-row>
     </v-container>
@@ -108,6 +121,7 @@ export default {
         GameHeader,
         gameLiveStats:      () => import("../components/Game/LiveGameStatsBelowHeader"),
         gameSuggestions:    () => import("../components/Game/PreGameSuggestions"),
+        gameTextbot:        () => import("../components/Game/GameTextbot"),
         gameOdds:           () => import("../components/Game/GameOdds"),
         noData:             () => import("../components/General/NoData/GenericNoData")
     },

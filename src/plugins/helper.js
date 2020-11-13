@@ -1,7 +1,17 @@
-const apiURL = "http://116.203.210.254/";
-// const apiURL = "http://192.168.210.124/"
-const downloadURL = `${apiURL}api/get_template/`;
+const removeNullProperties = (obj) => {
+    Object.keys(obj).forEach(key => {
+      let value = obj[key];
+      let hasProperties = value && Object.keys(value).length > 0;
+      if (value === null) {
+        delete obj[key];
+      }
+      else if ((typeof value !== "string") && hasProperties) {
+        removeNullProperties(value);
+      }
+    });
+    return obj;
+};
+
 export default {
-    url: apiURL,
-    csv: downloadURL
+    removeNullProperties
 };

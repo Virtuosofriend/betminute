@@ -1,5 +1,6 @@
 import Vue from "vue";
-import store from '../store';
+import store from "../store";
+import helper from "./helper";
 
 const PORT = 8080;
 const socket = new WebSocket(`wss://dbsrv.bet-minute.com:${PORT}`);
@@ -118,17 +119,18 @@ socket.onmessage = response => {
                 
       if ( socketResponse.data.bm_static_data != null ) {
           tmp_static = socketResponse.data.bm_static_data;
-           
       }
           
       let obj = {
-        lineup:       socketResponse.data.livescore_lineup || "",
-        bm_live_data: socketResponse.data.bm_live_data || "",
-        match_stats:  socketResponse.data.match_stats || "",
-        bm_static:    socketResponse.data.bm_static_data != null ? socketResponse.data.bm_static_data : tmp_static
+        lineup:         socketResponse.data.livescore_lineup || "",
+        bm_live_data:   socketResponse.data.bm_live_data || "",
+        match_stats:    socketResponse.data.match_stats || "",
+        bm_static:      socketResponse.data.bm_static_data != null ? socketResponse.data.bm_static_data : tmp_static,
+        textbot:        helper.removeNullProperties(socketResponse.data.textbot) || null,
       };      
       emitter.storeGame(obj);
-	}
+    }
+    
 	
 	// Odds
 

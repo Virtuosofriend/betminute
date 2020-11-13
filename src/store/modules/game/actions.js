@@ -9,7 +9,7 @@ const gameInfo = async ({ commit }, payload) => {
             "fetchdata":{
                 "matchview": {
                     "id": ${payload.gameID},
-                    "data": ["bm_pregame_data", "bm_static_data", "match_stats", "bm_live_data", "livescore_lineup", "${odds}"]
+                    "data": ["bm_pregame_data", "bm_static_data", "match_stats", "bm_live_data", "livescore_lineup", "${odds}", "textbot"]
                 } 
             }
         }`;     
