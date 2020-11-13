@@ -20,10 +20,15 @@
                     <h3 class="card__box-title">
                         Suggestions
                     </h3>
+
                     <game-suggestions
                         :suggestions="game.bm_static.suggestion"
                         v-if="game.bm_static.suggestion"
                     ></game-suggestions>
+                    <no-data v-else 
+                        class="pa-2 text-center"
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </div>
                 
             </v-col>
@@ -40,9 +45,8 @@
 
                     <no-data v-else 
                         class="pa-2 text-center"
-                        data-text="No live data available"
-                    >
-                    </no-data>
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </div>
                 
             </v-col>

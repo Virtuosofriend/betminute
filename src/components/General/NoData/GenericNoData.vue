@@ -1,7 +1,9 @@
 <template>
-    <h4>
-        {{ dataText }}
-    </h4>
+    <div>
+        <h5>
+            {{ dataText }}
+        </h5>
+    </div>
 </template>
 
 <script>
@@ -18,11 +20,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-h4 {
+div {
+    width: 100%;
+    margin: .3em auto;
+}
+h5 {
     text-transform: initial;
     color: var(--theme-dark-30);
+    opacity: .5;
     font-weight: 400;
-    width: 100%;
-    margin-top: .3em;
 }
 </style>
