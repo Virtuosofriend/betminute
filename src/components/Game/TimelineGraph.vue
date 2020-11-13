@@ -81,7 +81,6 @@ export default {
 		
 			for (let home_val in home) {
 				if (home[home_val] != null ) {
-
 					home[home_val].forEach( elem => {
 						let player_name = (home_val != "corner") ? elem.player_name : "";
 						let icon = home_val;
