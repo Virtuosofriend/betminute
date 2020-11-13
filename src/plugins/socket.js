@@ -77,7 +77,7 @@ const emitter = new Vue({
 
 socket.onmessage = response => { 
   let socketResponse = JSON.parse(response.data); 
-  console.log(socketResponse);
+//   console.log(socketResponse);
   
   if ( socketResponse.action == "authenticateuser" ) {
     if ( socketResponse.data.status == "OK" ) {

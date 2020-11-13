@@ -7,8 +7,8 @@
             </div>
             <div class="login--form mt-4">
                 <v-form
-                ref="loginForm"
-                full-width
+                	ref="loginForm"
+                	full-width
                 >
                 <v-text-field
                     v-model="loginData.name"
@@ -60,7 +60,6 @@
 </template>
 
 <script>
-import router from '../router';
 
 export default {
     data() {
@@ -69,9 +68,9 @@ export default {
         }
     },
     methods: {
-        login() {          
-            this.$store.dispatch('auth/socketLogin', this.loginData).then((res) => {               
-                router.push("/");
+        login() {
+			this.$store.dispatch("auth/socketLogin", this.loginData).then((res) => {               
+                this.$router.push("/");
             });
         }
     }
