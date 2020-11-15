@@ -1,8 +1,5 @@
 <template>
-    <div class="mt-2">
-        <p class="white--text text-center">
-            Game mobility
-        </p>
+    <div class="mt-4">
         <v-slide-group
             class="pb-4"
             dark

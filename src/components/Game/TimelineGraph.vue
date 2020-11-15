@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import {Chart} from 'highcharts-vue'
 import { mapGetters } from "vuex";
-import Highcharts from 'highcharts'
+import { Chart } from "highcharts-vue"
+import Highcharts from "highcharts"
 import * as AnnotationsModule from "highcharts/modules/annotations"
 AnnotationsModule(Highcharts);
 
@@ -17,10 +17,6 @@ import green from "../../assets/timeline/green.png"
 
 export default {
     name: "TimelineGraph",
-
-    components: {
-        highcharts: Chart 
-    },
 
     props: {
         homeLogo: {
@@ -407,6 +403,10 @@ export default {
 		},   
 
 	},
+
+	components: {
+        highcharts: Chart 
+    },
 	
 	mounted() {
 		this.init();

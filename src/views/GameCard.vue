@@ -58,6 +58,12 @@
                         :data-text="`${ $t('General.noContent')}`"
                     ></no-data>
                 </div>
+
+                <div class="card__box">
+                    <attacks-graph
+                        :gameid="game_id"
+                    ></attacks-graph>
+                </div>
                 
             </v-col>
 
@@ -93,6 +99,12 @@ import GameHeader from "../components/Game/Header";
 export default {
     name: "GameCard",
 
+    data() {
+        return {
+            game_id:    this.$route.params.gameID
+        }
+    },
+
     computed: {
         ...mapGetters({
             game: "game/fetchgame"
@@ -123,6 +135,7 @@ export default {
         gameSuggestions:    () => import("../components/Game/PreGameSuggestions"),
         gameTextbot:        () => import("../components/Game/GameTextbot"),
         gameOdds:           () => import("../components/Game/GameOdds"),
+        attacksGraph:       () => import("../components/Game/GameAttacksGraph"),
         noData:             () => import("../components/General/NoData/GenericNoData")
     },
 
