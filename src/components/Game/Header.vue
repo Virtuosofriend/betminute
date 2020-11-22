@@ -143,6 +143,7 @@
 							:minute="dataLineup.minute"
 							:injury="dataLineup.injury_time"
 							:extraTime="dataLineup.extra_time"
+							:key="dataLineup.minute"
 						></timeline-graph>
 					</v-col>
 

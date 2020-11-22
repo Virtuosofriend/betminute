@@ -15,18 +15,15 @@ export default {
     name: "Game__attacksGraph",
 
     props: {
-        gameid: {
+        attacks_home: {
             required:   true,
-            type:       String
-        }
-    },
+            type:       Array
+        },
 
-    data() {
-        return {
-            homeData:   [],
-            awayData:   [],
-            selection:  "attacks"
-        }
+        attacks_away: {
+            required:   true,
+            type:       Array
+        },  
     },
 
     computed: {
@@ -34,10 +31,11 @@ export default {
             return {
                 chart: {
                     backgroundColor: "transparent",
-                    height:          260,
+                    height:          190,
                 },
                 title: {
-                    text:       `<h4>${ this.selection.toUpperCase() }</h4>`,
+                    text:       ``,
+                    enabled:    false,
                     useHTML:    true,
                     style: {
                         color:      "#fff",
@@ -48,7 +46,14 @@ export default {
                 colors: ["#3ab795", "#b04d5d", "#3ab795", "#b04d5d"],
                 xAxis: {
                     title: {
-                        text:           "Minute"
+                        text:           "",
+                        enabled:        false
+                    },
+                    labels: {
+                        format: "{value}'",
+                        style: {
+                            fontSize: "9px",
+                        }
                     },
                     type:               "linear",
                     lineColor:          "#2c343a",
@@ -58,12 +63,13 @@ export default {
                 },
                 yAxis: {
                     title: {
-                        text: `${ this.selection.toUpperCase() }`
+                        text:       ``,
+                        enabled:    false
                     },
                     labels: {
                         format: "{value}",
                         style: {
-                            fontSize: "8px",
+                            fontSize: "9px",
                         }
                     },
                     allowDecimals:  false,
@@ -90,10 +96,19 @@ export default {
                     enabled: false
                 },
                 tooltip: {
+                    backgroundColor:    "#727c86",
+                    borderColor:        "#727c86",
+                    useHTML:            true,
                     formatter: function() {
-                        return '<b>' + this.series.name + '</b><br/>' +
-                        '#' + this.y + '<br/>' +
-                        this.x + "'";
+                        return `<div style="height: 36px">
+                                    <p style="font-size: 12px";> 
+                                        <strong>${ this.series.name }</strong>
+                                        <span style="display:block; font-size: 12px; margin-top: 6px; margin-bottom: 6px;">
+                                            #${ this.y }: ${ this.x }'
+                                        </span>
+                                    </p>
+                                </div>`
+
                     }
                 },
                 legend: {
@@ -113,54 +128,18 @@ export default {
                     enabled: false
                 },
                 series: [{
-                        name: "Home",
+                        name: this.$i18n.t( `General.home` ),
                         type: "areaspline",
                         turboThreshold: 0,
-                        data: this.homeData
+                        data: this.attacks_home
                     }, {
-                        name: "Away",
+                        name: this.$i18n.t( `General.away` ),
                         type: "areaspline",
                         turboThreshold: 0,
-                        data: this.awayData
+                        data: this.attacks_away
                     }]
             }
         }
-    },
-
-    methods: {
-        fetchData() {
-            axios.post(`FetchBetMinNode.php?stats_match_id=${ this.gameid }`)
-                .then( res => {
-                    console.log(res.data);
-                    this.homeData = res.data.home.stats.map(elem => {
-                        return {
-                            x: elem.min,
-                            y: elem.data[this.selection]
-                        }
-                    });
-  
-                    this.awayData = res.data.away.stats.map(elem => {
-                        return {
-                            x: elem.min,
-                            y: elem.data[this.selection]
-                        }
-                    });
-                }).catch( e => {
-                    console.log(e.response);
-                })
-        },
-
-        init() {
-
-        }
-    },
-
-    mounted() {
-        this.fetchData();
     }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

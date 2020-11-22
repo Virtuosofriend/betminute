@@ -25,7 +25,7 @@
                     <small v-if="listOver05sec.open != null">total: {{ listOver05sec.open.length }}</small>
                     <small v-if="listOver05sec.open == null">0 games</small>
                 </v-tab>
-              </v-tabs>
+        </v-tabs>
               <v-tabs-items
                 v-model="tabOver05"
                 dark

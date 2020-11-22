@@ -15,69 +15,68 @@
                 ></Game-header>
             </v-col>
 
-            <v-col cols="12" md="4">
-                <div class="card__box">
-                    <h3 class="card__box-title">
-                        {{ $t( `Games.suggestions.title` ) }}
-                    </h3>
-
-                    <game-suggestions
-                        :suggestions="game.bm_static.suggestion"
-                        v-if="game.bm_static.suggestion"
-                    ></game-suggestions>
-                    <no-data v-else 
-                        class="pa-2 text-center"
-                        :data-text="`${ $t('General.noContent')}`"
-                    ></no-data>
-                </div>
-
-                <div class="card__box">
-                    <h3 class="card__box-title">
-                        {{ $t( `Games.textbot.title` ) }}
-                    </h3>
-                    <game-textbot
-                        :textbotValues="game.textbot"
-                        v-if="game.textbot != null"
-                    ></game-textbot>
-                </div>
-                
-            </v-col>
-
-            <v-col cols="12" md="8">
-                <div class="card__box">
-                    <game-live-stats
-                        :gameData="game.bm_live_data"
-                        :homeTeam="homeTeam.logo"
-                        :awayTeam="awayTeam.logo"
-                        v-if="game.bm_live_data"
-                    >
-                    </game-live-stats>
-
-                    <no-data v-else 
-                        class="pa-2 text-center"
-                        :data-text="`${ $t('General.noContent')}`"
-                    ></no-data>
-                </div>
-
-                <div class="card__box">
-                    <attacks-graph
-                        :gameid="game_id"
-                    ></attacks-graph>
-                </div>
-                
-            </v-col>
-
             <v-col
                 cols="12"
             >
-                <div class="card__box">
-                    <h3 class="card__box-title text-center">
-                        {{ $t( `Games.tipping.title` ) }}
-                    </h3>
-                    <game-odds></game-odds>
-                </div>
-                
-            </v-col>            
+
+                <v-tabs
+                    fixed-tabs
+                    background-color="background"
+                    dark
+                    v-model="gameCardTab"
+                    slider-color="#2c343a"
+                    slider-size="1"
+                >
+                    <v-tab 
+                        class="tab--title"
+                        href="#gameInfo"
+                    >
+                        Game Information
+                    </v-tab>
+
+                    <v-tab 
+                        class="tab--title"
+                    >
+                        H2H
+                    </v-tab>
+
+                    <v-tab 
+                        class="tab--title"
+                    >
+                        Team Stats
+                    </v-tab>
+
+                    <v-tab 
+                        class="tab--title"
+                    >
+                        Past meetings
+                    </v-tab>
+
+                    <v-tab 
+                        class="tab--title"
+                    >
+                        Standings
+                    </v-tab>
+
+                </v-tabs>
+
+                <v-tabs-items
+                    v-model="gameCardTab"
+                    dark
+                    class="tabs--wrapper"
+                >
+                    <v-tab-item
+                        style="background-color: transparent"
+                        value="gameInfo"
+                    >
+                        <information-tab
+                            :homeTeam="homeTeam"
+                            :awayTeam="awayTeam"
+                        ></information-tab>
+                                    
+                    </v-tab-item>
+                </v-tabs-items>
+            </v-col>
         </v-row>
 
         <v-row v-else>
@@ -92,6 +91,7 @@
 </template>
 
 <script>
+
 import { mapGetters } from "vuex";
 
 import GameHeader from "../components/Game/Header";
@@ -101,7 +101,8 @@ export default {
 
     data() {
         return {
-            game_id:    this.$route.params.gameID
+            game_id:                    this.$route.params.gameID,
+            gameCardTab:                "",
         }
     },
 
@@ -110,7 +111,7 @@ export default {
             game: "game/fetchgame"
         }),
 
-        homeTeam() {            
+        homeTeam() {
             return {
                 name:           this.game.lineup.home.name,
                 logo:           this.game.lineup.home.logo,
@@ -131,11 +132,7 @@ export default {
 
     components: {
         GameHeader,
-        gameLiveStats:      () => import("../components/Game/LiveGameStatsBelowHeader"),
-        gameSuggestions:    () => import("../components/Game/PreGameSuggestions"),
-        gameTextbot:        () => import("../components/Game/GameTextbot"),
-        gameOdds:           () => import("../components/Game/GameOdds"),
-        attacksGraph:       () => import("../components/Game/GameAttacksGraph"),
+        informationTab:     () => import("./GameCard/InformationTab"),
         noData:             () => import("../components/General/NoData/GenericNoData")
     },
 
@@ -147,18 +144,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card__box {
-    width: 100%;
-    background-color: var(--theme-dark-10);
-    border-radius: 15px;
-    margin: .5em auto;
-    min-height: 50px;
-}
 
-.card__box-title {
-    padding-left: .6em;
-    padding-top: .5em;
-    font-weight: 600;
-    text-transform: initial;
-}
 </style>
