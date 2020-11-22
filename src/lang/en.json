@@ -26,6 +26,11 @@
         "live":             "Live now",
         "starts":           "Starts",
         "minute":           "Minute",
+        "gameInformation":  "Game information",
+        "h2h":              "H2H",
+        "teamStats":        "Team Stats",
+        "pastMeetings":     "Past meetings",
+        "standings":        "Standings",
         "gameEvents": {
             "match_mobility_1": "Match mobility 1",
             "match_mobility_2": "Match mobility 2",
@@ -40,7 +45,7 @@
             "event_goal":       "Goal scored"
         },
         "suggestions":  {
-            "title":                "Suggestions",
+            "title":                "Pre-game Suggestions",
             "overmisoimixrono":     "Over 0.5",
             "overenamisiagona":     "Over 1.5",
             "overdiomisiagona":     "Over 2.5",

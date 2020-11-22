@@ -24,38 +24,39 @@
                     background-color="background"
                     dark
                     v-model="gameCardTab"
-                    slider-color="#2c343a"
+                    slider-color="info"
                     slider-size="1"
                 >
                     <v-tab 
                         class="tab--title"
+                        active-class="tab--title_active"
                         href="#gameInfo"
                     >
-                        Game Information
+                        {{ $t( `Games.gameInformation` ) }}
                     </v-tab>
 
                     <v-tab 
                         class="tab--title"
                     >
-                        H2H
+                        {{ $t( `Games.h2h` ) }}
                     </v-tab>
 
                     <v-tab 
                         class="tab--title"
                     >
-                        Team Stats
+                        {{ $t( `Games.teamStats` ) }}
                     </v-tab>
 
                     <v-tab 
                         class="tab--title"
                     >
-                        Past meetings
+                        {{ $t( `Games.pastMeetings` ) }}
                     </v-tab>
 
                     <v-tab 
                         class="tab--title"
                     >
-                        Standings
+                        {{ $t( `Games.standings` ) }}
                     </v-tab>
 
                 </v-tabs>

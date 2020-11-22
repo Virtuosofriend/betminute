@@ -133,9 +133,6 @@ export default {
   }
 
   /* General Compns */
-  .v-slide-group__wrapper {
-    background-color: #181e23 !important;
-  }
   .theme--dark.v-tabs-items {
     background-color: transparent !important;
   }
@@ -175,6 +172,26 @@ export default {
 
   .card--content div {
     width: 100%;
+  }
+
+  .card__box {
+    width: 100%;
+    background-color: var(--theme-dark-10);
+    border-radius: 15px;
+    margin: .5em auto;
+    min-height: 50px;
+  }
+
+  .card__box-title {
+      padding-left: 16px;
+      padding-top: 8px;
+      font-weight: 600;
+      text-transform: initial;
+  }
+
+  /** Tabs **/
+  .tab--title_active {
+    font-weight: 600 !important;
   }
 
   /** Helpers **/

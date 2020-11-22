@@ -38,10 +38,16 @@
                     <h3 class="card__box-title">
                         {{ $t( `Games.textbot.title` ) }}
                     </h3>
+
                     <game-textbot
                         :textbotValues="game.textbot"
-                        v-if="game.textbot != null"
+                        v-if="game.textbot.mobility_text"
                     ></game-textbot>
+
+                    <no-data v-else 
+                        class="pa-2 text-center"
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </div>
             
             </v-col>
@@ -69,7 +75,7 @@
                     <attacks-graph
                         class="mt-2"
                         :attacks_home="attacks_dangerous_home"
-                        :attacks_away="attacks__dangerous_away"
+                        :attacks_away="attacks_dangerous_away"
                         v-if="attacks_dangerous_home.length > 0 && attacks_dangerous_away.length > 0"
                         :key="game.lineup.minute"
                     ></attacks-graph>
@@ -111,6 +117,7 @@ export default {
 
     data() {
         return {
+            game_id:                    this.$route.params.gameID,
             attacks_home:               [],
             attacks_away:               [],
             attacks_dangerous_home:     [],
@@ -178,18 +185,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card__box {
-    width: 100%;
-    background-color: var(--theme-dark-10);
-    border-radius: 15px;
-    margin: .5em auto;
-    min-height: 50px;
-}
 
-.card__box-title {
-    padding-left: .6em;
-    padding-top: .5em;
-    font-weight: 600;
-    text-transform: initial;
-}
 </style>

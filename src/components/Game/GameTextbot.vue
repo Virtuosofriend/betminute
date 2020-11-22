@@ -10,9 +10,10 @@
                     v-slot="{ active, toggle }"
                 >
                     <v-card
-                        color="secondary"
+                        color="dark"
                         class="ma-4"
-                        width="180"
+                        width="360"
+                        elevation="0"
                     >
                         <v-row
                             class="fill-height"

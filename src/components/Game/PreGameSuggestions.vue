@@ -3,32 +3,42 @@
         <v-col
             v-for="[value, key, index] in Object.entries(suggestions)"
             :key="index"
-           
+            cols="12"
         >
-            <div class="pl-2 pb-1 suggestions">
-                <v-btn
-                    v-if="value != 'simeio'"
-                    :color="key ? 'success' : 'accent'"
-                    depressed
-                    outlined
-                    small
+            <div 
+                class="pl-2 pb-1"
+            >
+                <div 
+                    class="suggestions"
+                    v-if="value != 'simeio' && key"
                 >
-                    {{ $t(`Games.suggestions.${value}`) }}
-                </v-btn>
+                    <v-icon 
+                        color="success"
+                        x-small
+                        class="mr-2"
+                    > 
+                        fas fa-circle
+                    </v-icon>
+                    <p class="suggestions__title">
+                        {{ $t(`Games.suggestions.${value}`) }}
+                    </p>
+                </div>
 
-                <v-btn
+                <div 
+                    class="suggestions"
                     v-if="value == 'simeio' && key != '-'"
-                    :color="key ? 'success' : 'accent'"
-                    depressed
-                    small
-                    text
                 >
+                    <v-icon 
+                        color="success"
+                        x-small
+                        class="mr-2"
+                    > 
+                        fas fa-circle
+                    </v-icon>
                     {{ $t(`Games.suggestions.${value}`) }}: {{ key }}
-                </v-btn>
+                </div>
             </div>
-            
         </v-col>
-
     </v-row>
 </template>
 
@@ -56,5 +66,16 @@ export default {
 .suggestions {
     display: flex;
     width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 8px;
+    margin-top: 8px;
+}
+
+.suggestions__title {
+    color: var(--v-primary-darken2);
+    font-size: 12px;
+    margin: 0;
+
 }
 </style>
