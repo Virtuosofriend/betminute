@@ -55,6 +55,8 @@
 
                     <v-tab 
                         class="tab--title"
+                        active-class="tab--title_active"
+                        href="#gameStandings"
                     >
                         {{ $t( `Games.standings` ) }}
                     </v-tab>
@@ -73,8 +75,17 @@
                         <information-tab
                             :homeTeam="homeTeam"
                             :awayTeam="awayTeam"
-                        ></information-tab>
-                                    
+                        ></information-tab>    
+                    </v-tab-item>
+
+                    <v-tab-item
+                        style="background-color: transparent"
+                        value="gameStandings"
+                    >
+                        <standings-tab
+                            :homeTeam="homeTeam"
+                            :awayTeam="awayTeam"
+                        ></standings-tab>
                     </v-tab-item>
                 </v-tabs-items>
             </v-col>
@@ -114,6 +125,7 @@ export default {
 
         homeTeam() {
             return {
+                id:             this.game.lineup.home.id,
                 name:           this.game.lineup.home.name,
                 logo:           this.game.lineup.home.logo,
                 goals:          this.game.lineup.home.goals,
@@ -123,6 +135,7 @@ export default {
 
         awayTeam() {
             return {
+                id:             this.game.lineup.away.id,
                 name:           this.game.lineup.away.name,
                 logo:           this.game.lineup.away.logo,
                 goals:          this.game.lineup.away.goals,
@@ -134,6 +147,7 @@ export default {
     components: {
         GameHeader,
         informationTab:     () => import("./GameCard/InformationTab"),
+        standingsTab:       () => import("./GameCard/StandingsTab"),
         noData:             () => import("../components/General/NoData/GenericNoData")
     },
 

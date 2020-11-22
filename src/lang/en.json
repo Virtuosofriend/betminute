@@ -13,6 +13,7 @@
     "General": {
         "home":             "Home",
         "away":             "Away",
+        "overall":          "Overall",
         "logout":           "Logout",
         "noContent":        "No data available"
     },
@@ -62,6 +63,21 @@
             "title":                "Tipping"
         },
         "attacks":                  "Attacks",
-        "dangerousAttacks":         "Dangerous Attacks"
+        "dangerousAttacks":         "Dangerous Attacks",
+        "standingsTab": {
+            "dropdownMenu":         "Make a selection",
+            "position":             "Pos.",
+            "logo":                 "Team",
+            "result":               "Status",
+            "games_played":         "MP",
+            "won":                  "W",
+            "draw":                 "D",
+            "lost":                 "L",
+            "goals_scored":         "F",
+            "goals_against":        "A",
+            "goal_difference":      "D",
+            "points":               "Pts",
+            "recent_form":          "Form"
+        }
     }
 }

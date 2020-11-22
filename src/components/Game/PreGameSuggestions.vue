@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters>
         <v-col
-            v-for="[value, key, index] in Object.entries(suggestions)"
+            v-for="[value, key, index] in Object.entries(properSuggestions)"
             :key="index"
             cols="12"
         >
@@ -10,39 +10,48 @@
             >
                 <div 
                     class="suggestions"
-                    v-if="value != 'simeio' && key"
                 >
-                    <v-icon 
-                        color="success"
-                        x-small
-                        class="mr-2"
-                    > 
-                        fas fa-circle
-                    </v-icon>
-                    <p class="suggestions__title">
-                        {{ $t(`Games.suggestions.${value}`) }}
-                    </p>
+                    <div
+                        class="d-flex"
+                        v-if="value != 'simeio'"
+                    >
+                        <v-icon 
+                            color="success"
+                            x-small
+                            class="mr-2"
+                        > 
+                            fas fa-circle
+                        </v-icon>
+                        <p class="suggestions__title">
+                            {{ $t(`Games.suggestions.${value}`) }}
+                        </p>
+                    </div>
+
+                    <div 
+                        class="d-flex mb-2"
+                        v-else
+                    >
+                        <v-icon 
+                            color="success"
+                            x-small
+                            class="mr-2"
+                        > 
+                            fas fa-circle
+                        </v-icon>
+                        <p class="suggestions__title">
+                            {{ $t(`Games.suggestions.${value}`) }}: {{ key }}
+                        </p>
+                    </div>
                 </div>
 
-                <div 
-                    class="suggestions"
-                    v-if="value == 'simeio' && key != '-'"
-                >
-                    <v-icon 
-                        color="success"
-                        x-small
-                        class="mr-2"
-                    > 
-                        fas fa-circle
-                    </v-icon>
-                    {{ $t(`Games.suggestions.${value}`) }}: {{ key }}
-                </div>
             </div>
         </v-col>
     </v-row>
 </template>
 
 <script>
+import helper from "../../plugins/helper";
+
 export default {
     name:   "Game__pregamesuggestions",
 
@@ -56,7 +65,12 @@ export default {
     data() {
         return {
             simeio:             "-",
-            properSuggestions: {}
+        }
+    },
+
+    computed: {
+        properSuggestions() {
+            return helper.removeFalseProperties(this.suggestions)
         }
     }
 }

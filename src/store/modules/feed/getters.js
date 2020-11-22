@@ -13,15 +13,20 @@ const liveAndnotStarted = state => {
 }
 const finished = state => state.finished;
 
+const allGames = state => {
+  return state.livescore.concat(state.finished).concat(state.notStarted);
+}
+
 export default {
-  information,
+  allGames,
   banka,
+  information,
+  finished,
   listsOver1_5ft,
   listsOver0_5ht,
   listsOver0_5secondhalf,
-  topTipsters,
   livescore,
+  liveAndnotStarted,
   notStarted,
-  finished,
-  liveAndnotStarted
+  topTipsters
 };

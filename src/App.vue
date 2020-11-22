@@ -194,6 +194,28 @@ export default {
     font-weight: 600 !important;
   }
 
+  /** Tables **/
+  .custom__table tr {
+      background-color: var(--v-accent-base);
+  }
+
+  .custom__table thead tr {
+      background-color: var(--v-background-lighten2);
+  }
+
+  .custom__table thead th {
+      border: 0 !important;
+  }
+  .custom__table tr {
+      border: 0;
+  }
+  .custom__table tbody td {
+      border: 0 !important;
+  }
+  tr.active {
+        background-color:var(--v-background-base) !important; 
+  }
+
   /** Helpers **/
   .w-100 {
     width: 100%;

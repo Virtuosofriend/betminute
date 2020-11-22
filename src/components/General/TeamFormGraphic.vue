@@ -1,8 +1,8 @@
 <template>
     <div class="teamform">
-  
+
         <div 
-            v-for="(data, index) in teamForm"
+            v-for="(data, index) in form"
             :key="index"
             class="teamform__icons"
             :class="{ 'win': data == 'W', 'loss': data == 'L', 'draw': data == 'D'}"
@@ -30,8 +30,10 @@ export default {
         }
     },
 
+ 
     watch: {
         form(newValue, oldValue) {
+            console.log(newValue)
             if ( newValue != null ) {
                 const values = newValue.split("");
                 this.teamForm = values;
