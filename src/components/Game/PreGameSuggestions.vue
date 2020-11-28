@@ -29,7 +29,7 @@
 
                     <div 
                         class="d-flex mb-2"
-                        v-else
+                        v-if="value == 'simeio' && key != '-'"
                     >
                         <v-icon 
                             color="success"
