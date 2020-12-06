@@ -9,6 +9,7 @@ import i18n from "./plugins/i18n";
 import HighchartsVue from "highcharts-vue"
 import Vuelidate from "vuelidate"
 import axios from "axios"
+import moment from "moment";
 
 Vue.config.productionTip = false;
 Vue.use(HighchartsVue);
@@ -23,6 +24,22 @@ axios.defaults.headers.common = {
 axios.defaults.baseURL = process.env.VUE_APP_baseURL || "https://bet-minute.com/service/requests";
 /** End of config **/
 
+
+Vue.filter("dateOnly", value => {
+    if (!value){
+        return ""
+    }
+
+    return moment(value).format("DD-MM-YYYY");
+});
+
+Vue.filter("dateSmall", value => {
+    if (!value){
+        return ""
+    }
+
+    return moment(value).format("DD-MM");
+});
 
 new Vue({
   router,

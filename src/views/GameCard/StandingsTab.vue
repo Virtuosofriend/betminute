@@ -7,18 +7,11 @@
                 <h3 class="card__box-title text-center">
                     {{ $t( `Games.standings` ) }}
 
-                    <v-select
-                        :items="selection_items"
-                        v-model="selection"
-                        dark
-                        style="width: 250px;"
-                        flat
-                        item-color="accent"
-                        background-color="transparent"
-                        color="primary"
-                        :label="`${ $t('Games.standingsTab.dropdownMenu') }`"
-                        @change="changeSelection()"
-                    ></v-select>
+                    <dropdown-selection
+                        class="mt-2 pr-3"
+                        :defaultValue="selection"
+                        @changeDefaultValue="selection = $event; changeSelection()"
+                    ></dropdown-selection>
                 </h3>
 
                 <v-data-table
@@ -80,7 +73,7 @@ export default {
             game_id:    this.$route.params.gameID,
             standings:  [],
             active:     [],
-            selection:  ""
+            selection:  "overall"
         }
     },
 
@@ -88,23 +81,6 @@ export default {
         ...mapGetters({
             game: "feed/allGames"
         }),
-
-        selection_items() {
-            return [
-                {
-                    value:  "",
-                    text:   this.$i18n.t( `General.overall` )
-                },
-                {
-                    value:  "home",
-                    text:   this.$i18n.t( `General.home` )
-                },
-                {
-                    value:  "away",
-                    text:   this.$i18n.t( `General.away` )
-                }
-            ]
-        },
 
         tableHeaders() { 
             return Object.keys(this.active[0]).map(elem => {
@@ -155,7 +131,7 @@ export default {
                 };
 
                     
-                    if ( this.selection == "" ) {
+                    if ( this.selection == "overall" ) {
                         return {
                             ...obj,
                             games_played:       item.games_played,
@@ -208,7 +184,8 @@ export default {
     },
 
     components: {
-        teamForm: () => import("../../components/General/TeamFormGraphic"),
+        teamForm:           () => import("../../components/General/TeamFormGraphic"),
+        dropdownSelection:  () => import("../../components/General/HomeAwayOverallDropdown"),
     },
 
     mounted() {

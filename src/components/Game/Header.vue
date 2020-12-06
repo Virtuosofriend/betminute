@@ -91,7 +91,7 @@
 				<div class="w-100">
 					<div class="cta-button">
 						<v-btn
-							color="primary"
+							color="secondary"
 							depressed
 							small
 						>
@@ -144,6 +144,7 @@
 							:injury="dataLineup.injury_time"
 							:extraTime="dataLineup.extra_time"
 							:key="dataLineup.minute"
+							v-if="dataLineup.minute > 0"
 						></timeline-graph>
 					</v-col>
 

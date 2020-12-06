@@ -41,7 +41,7 @@
 
                     <game-textbot
                         :textbotValues="game.textbot"
-                        v-if="game.textbot.mobility_text"
+                        v-if="game.textbot != null"
                     ></game-textbot>
 
                     <no-data v-else 

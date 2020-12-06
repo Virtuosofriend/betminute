@@ -33,7 +33,6 @@ export default {
  
     watch: {
         form(newValue, oldValue) {
-            console.log(newValue)
             if ( newValue != null ) {
                 const values = newValue.split("");
                 this.teamForm = values;

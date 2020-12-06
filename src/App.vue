@@ -215,6 +215,10 @@ export default {
   tr.active {
         background-color:var(--v-background-base) !important; 
   }
+  .custom__table .v-data-footer {
+      background-color: var(--v-background-lighten2);
+      border-top: 0 !important;
+  }
 
   /** Helpers **/
   .w-100 {

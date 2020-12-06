@@ -15,7 +15,9 @@
         "away":             "Away",
         "overall":          "Overall",
         "logout":           "Logout",
-        "noContent":        "No data available"
+        "noContent":        "No data available",
+        "of":               "of",
+        "results":          "Results per page"
     },
     "myFeed": {
         "livefeed":         "Live feed",
@@ -64,6 +66,20 @@
         },
         "attacks":                  "Attacks",
         "dangerousAttacks":         "Dangerous Attacks",
+        "pastMeetingsTab": {
+            "title1":                "Past meetings",
+            "title2":                "Past form",
+            "table_fields": {
+                "date":             "Date",
+                "specification":    "League",
+                "agwnistiki":       "Round",
+                "htskor":           "HT",
+                "skor":             "FT",
+                "htover1":          "Goal in HT",
+                "htover2":          "Over 1.5 in HT",
+                "away":             "Opponent"
+            }
+        },
         "standingsTab": {
             "dropdownMenu":         "Make a selection",
             "position":             "Pos.",
