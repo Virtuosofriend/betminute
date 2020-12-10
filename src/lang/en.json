@@ -66,6 +66,14 @@
         },
         "attacks":                  "Attacks",
         "dangerousAttacks":         "Dangerous Attacks",
+        "teamStatsTab": {
+            "title1":               "For-Against goals",
+            "title2":               "For-Against corners",
+            "corners":              "Number of corners",
+            "goals":                "Number of goals",
+            "forTeam":              "For",
+            "againstTeam":          "Against"
+        },
         "pastMeetingsTab": {
             "title1":                "Past meetings",
             "title2":                "Past form",

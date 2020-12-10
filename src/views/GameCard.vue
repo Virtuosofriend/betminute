@@ -45,6 +45,7 @@
                     <v-tab 
                         class="tab--title"
                         active-class="tab--title_active"
+                        href="#gameTeamStats"
                     >
                         {{ $t( `Games.teamStats` ) }}
                     </v-tab>
@@ -81,6 +82,14 @@
                             :awayTeam="awayTeam"
                         ></information-tab>    
                     </v-tab-item>
+
+                    <v-tab-item
+                        style="background-color: transparent"
+                        value="gameTeamStats"
+                    >
+                         <teamstats-tab></teamstats-tab> 
+                    </v-tab-item>
+
                     <v-tab-item
                         style="background-color: transparent"
                         value="gamePastMeetings"
@@ -157,6 +166,7 @@ export default {
     components: {
         GameHeader,
         informationTab:     () => import("./GameCard/InformationTab"),
+        teamstatsTab:       () => import("./GameCard/TeamStatsTab"),
         pastmeetingsTab:    () => import("./GameCard/PastMeetingsTab"),
         standingsTab:       () => import("./GameCard/StandingsTab"),
         noData:             () => import("../components/General/NoData/GenericNoData")
