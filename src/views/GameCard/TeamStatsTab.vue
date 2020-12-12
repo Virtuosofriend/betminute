@@ -8,6 +8,13 @@
                 <h3 class="card__box-title text-center">
                     {{ $t( `Games.teamStatsTab.title1` ) }}
                 </h3>
+
+                <div class="card__box-description">
+                    <p>
+                        {{ $t( `Games.teamStatsTab.description1` ) }}
+                    </p>
+                </div>
+
                 <v-container>
                     <v-row>
                         <v-col
@@ -50,9 +57,8 @@
                     </v-row>
                 </v-container>
                 
-
                 <!-- <no-data
-                    v-else
+                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
                     class="pa-2 text-center"
                     :data-text="`${ $t('General.noContent')}`"
                 ></no-data> -->
@@ -67,6 +73,13 @@
                 <h3 class="card__box-title text-center">
                     {{ $t( `Games.teamStatsTab.title2` ) }}
                 </h3>
+
+                <div class="card__box-description">
+                    <p>
+                        {{ $t( `Games.teamStatsTab.description2` ) }}
+                    </p>
+                </div>
+
                 <v-container>
                     <v-row>
                         <v-col
@@ -110,12 +123,75 @@
                 </v-container>
                 
                 <!-- <no-data
-                    v-else
+                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
                     class="pa-2 text-center"
                     :data-text="`${ $t('General.noContent')}`"
                 ></no-data> -->
             </div>
         </v-col>
+
+        <v-col
+            cols="12"
+            md="12"
+        >
+            <div class="card__box">
+                <h3 class="card__box-title text-center">
+                    {{ $t( `Games.teamStatsTab.title3` ) }}
+                </h3>
+
+                <div class="card__box-description">
+                    <p>
+                        {{ $t( `Games.teamStatsTab.description3` ) }}
+                    </p>
+                </div>
+
+                <v-container>
+                    <v-row>
+                        <v-col
+                            cols="12"
+                            md="6"
+                        >
+                            <div class="team">
+                                <img :src="gameData.lineup.home.logo" class="team__logo">
+                                <dropdown-home-away
+                                    :defaultValue="defaultValue_home_overunder"
+                                    @changeDefaultValue="defaultValue_home_overunder = $event"
+                                ></dropdown-home-away>
+                            </div>
+                            <over-goals-graph
+                                :gameData="gameData.bm_static.home.uo"
+                                :teamField="defaultValue_home_overunder"
+                            ></over-goals-graph>
+                        </v-col>
+
+                        <v-col
+                            cols="12"
+                            md="6"
+                        >
+                            <div class="team">
+                                <img :src="gameData.lineup.away.logo" class="team__logo">
+                                <dropdown-home-away
+                                    :defaultValue="defaultValue_away_overunder"
+                                    @changeDefaultValue="defaultValue_away_overunder = $event"
+                                ></dropdown-home-away>
+                            </div>
+
+                            <over-goals-graph
+                                :gameData="gameData.bm_static.away.uo"
+                                :teamField="defaultValue_away_overunder"
+                            ></over-goals-graph>
+                        </v-col>
+                    </v-row>
+                </v-container>
+                
+                <!-- <no-data
+                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
+                    class="pa-2 text-center"
+                    :data-text="`${ $t('General.noContent')}`"
+                ></no-data> -->
+            </div>
+        </v-col>
+
     </v-row>
 </template>
 
@@ -123,6 +199,7 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 import dropdownSelection from "../../components/Game/TeamStats/DropdownSelection"
+import dropdownHomeAway from "../../components/General/HomeAwayOverallDropdown"
 
 export default {
     name:   "Teamstats__tab",
@@ -133,7 +210,9 @@ export default {
             defaultValue_home_goal:     10,
             defaultValue_away_goal:     10,
             defaultValue_home_corner:   10,
-            defaultValue_away_corner:   10
+            defaultValue_away_corner:   10,
+            defaultValue_home_overunder:"home",
+            defaultValue_away_overunder:"away"
         }
     },
 
@@ -146,13 +225,24 @@ export default {
 
     components: {
         noData:         () => import("../../components/General/NoData/GenericNoData"),
+        overGoalsGraph: () => import("../../components/Game/TeamStats/OverGoalsMatches"),
         timeIntervals:  () => import("../../components/Game/TeamStats/TimeIntervals"),
-        dropdownSelection
+        dropdownSelection,
+        dropdownHomeAway
     }
 }
 </script>
 
 <style lang="scss" scoped>
+.card__box-description {
+    display: flex;
+    justify-content: flex-start;
+    color: var(--v-primary-base);
+    font-size: 14px;
+    width: 50%;
+    margin: 24px auto 0px auto;
+    opacity: .7;
+}
 .team {
     display: flex;
     align-items: center;
@@ -160,6 +250,7 @@ export default {
 .team__logo {
     object-fit: contain;
     width: 64px;
+    height: 64px;
     margin-right: 4px;
 }
 </style>

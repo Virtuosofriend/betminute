@@ -73,7 +73,7 @@ export default {
             game_id:    this.$route.params.gameID,
             standings:  [],
             active:     [],
-            selection:  "overall"
+            selection:  "sum"
         }
     },
 
@@ -131,7 +131,7 @@ export default {
                 };
 
                     
-                    if ( this.selection == "overall" ) {
+                    if ( this.selection == "sum" ) {
                         return {
                             ...obj,
                             games_played:       item.games_played,

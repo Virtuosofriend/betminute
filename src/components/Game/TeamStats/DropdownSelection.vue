@@ -36,19 +36,19 @@ export default {
             return [
                 {
                     value:  10,
-                    text:   "10 mins interval"
+                    text:   this.$i18n.t( `Games.teamStatsTab.dropDown.10mins` )
                 },
                 {
                     value:  15,
-                    text:   "15 mins interval"
+                    text:   this.$i18n.t( `Games.teamStatsTab.dropDown.15mins` )
                 },
                 {
                     value:  30,
-                    text:   "30 mins interval"
+                    text:   this.$i18n.t( `Games.teamStatsTab.dropDown.30mins` )
                 },
                 {
                     value:  45,
-                    text:   "45 mins interval"
+                    text:   this.$i18n.t( `Games.teamStatsTab.dropDown.45mins` )
                 }
             ]
         }

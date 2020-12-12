@@ -69,10 +69,21 @@
         "teamStatsTab": {
             "title1":               "For-Against goals",
             "title2":               "For-Against corners",
+            "title3":               "Over/Under matches",
+            "description1":         "This panel shows the number of goals (for and against) for each team per specific time interval. The default value is 10mins but you can change it from the dropdown menu.",
+            "description2":         "This panel shows the number of corners (for and against) for each team per specific time interval. The default value is 10mins but you can change it from the dropdown menu.",
+            "description3":         "This panel shows the number of matches that each team has scored more than 0.5 goals, 1.5 goals and 2.5 goals per each half and in total.",
             "corners":              "Number of corners",
             "goals":                "Number of goals",
+            "matches":              "Number of matches",
             "forTeam":              "For",
-            "againstTeam":          "Against"
+            "againstTeam":          "Against",
+            "dropDown": {
+                "10mins":           "10 mins interval",
+                "15mins":           "15 mins interval",
+                "30mins":           "30 mins interval",
+                "45mins":           "45 mins interval"
+            }
         },
         "pastMeetingsTab": {
             "title1":                "Past meetings",

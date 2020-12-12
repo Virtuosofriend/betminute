@@ -2,7 +2,6 @@
     <div>
         <highcharts 
 			:options="chartOptions"
-            :key="interval"
 		></highcharts>
     </div>
 </template>
@@ -12,7 +11,7 @@ import { Chart } from "highcharts-vue"
 import Highcharts from "highcharts"
 
 export default {
-    name: "Time__intervals",
+    name: "OverGoals__graphs",
 
     props: {
         gameData: {
@@ -20,99 +19,69 @@ export default {
             type:       Object
         },
 
-        interval: {
-            required:   false,
-            type:       Number,
-            default:    10
-        },
-
-        title: {
+        teamField: {
             required:   true,
             type:       String
         }
     },
 
     computed: {
-        chartOptions() {
-            const max_time = 100;
-            let categories = {
-                data:   [],
-                labels: []
+        categories() {
+            return [
+                "1st half",
+                "2nd half",
+                "Total"
+            ]
+        },
+
+        chartOptions() {          
+            let data = {
+                first_half:   [],
+                second_half:  [],
+                total:        []
             };
 
-            let i = 0;
-            for ( i; i < max_time; i += this.interval ) {
-                let difference = this.interval;
-                let starting = i;
+            for ( let value in data ) {
+                for ( let half in this.gameData[value][this.teamField]) {
+                    if ( half.includes("1") ) {
+                        data.first_half.push(this.gameData[value][this.teamField][half]);
+                    }
 
-                if ( i == 40 ) {
-                    difference = 5;
-                }
-                if ( i == 50 ) {
-                    difference = 5;
-                    starting = 45;
-                }
+                    if ( half.includes("2") ) {
+                        data.second_half.push(this.gameData[value][this.teamField][half]);
+                    }
 
-                if ( i > 50 && this.interval == 10 ) {
-                    difference = 10;
+                    if ( half.includes("3") ) {
+                        data.total.push(this.gameData[value][this.teamField][half]);
+                    }
                 }
-
-                if ( i == 90 ) {
-                    break;
-                }
-                
-                categories.labels.unshift(`${starting}' - ${starting + difference}'`);
-                categories.data.push(`i${starting + 1}to${starting + difference}`);
             }
-
-            let for_data = [];
-            let against_data = [];
-            categories.data.forEach( elem => {
-                for_data.unshift(- + +this.gameData.for[elem]);
-                against_data.unshift(this.gameData.against[elem]);
-            });
-
-            const max_for = Math.max(...for_data.map(elem => Math.abs(elem)));
-            const max_against = Math.max(...against_data.map(elem => Math.abs(elem)));
-        
-            let max = ( max_for > max_against ) ? max_for : max_against;
+            
             return {
                 chart: {
-                    type:               "bar",
+                    type:               "column",
                     backgroundColor:    "transparent",
                     borderRadius:		"15px"
                 },
                 title: {
                     text:                   ""
                 },
-                xAxis: [{
-                    categories:             categories.labels,
+                xAxis: {
+                    categories:             this.categories,
                     gridLineWidth:          0,
 					lineWidth:              0,
-					allowDecimals:          false,
+                    gridLineColor:          "#000",
                     reversed:               false,
                     labels: {
                         step:   1
                     },
-                }, {
-                    opposite:               true,
-                    reversed:               false,
-                    gridLineWidth:          0,
-					lineWidth:              0,
-					allowDecimals:          false,
-                    categories:             categories.labels,
-                    linkedTo:               0,
-                    labels: {
-                        step:   1
-                    },
-                }],
+                },
                 yAxis: {
                     title: {
-                        text:              this.$i18n.t( `Games.teamStatsTab.${this.title}`)
+                        text:              this.$i18n.t( `Games.teamStatsTab.matches`)
                     },
                     gridLineWidth:        0,
 					lineWidth:            0,
-                    max:                  max + 1,
                     allowDecimals:        false,
                     labels: {
 						formatter: function () {
@@ -125,7 +94,12 @@ export default {
 					}
                 },
                 legend: {
-					enabled:              false
+					enabled:              true,
+                    itemStyle:  {
+                        color:      "#fff",
+                        fontSize:   "12px",
+                        fontWeight: "bold"
+                    }
 				},
                 credits: {
 					enabled:              false
@@ -134,11 +108,12 @@ export default {
 					enabled:              false
 				},
                 plotOptions: {
-                    bar: {
-                        stacking:       "normal",
-                        borderWidth:    0,
-                        pointWidth:     3,
-                        minPointLength: 0.5,
+                    column: {
+                        pointPadding:           0.2,
+                        groupPadding:           0.7,
+                        borderWidth:            0,
+                        minPointLength:         3,
+                        pointWidth:             12,
                         dataLabels: {
                             enabled:            true,
                             inside:             false,
@@ -175,13 +150,17 @@ export default {
                 },
 
                 series: [{
-                    name:   this.$i18n.t( `Games.teamStatsTab.forTeam` ),
-                    color:  "#5a6fd0",
-                    data:   for_data,
+                    name:   "Over 0.5",
+                    color:  "#69779b",
+                    data:   data.first_half,
                 }, {
-                    name:   this.$i18n.t( `Games.teamStatsTab.againstTeam` ),
-                    color:  "#d23a87",
-                    data:   against_data,
+                    name:   "Over 1.5",
+                    color:  "#acdbdf",
+                    data:   data.second_half,
+                }, {
+                    name:   "Over 2.5",
+                    color:  "#f0ece2",
+                    data:   data.total,
                 }]
             }
         }

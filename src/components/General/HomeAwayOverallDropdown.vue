@@ -6,6 +6,7 @@
         solo
         flat
         dense
+        label="Selection"
         full-width
         item-color="accent"
         background-color="background lighten-2"
@@ -35,7 +36,7 @@ export default {
         selection_items() {
             return [
                 {
-                    value:  "overall",
+                    value:  "sum",
                     text:   this.$i18n.t( `General.overall` )
                 },
                 {
