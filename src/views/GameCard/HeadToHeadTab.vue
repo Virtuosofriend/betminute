@@ -4,7 +4,7 @@
             cols="12"
             md="12"
         >
-            <div class="card__box">
+            <div class="card__box no__background">
                 <h3 class="card__box-title text-center">
                     {{ $t( `Games.H2HTab.title` ) }}
                 </h3>
@@ -91,6 +91,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.no__background {
+    background: transparent;
+}
 .card__box-description {
     display: flex;
     justify-content: flex-start;

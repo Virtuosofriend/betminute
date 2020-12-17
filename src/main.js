@@ -11,6 +11,8 @@ import Vuelidate from "vuelidate"
 import axios from "axios"
 import moment from "moment";
 
+import NoDecimals from "./commons/number.filter";
+
 Vue.config.productionTip = false;
 Vue.use(HighchartsVue);
 Vue.use(Vuelidate);
@@ -24,6 +26,7 @@ axios.defaults.headers.common = {
 axios.defaults.baseURL = process.env.VUE_APP_baseURL || "https://bet-minute.com/service/requests";
 /** End of config **/
 
+Vue.filter("noDecimals", NoDecimals);
 
 Vue.filter("dateOnly", value => {
     if (!value){

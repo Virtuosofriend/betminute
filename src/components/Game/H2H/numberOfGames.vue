@@ -3,7 +3,7 @@
         <h3>
             {{ games }}
             <small>
-                Matches
+                {{ $t( `Games.H2HTab.numberOfGames` ) }}
             </small>
         </h3>
     </div>
@@ -24,9 +24,10 @@ export default {
 
 <style lang="scss" scoped>
 .circle {
-    background-color: var(--v-background-lighten2);
-    padding: 10px;
-    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
 }
 
 h3 {

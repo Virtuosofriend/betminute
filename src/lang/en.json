@@ -86,7 +86,24 @@
             }
         },
         "H2HTab": {
-            "title":                  "H2H stats"
+            "title":                    "H2H stats",
+            "goals":                    "For - Against goals",
+            "matches":                  "Goals scored per match",
+            "numberOfGames":            "Matches",
+            "numberOfGoal":             "goal",
+            "in":                       "in",
+            "numberOfMatch":            "match",
+            "specificBettingMarkets":   "Specific markets",
+            "specific_markets": {
+                "total_goal_goal":        "Goal goal",
+                "first_half_goal_goal":   "First half goal-goal",
+                "second_half_goal_goal":  "Second half goal-goal",
+                "true_goal_goal":         "True goal-goal",
+                "over_15_home":           "Over 1.5 at home",
+                "over_15_away":           "Over 1.5 away",
+                "over_25_goal_goal":      "Over 2.5 & goal-goal",
+                "over_25_contribution":   "Over 2.5 contribution"
+            }
         },
         "pastMeetingsTab": {
             "title1":                "Past meetings",

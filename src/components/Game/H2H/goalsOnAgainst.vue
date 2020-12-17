@@ -2,7 +2,6 @@
     <div>
         <highcharts 
 			:options="chartOptions"
-            :key="interval"
 		></highcharts>
     </div>
 </template>
@@ -12,66 +11,20 @@ import { Chart } from "highcharts-vue"
 import Highcharts from "highcharts"
 
 export default {
-    name: "Time__intervals",
+    name: "Goals__againstOnH2H",
 
     props: {
         gameData: {
             required:   true,
             type:       Object
-        },
-
-        interval: {
-            required:   false,
-            type:       Number,
-            default:    10
-        },
-
-        title: {
-            required:   true,
-            type:       String
         }
     },
 
     computed: {
         chartOptions() {
-            const max_time = 100;
-            let categories = {
-                data:   [],
-                labels: []
-            };
-
-            let i = 0;
-            for ( i; i < max_time; i += this.interval ) {
-                let difference = this.interval;
-                let starting = i;
-
-                if ( i == 40 ) {
-                    difference = 5;
-                }
-                if ( i == 50 ) {
-                    difference = 5;
-                    starting = 45;
-                }
-
-                if ( i > 50 && this.interval == 10 ) {
-                    difference = 10;
-                }
-
-                if ( i == 90 ) {
-                    break;
-                }
-                
-                categories.labels.unshift(`${starting}' - ${starting + difference}'`);
-                categories.data.push(`i${starting + 1}to${starting + difference}`);
-            }
-
-            let for_data = [];
-            let against_data = [];
-            categories.data.forEach( elem => {
-                for_data.unshift(- + +this.gameData.for[elem]);
-                against_data.unshift(this.gameData.against[elem]);
-            });
-
+            const categories = ["1'-45'", "46'-90'", "1'-90'"];
+            const for_data = [-this.gameData.first_half_for, -this.gameData.second_half_for, -this.gameData.total_for];
+            const against_data = [this.gameData.first_half_against, this.gameData.second_half_against, this.gameData.total_against];
             const max_for = Math.max(...for_data.map(elem => Math.abs(elem)));
             const max_against = Math.max(...against_data.map(elem => Math.abs(elem)));
             let max = ( max_for > max_against ) ? max_for : max_against;
@@ -80,45 +33,37 @@ export default {
                 chart: {
                     type:               "bar",
                     backgroundColor:    "transparent",
-                    borderRadius:		"15px"
+                    borderRadius:		"15px",
+                    height:             "120px"
                 },
                 title: {
                     text:                   ""
                 },
-                xAxis: [{
-                    categories:             categories.labels,
+                xAxis: {
+                    categories:             categories,
                     gridLineWidth:          0,
 					lineWidth:              0,
 					allowDecimals:          false,
                     reversed:               false,
                     labels: {
-                        step:                 1,
+                        step:   1,
                         style: {
                             color:            "#727c86",
                             fontSize:         "10px",
                         }
                     },
-                }, {
-                    opposite:               true,
-                    reversed:               false,
-                    gridLineWidth:          0,
-					lineWidth:              0,
-					allowDecimals:          false,
-                    categories:             categories.labels,
-                    linkedTo:               0,
-                    labels: {
-                        step:   1
-                    },
-                }],
+                },
                 yAxis: {
                     title: {
-                        text:              this.$i18n.t( `Games.teamStatsTab.${this.title}`)
+                        text:               this.$i18n.t( `Games.teamStatsTab.goals`),
+                        enabled:            false
                     },
                     gridLineWidth:        0,
 					lineWidth:            0,
                     max:                  max + 1,
                     allowDecimals:        false,
                     labels: {
+                        enabled:    false,
 						formatter: function () {
                             return Math.abs(this.value);
                         },
