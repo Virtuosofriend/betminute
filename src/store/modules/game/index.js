@@ -3,14 +3,15 @@ import getters from './getters';
 import mutations from './mutations';
 
 const state = {
-  game:     {},
-  odds:     [],
+    game:     {},
+    odds:     [],
+    h2h:      {}
 };
 
 export default {
-  namespaced: true,
-  state,
-  actions,
-  getters,
-  mutations,
+    namespaced: true,
+    state,
+    actions,
+    getters,
+    mutations,
 };

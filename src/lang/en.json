@@ -85,6 +85,9 @@
                 "45mins":           "45 mins interval"
             }
         },
+        "H2HTab": {
+            "title":                  "H2H stats"
+        },
         "pastMeetingsTab": {
             "title1":                "Past meetings",
             "title2":                "Past form",

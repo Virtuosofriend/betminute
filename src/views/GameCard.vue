@@ -38,6 +38,7 @@
                     <v-tab 
                         class="tab--title"
                         active-class="tab--title_active"
+                        href="#gameH2H"
                     >
                         {{ $t( `Games.h2h` ) }}
                     </v-tab>
@@ -81,6 +82,16 @@
                             :homeTeam="homeTeam"
                             :awayTeam="awayTeam"
                         ></information-tab>    
+                    </v-tab-item>
+
+                    <v-tab-item
+                        style="background-color: transparent"
+                        value="gameH2H"
+                    >
+                        <headtohead-tab
+                            :homeTeam="homeTeam"
+                            :awayTeam="awayTeam"
+                        ></headtohead-tab>    
                     </v-tab-item>
 
                     <v-tab-item
@@ -163,9 +174,16 @@ export default {
         }
     },
 
+    methods: {
+        fetchAllGameData() {
+            this.$store.dispatch("game/fetch_h2h", this.game_id);
+        }
+    },
+
     components: {
         GameHeader,
         informationTab:     () => import("./GameCard/InformationTab"),
+        headtoheadTab:      () => import("./GameCard/HeadToHeadTab"),
         teamstatsTab:       () => import("./GameCard/TeamStatsTab"),
         pastmeetingsTab:    () => import("./GameCard/PastMeetingsTab"),
         standingsTab:       () => import("./GameCard/StandingsTab"),
@@ -175,6 +193,7 @@ export default {
     mounted() {
         const payload = this.$route.params;
         this.$store.dispatch("game/gameInfo", payload);
+        this.fetchAllGameData();
     }
 }
 </script>
