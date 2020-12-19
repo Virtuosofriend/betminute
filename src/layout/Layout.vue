@@ -1,19 +1,19 @@
 <template>
-  <v-row>
-      <v-col 
-        class="col-md-2 sidebar">
-        <router-view name="sidebar" />
-      </v-col>
-      <v-col 
-        class="col-md-8 main">
-        <router-view name="main" />
-      </v-col>
-      <v-col
-        class="col-md-2"
-      >
-        <topTipsters></topTipsters>
-      </v-col>
-    </v-row>
+    <v-row>
+        <v-col 
+            class="col-md-2 sidebar">
+            <router-view name="sidebar" />
+        </v-col>
+        <v-col 
+            class="col-md-8 main">
+            <router-view name="main" />
+        </v-col>
+        <v-col
+            class="col-md-2"
+        >
+            <topTipsters></topTipsters>
+        </v-col>
+        </v-row>
 </template>
 
 <script>

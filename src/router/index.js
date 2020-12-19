@@ -1,60 +1,60 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Socket from '../plugins/socket';
+import Vue from "vue"
+import VueRouter from "vue-router"
+import Socket from "../plugins/socket";
+import store from "../store";
 
-import Layout from '../layout/Layout.vue';
-import Sidebar from '../layout/Sidebar.vue';
-import Login from '../views/Login.vue';
-import Home from '../views/Dashboard.vue';
-import MyFeed from '../views/MyFeed.vue';
-import GameCard from '../views/GameCard.vue';
+import Layout from "../layout/Layout.vue";
+import Sidebar from "../layout/Sidebar.vue";
+import Login from "../views/Login.vue";
+import Home from "../views/Dashboard.vue";
+import MyFeed from "../views/MyFeed.vue";
+import GameCard from "../views/GameCard.vue";
 
-import store from '../store';
-import socket from '../plugins/socket';
 
 Vue.use(VueRouter)
 
-
 const routes = [
-  {
-    path:       "/",
-    component:  Layout,
-    meta: {
-      authentication: true,
-    },
-    redirect:   "/dashboard",
-    children: [{
-      name:     "dashboard",
-      path:     "/dashboard",
-      components: {
-        main:     Home,
-        sidebar:  Sidebar
-      },
+    {
+        path:       "/",
+        component:  Layout,
+        meta: {
+            authentication: true,
+        },
+        redirect:   "/dashboard",
+        children: [{
+            name:     "dashboard",
+            path:     "/dashboard",
+            components: {
+                main:     Home,
+                sidebar:  Sidebar
+            },
+        },{
+            name:       "myFeed",
+            path:       "/my-feed",
+            components: {
+                main:     MyFeed,
+                sidebar:  Sidebar
+            },
+        },{
+            name:       "gameCard",
+            path:       "/my-feed/:status/game/:gameID",
+            components: {
+                main:     GameCard,
+                sidebar:  Sidebar
+            }
+        },{
+            name:       "controlPanel",
+            path:       "/control-panel"
+        }]
     },{
-      name:       "myFeed",
-      path:       "/my-feed",
-      components: {
-        main:     MyFeed,
-        sidebar:  Sidebar
-      },
-    },{
-      name:       "gameCard",
-      path:       "/:status/game/:gameID",
-      components: {
-        main:     GameCard,
-        sidebar:  Sidebar
-      }
-    }]
-  },
-  {
-    name: "login",
-    path: "/login",
-    component: Login
-  }
+        name: "login",
+        path: "/login",
+        component: Login
+    }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes,
   scrollBehavior (to, from, savedPosition) {
@@ -68,7 +68,7 @@ router.beforeEach((to, from, next) => {
       next()
       return
     }
-    next('/login') 
+    next("/login") 
   } else {
     next() 
   }     

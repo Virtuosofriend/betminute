@@ -91,11 +91,13 @@
 				<div class="w-100">
 					<div class="cta-button">
 						<v-btn
-							color="secondary"
+							color="error darken-2"
 							depressed
 							small
+							:to="{ name: 'myFeed' }"
+							class="text--initial"
 						>
-							Add tips
+							{{ $t( `Games.backToFeed` ) }}
 						</v-btn>
 					</div>
 				</div>
@@ -207,7 +209,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.text--initial {
+    text-transform: initial;
+    letter-spacing: initial;
+}
 .daily--tip {
   background: url("../../assets/games/back.jpg") no-repeat 50% 30%;
   background-size: cover;

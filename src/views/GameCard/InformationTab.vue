@@ -8,7 +8,7 @@
 
                     <game-suggestions
                         :suggestions="game.bm_static.suggestion"
-                        v-if="game.bm_static.suggestion"
+                        v-if="game.bm_static != null"
                     ></game-suggestions>
                     <no-data v-else 
                         class="pa-2 text-center"

@@ -25,8 +25,13 @@
                             <page-container
                                 team="home"
                                 :team_field="defaultValue_home"
+                                v-if="game_h2h != null"
                             ></page-container>
-
+                            <no-data
+                                v-else
+                                class="pa-2 text-center"
+                                :data-text="`${ $t('General.noContent')}`"
+                            ></no-data>
                         </v-col>
 
                         <v-col
@@ -44,19 +49,18 @@
                             <page-container
                                 team="away"
                                 :team_field="defaultValue_away"
+                                v-if="game_h2h != null"
                             ></page-container>
+                            <no-data
+                                v-else
+                                class="pa-2 text-center"
+                                :data-text="`${ $t('General.noContent')}`"
+                            ></no-data>
                         </v-col>
                     </v-row>
                 </v-container>
-                
-                <!-- <no-data
-                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
-                    class="pa-2 text-center"
-                    :data-text="`${ $t('General.noContent')}`"
-                ></no-data> -->
             </div>
         </v-col>
-
     </v-row>
 </template>
 
@@ -79,8 +83,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            game:       "feed/allGames",
-            gameData:   "game/fetchgame"
+            game_h2h:       "game/getH2H",
+            gameData:       "game/fetchgame"
         })
     },
 

@@ -501,10 +501,10 @@ const fetch_h2h = async( {commit }, payload) => {
             home:   home_response,
             away:   away_response
         };
-
         commit("saveH2H", result);
     } catch(e) {
-        console.log(e.response)
+        console.log(e.response);
+        commit("saveH2H", e.response);
     }
 };
 

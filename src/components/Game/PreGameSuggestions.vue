@@ -43,7 +43,6 @@
                         </p>
                     </div>
                 </div>
-
             </div>
         </v-col>
     </v-row>
@@ -72,6 +71,10 @@ export default {
         properSuggestions() {
             return helper.removeFalseProperties(this.suggestions)
         }
+    },
+
+    components: {
+        noData:     () => import("../../components/General/NoData/GenericNoData"),
     }
 }
 </script>

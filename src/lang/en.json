@@ -28,6 +28,7 @@
         "favorites":        "Favorites"
     },
     "Games": {
+        "backToFeed":       "Back to feed",
         "finished":         "Finished",
         "live":             "Live now",
         "starts":           "Starts",

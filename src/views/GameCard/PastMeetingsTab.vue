@@ -9,7 +9,7 @@
                 </h3>
 
                 <generic-table
-                    v-if="gameData.bm_static.past_matches != null"
+                    v-if="gameData.bm_static != null"
                     :tableData="gameData.bm_static.past_matches"
                 ></generic-table>
                 <no-data
@@ -28,7 +28,7 @@
                 </h3>
                 <v-container>
 
-                    <v-row>
+                    <v-row v-if="gameData.bm_static != null">
                         <v-col
                             cols="12"
                             lg="6"
@@ -65,6 +65,11 @@
                             ></form-table>
                         </v-col>
                     </v-row>
+                    <no-data
+                        v-else
+                        class="pa-2 text-center"
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </v-container>
             </div>
         </v-col>

@@ -43,7 +43,6 @@
                         v-for="links in menubar" 
                         :key="links.label" 
                         :to="{ name: links.path }"
-                        exact
                     >
                         {{ $t( `Sidebar.${links.path}` ) }}
                     </router-link>
@@ -85,7 +84,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .sidebar--wrapper {
     display: flex;
     flex-direction: column;

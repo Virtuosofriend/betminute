@@ -16,7 +16,7 @@
                 </div>
 
                 <v-container>
-                    <v-row>
+                    <v-row v-if="gameData.bm_static != null">
                         <v-col
                             cols="12"
                             md="6"
@@ -55,13 +55,13 @@
                             ></time-intervals>
                         </v-col>
                     </v-row>
+                    <no-data
+                        v-else
+                        class="pa-2 text-center"
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </v-container>
-                
-                <!-- <no-data
-                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
-                    class="pa-2 text-center"
-                    :data-text="`${ $t('General.noContent')}`"
-                ></no-data> -->
+
             </div>
         </v-col>
 
@@ -81,7 +81,7 @@
                 </div>
 
                 <v-container>
-                    <v-row>
+                    <v-row v-if="gameData.bm_static != null">
                         <v-col
                             cols="12"
                             md="6"
@@ -120,13 +120,12 @@
                             ></time-intervals>
                         </v-col>
                     </v-row>
+                    <no-data
+                        v-else
+                        class="pa-2 text-center"
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </v-container>
-                
-                <!-- <no-data
-                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
-                    class="pa-2 text-center"
-                    :data-text="`${ $t('General.noContent')}`"
-                ></no-data> -->
             </div>
         </v-col>
 
@@ -146,7 +145,7 @@
                 </div>
 
                 <v-container>
-                    <v-row>
+                    <v-row v-if="gameData.bm_static != null">
                         <v-col
                             cols="12"
                             md="6"
@@ -182,16 +181,14 @@
                             ></over-goals-graph>
                         </v-col>
                     </v-row>
+                    <no-data
+                        v-else
+                        class="pa-2 text-center"
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </v-container>
-                
-                <!-- <no-data
-                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
-                    class="pa-2 text-center"
-                    :data-text="`${ $t('General.noContent')}`"
-                ></no-data> -->
             </div>
         </v-col>
-
     </v-row>
 </template>
 
@@ -218,7 +215,6 @@ export default {
 
     computed: {
         ...mapGetters({
-            game:       "feed/allGames",
             gameData:   "game/fetchgame"
         })
     },
