@@ -41,6 +41,10 @@
                                 ></dropdown-home-away>
                             </div>
 
+                            <page-container
+                                team="away"
+                                :team_field="defaultValue_away"
+                            ></page-container>
                         </v-col>
                     </v-row>
                 </v-container>

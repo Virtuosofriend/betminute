@@ -50,6 +50,10 @@ export default {
             if ( value > 30 && value <= 60 ) {
                 return "warning darken-2"
             }
+
+            if ( value > 60 && value <= 80 ) {
+                return "info"
+            }
             return "info lighten-4";
         }
     }

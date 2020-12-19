@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="box__padding">
         <highcharts 
 			:options="chartOptions"
 		></highcharts>
@@ -21,8 +21,15 @@ export default {
     },
 
     computed: {
+        categories() {
+            return [
+                this.$i18n.t(`General.firstHalf`),
+                this.$i18n.t(`General.secondaHalf`),
+                this.$i18n.t(`General.fullMatch`)
+            ]
+        },
+
         chartOptions() {
-            const categories = ["1'-45'", "46'-90'", "1'-90'"];
             const for_data = [-this.gameData.first_half_for, -this.gameData.second_half_for, -this.gameData.total_for];
             const against_data = [this.gameData.first_half_against, this.gameData.second_half_against, this.gameData.total_against];
             const max_for = Math.max(...for_data.map(elem => Math.abs(elem)));
@@ -34,13 +41,13 @@ export default {
                     type:               "bar",
                     backgroundColor:    "transparent",
                     borderRadius:		"15px",
-                    height:             "120px"
+                    height:             120,
                 },
                 title: {
                     text:                   ""
                 },
                 xAxis: {
-                    categories:             categories,
+                    categories:             this.categories,
                     gridLineWidth:          0,
 					lineWidth:              0,
 					allowDecimals:          false,
@@ -60,7 +67,7 @@ export default {
                     },
                     gridLineWidth:        0,
 					lineWidth:            0,
-                    max:                  max + 1,
+                    max:                  max + 10,
                     allowDecimals:        false,
                     labels: {
                         enabled:    false,
@@ -143,7 +150,8 @@ export default {
 </script>
 
 <style lang="scss">
-.highcharts-area.zone-0 {
-	fill: #f7a35c;
+.box__padding {
+    padding-left: 16px;
+    padding-right: 16px;
 }
 </style>

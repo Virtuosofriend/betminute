@@ -4,23 +4,10 @@
             <highcharts 
                 :options="chartOptions"
             ></highcharts>
-        </div>
-        <div class="matches__description">
-            <h2 class="matches__description-stats" 
-                v-for="(values, keys, index) in gameData" 
-                :key="values.percentage"
-            >
-                <v-icon 
-                    x-small
-                    :color="colors[index]"
-                    class="mr-1"
-                >
-                    fas fa-square
-                </v-icon>
-                {{ values.label }} {{ $t( `Games.H2HTab.numberOfGoal` ) }}<span v-if="values.label != '0-1'">s</span> {{ $t( `Games.H2HTab.in` ) }} 
-                <span>{{ values.matches }} {{ $t( `Games.H2HTab.numberOfMatch` ) }}<span v-if="values.matches > 1">es</span></span>
-            </h2>
 
+            <div class="p-1 matches__description">
+                <p class="mb-0">{{ gameData.draw_result }}% {{ $t( `Games.H2HTab.drawGamesExplanation` )}}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -30,7 +17,7 @@ import { Chart } from "highcharts-vue"
 import Highcharts from "highcharts"
 
 export default {
-    name:   "Matches__pie",
+    name:   "WinLossDraw__pie",
 
     props: {
         gameData: {
@@ -41,19 +28,27 @@ export default {
 
     data() {
         return {
-            colors: ["#7189bf", "#72d6c9", "#ffc785", "#df7599"]
+            win:    "#4bb288",
+            loss:   "#aa2e38",
+            draw:   "#eb9a28"
         }
     },
 
     computed: {
-        chartOptions() {
-            let data = Object.values(this.gameData).map((elem, index) => {
-                return {
-                    name:       elem.label,
-                    y:          elem.percentage,
-                    color:      this.colors[index]
+        filteredData() {
+            return Object.keys(this.gameData).map((elem, index) => {
+                if ( elem != "draw_result" ) {
+
+                    return {
+                        name:       elem,
+                        y:          this.gameData[elem],
+                        color:      this[elem]
+                    }
                 }
             });
+        },
+        chartOptions() {
+            const data = this.filteredData;
 
             return {
                 chart: {
@@ -62,15 +57,21 @@ export default {
                     borderRadius:		"15px",
                     BorderWidth:        null,
                     plotShadow:         false,
-                    height:             200,
-                    width:              180,
+                    height:             240,
+                    width:              220,
                     className:          "mx-auto"
                 },
                 title: {
                     text:                   ""
                 },
                 legend: {
-					enabled:              false
+                    enabled:              true,
+                    padding:               8,
+                    itemStyle:  {
+                        color:      "#fff",
+                        fontSize:   "12px",
+                        fontWeight: "bold"
+                    }
 				},
                 credits: {
 					enabled:              false
@@ -84,17 +85,18 @@ export default {
                         cursor:                 "pointer",
                         borderWidth:            0,
                         enableMouseTracking:    false,
+                        showInLegend:           true,
                         dataLabels: {
-                            enabled:            false,
+                            enabled:            true,
                             inside:             false,
-                            color:              "#727c86",
+                            color:              "#fff",
                             style: {
                                 fontWeight:     "bold",
-                                textOutline:    "none"
+                                textOutline:    "none",
+                                fontSize:       "10px"
                             },
-                            formatter: function() {
-                                return `${Math.abs(this.point.y)}%`
-                            }
+                            format:             "{point.y:.1f} %",
+                            distance:           -19,
                         },
                         
                     },
@@ -136,31 +138,25 @@ export default {
 .matches {
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 
 .matches__pie {
-    width: 80%;
+    width: 100%;
 }
 
 .matches__description {
-    width: 50%;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--v-background-base);
+    border-radius: 6px;
+    padding: 6px;
 }
 
-.matches__description-stats {
-    font-weight: 400;
-    text-transform: initial;
+.matches__description p {
     font-size: 14px;
-    margin-bottom: 6px;
-}
-
-.matches__description {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 16px;
-}
-
-.title span {
-    display: inline-block;
+    color: #fff;
+    text-align: center;
 }
 </style>
