@@ -110,30 +110,23 @@
 						md="3"
 					>
 						<div class="team--box home">
+                            <div 
+                                class="team--logo"
+                            >
+                                <img :src="dataHome.logo">
+                            </div>
 
-						<div 
-							class="team--logo"
-						>
-
-							<v-img
-								:src="dataHome.logo"
-							>
-							</v-img>
-
-						</div>
-
-						<div
-							class="team--text"
-						>
-							<h4>
-								{{ dataHome.name }}
-								<team-form
-									:form="dataHome.recent_form"
-									v-if="dataHome.recent_form"
-								></team-form>
-							</h4>
-						</div>
-						
+                            <div
+                                class="team--text"
+                            >
+                                <h4>
+                                    {{ dataHome.name }}
+                                    <team-form
+                                        :form="dataHome.recent_form"
+                                        v-if="dataHome.recent_form"
+                                    ></team-form>
+                                </h4>
+                            </div>
 						</div>
 					</v-col>
 
@@ -158,12 +151,7 @@
 							<div 
 								class="team--logo"
 							>
-
-								<v-img
-									:src="dataAway.logo"
-								>
-								</v-img>
-
+                                <img :src="dataAway.logo">
 							</div>
 
 							<div
@@ -191,20 +179,20 @@ export default {
     name: "GameHeader",
 
     props: {
-      dataLineup: {
-        type: Object
-      },
-      dataHome: {
-        type: Object
-      },
-      dataAway: {
-        type: Object
-      }
+        dataLineup: {
+            type: Object
+        },
+        dataHome: {
+            type: Object
+        },
+        dataAway: {
+            type: Object
+        }
     },
 
     components: {
-		teamForm: () => import("../General/TeamFormGraphic"),
-		timelineGraph: () => import("./TimelineGraph")
+		teamForm:       () => import("../General/TeamFormGraphic"),
+		timelineGraph:  () => import("./TimelineGraph")
     }
 }
 </script>
@@ -291,8 +279,8 @@ export default {
 }
 
 .team--box.home {
-   align-items: flex-start;
-     padding-left: 1em;
+    align-items: flex-start;
+    padding-left: 1em;
 }
 
 .team--box.away {
@@ -301,12 +289,24 @@ export default {
 }
 
 .team--logo {
-  object-fit: contain;
-  width: 70px;
-  height: 70px;
-  padding: .6em;
-  border-radius: 50%;
-  background-color: var(--theme-dark-60);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--theme-dark-60);
+    margin-bottom: 8px;
+}
+
+.team--logo img {
+    object-fit: cover;
+    object-position: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: relative;
 }
 
 .team--text {

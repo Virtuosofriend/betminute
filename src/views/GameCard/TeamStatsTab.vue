@@ -22,7 +22,9 @@
                             md="6"
                         >
                             <div class="team">
-                                <img :src="gameData.lineup.home.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.home.logo"
+                                ></team-logo>
                                 <dropdown-selection
                                     :defaultValue="defaultValue_home_goal"
                                     @changeTimeInterval="defaultValue_home_goal = $event"
@@ -87,7 +89,9 @@
                             md="6"
                         >
                             <div class="team">
-                                <img :src="gameData.lineup.home.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.away.logo"
+                                ></team-logo>
                                 <dropdown-selection
                                     :defaultValue="defaultValue_home_corner"
                                     @changeTimeInterval="defaultValue_home_corner = $event"
@@ -197,6 +201,7 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import dropdownSelection from "../../components/Game/TeamStats/DropdownSelection"
 import dropdownHomeAway from "../../components/General/HomeAwayOverallDropdown"
+import TeamLogo from '../../components/General/TeamLogo.vue';
 
 export default {
     name:   "Teamstats__tab",
@@ -224,7 +229,8 @@ export default {
         overGoalsGraph: () => import("../../components/Game/TeamStats/OverGoalsMatches"),
         timeIntervals:  () => import("../../components/Game/TeamStats/TimeIntervals"),
         dropdownSelection,
-        dropdownHomeAway
+        dropdownHomeAway,
+        TeamLogo
     }
 }
 </script>

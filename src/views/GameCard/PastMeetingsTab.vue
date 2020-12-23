@@ -34,7 +34,9 @@
                             lg="6"
                         >
                             <div class="team">
-                                <img :src="gameData.lineup.home.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.home.logo"
+                                ></team-logo>
                                 <dropdown-selection
                                     :defaultValue="defaultValue_home"
                                     @changeDefaultValue="defaultValue_home = $event"
@@ -52,7 +54,9 @@
                             lg="6"
                         >   
                             <div class="team">
-                                <img :src="gameData.lineup.away.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.away.logo"
+                                ></team-logo>
                                 <dropdown-selection
                                     :defaultValue="defaultValue_away"
                                     @changeDefaultValue="defaultValue_away = $event"
@@ -79,6 +83,7 @@
 <script>
 import axios from "axios";
 import { mapGetters } from "vuex";
+import TeamLogo from '../../components/General/TeamLogo.vue';
 
 export default {
     name:   "Pastmeetings__tab",
@@ -102,7 +107,8 @@ export default {
         dropdownSelection:  () => import("../../components/General/HomeAwayOverallDropdown"),
         noData:             () => import("../../components/General/NoData/GenericNoData"),
         genericTable:       () => import("../../components/Game/PastMeetingsTable"),
-        formTable:          () => import("../../components/Game/PastForm/FormTable")
+        formTable:          () => import("../../components/Game/PastForm/FormTable"),
+        TeamLogo
     }
 }
 </script>
@@ -111,10 +117,5 @@ export default {
 .team {
     display: flex;
     align-items: center;
-}
-.team__logo {
-    object-fit: contain;
-    width: 64px;
-    margin-right: 4px;
 }
 </style>

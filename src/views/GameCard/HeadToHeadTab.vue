@@ -16,7 +16,9 @@
                             md="6"
                         >
                             <div class="team">
-                                <img :src="gameData.lineup.home.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.home.logo"
+                                ></team-logo>
                                 <dropdown-home-away
                                     :defaultValue="defaultValue_home"
                                     @changeDefaultValue="defaultValue_home = $event"
@@ -39,7 +41,9 @@
                             md="6"
                         >
                             <div class="team">
-                                <img :src="gameData.lineup.away.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.away.logo"
+                                ></team-logo>
                                 <dropdown-home-away
                                     :defaultValue="defaultValue_away"
                                     @changeDefaultValue="defaultValue_away = $event"
@@ -69,6 +73,7 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import dropdownHomeAway from "../../components/General/HomeAwayOverallDropdown";
 import pageContainer from "../../components/Game/HeadToHeadContainer";
+import TeamLogo from '../../components/General/TeamLogo.vue';
 
 export default {
     name:   "H2H__tab",
@@ -93,7 +98,8 @@ export default {
         overGoalsGraph: () => import("../../components/Game/TeamStats/OverGoalsMatches"),
         timeIntervals:  () => import("../../components/Game/TeamStats/TimeIntervals"),
         dropdownHomeAway,
-        pageContainer
+        pageContainer,
+        TeamLogo
     }
 }
 </script>
@@ -114,11 +120,5 @@ export default {
 .team {
     display: flex;
     align-items: center;
-}
-.team__logo {
-    object-fit: contain;
-    width: 64px;
-    height: 64px;
-    margin-right: 4px;
 }
 </style>
