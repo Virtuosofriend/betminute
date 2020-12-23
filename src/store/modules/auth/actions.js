@@ -28,7 +28,7 @@ const socketLogin = async ({ commit }, data) => {
         Socket.send(message);
         return true;
     } catch(e) {
-        return false;
+        return console.log(e.response);
     }
 };
 

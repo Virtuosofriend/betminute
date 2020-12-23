@@ -37,7 +37,7 @@ const globaldata = async ({ commit } , payload) => {
 
         // Socket.send(message2);
     } catch(e) {
-        return e.response;
+        return console.log(e.response);
     }
 };
 
@@ -51,7 +51,7 @@ const userPrefs = async ({ commit }, data) => {
 
         commit("savePrefs", payload);
     } catch(e) {
-        console.log(e);
+        console.log(e.response);
         
     }
 };
