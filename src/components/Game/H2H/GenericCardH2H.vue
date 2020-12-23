@@ -4,9 +4,10 @@
         color="background"
         class="pa-2"
         elevation="0"
+        height="140"
     >
         <v-card-title>
-            <h3 class="card__title">
+            <h3 class="card__title mb-0">
                 <slot name="title">Title</slot>
             </h3>
         </v-card-title>
@@ -15,14 +16,13 @@
                 align="center"
                 class="mx-0"
             >
-
-                <div class="my-4 description">
-                    <p>{{ cardData | noDecimals }}%</p>
+                <div class="my-2 description">
+                    <p class="mb-0">{{ cardData | noDecimals }}%</p>
                 </div>
 
                 <v-progress-linear 
                     :value="cardData"
-                    :color="coloredProgress(cardData)"
+                    color="info lighten-4"
                 >
                 </v-progress-linear>
             </v-row>

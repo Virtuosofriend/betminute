@@ -3,7 +3,7 @@
         <v-row>
             <v-col 
                 cols="12"
-                md="4"
+                md="12"
             >
                 <div class="card__box">
                     <number-of-games
@@ -59,7 +59,7 @@
                 cols="12"
             >
                 <v-row>
-                    <v-col>
+                    <v-col cols="12">
                         <div class="card__box">
                             <h3 class="card__box-title text-center">
                                 {{ $t( `Games.H2HTab.scoredFailedscore` ) }}
@@ -70,7 +70,7 @@
                             ></goals-on-against>
                         </div>
                     </v-col>
-                    <v-col>
+                    <v-col cols="12">
                         <div class="card__box">
                             <h3 class="card__box-title text-center">
                                 {{ $t( `Games.H2HTab.cleanSheetTitle` ) }}

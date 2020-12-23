@@ -95,7 +95,10 @@ export default {
                                 textOutline:    "none",
                                 fontSize:       "10px"
                             },
-                            format:             "{point.y:.1f} %",
+                            formatter: function() {
+                                return this.y > 0 ? `${Math.floor(this.y)}%` : ""
+
+                            },
                             distance:           -19,
                         },
                         

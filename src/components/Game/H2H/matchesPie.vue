@@ -63,7 +63,7 @@ export default {
                     BorderWidth:        null,
                     plotShadow:         false,
                     height:             200,
-                    width:              180,
+                    width:              200,
                     className:          "mx-auto"
                 },
                 title: {
@@ -85,16 +85,19 @@ export default {
                         borderWidth:            0,
                         enableMouseTracking:    false,
                         dataLabels: {
-                            enabled:            false,
+                            enabled:            true,
                             inside:             false,
-                            color:              "#727c86",
+                            color:              "#fff",
                             style: {
                                 fontWeight:     "bold",
-                                textOutline:    "none"
+                                textOutline:    "none",
+                                fontSize:       "10px"
                             },
                             formatter: function() {
-                                return `${Math.abs(this.point.y)}%`
-                            }
+                                return this.y > 0 ? `${Math.floor(this.y)}%` : ""
+
+                            },
+                            distance:           -20
                         },
                         
                     },

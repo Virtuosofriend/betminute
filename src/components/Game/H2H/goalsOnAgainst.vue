@@ -23,15 +23,15 @@ export default {
     computed: {
         categories() {
             return [
-                this.$i18n.t(`General.firstHalf`),
+                this.$i18n.t(`General.fullMatch`),
                 this.$i18n.t(`General.secondaHalf`),
-                this.$i18n.t(`General.fullMatch`)
+                this.$i18n.t(`General.firstHalf`)
             ]
         },
 
         chartOptions() {
-            const for_data = [-this.gameData.first_half_for, -this.gameData.second_half_for, -this.gameData.total_for];
-            const against_data = [this.gameData.first_half_against, this.gameData.second_half_against, this.gameData.total_against];
+            const for_data = [-this.gameData.total_for, -this.gameData.second_half_for,-this.gameData.first_half_for];
+            const against_data = [this.gameData.total_against, this.gameData.second_half_against, this.gameData.first_half_against];
             const max_for = Math.max(...for_data.map(elem => Math.abs(elem)));
             const max_against = Math.max(...against_data.map(elem => Math.abs(elem)));
             let max = ( max_for > max_against ) ? max_for : max_against;
@@ -42,6 +42,7 @@ export default {
                     backgroundColor:    "transparent",
                     borderRadius:		"15px",
                     height:             120,
+                    width:              700
                 },
                 title: {
                     text:                   ""
