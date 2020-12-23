@@ -1,5 +1,5 @@
 import Socket from '../../../plugins/socket'
-import axios from "axios";
+import ApiService from "../../../commons/api.service";
 
 const gameInfo = async ({ commit }, payload) => {    
     try {
@@ -28,7 +28,7 @@ const gameInfo = async ({ commit }, payload) => {
 
 const fetch_h2h = async( {commit }, payload) => {
     try {
-        const response = (await axios.post(`FetchBetMinNode.php?bm_h2h_id=${payload}`)).data;
+        const response = (await ApiService.bet_minute().post(`FetchBetMinNode.php?bm_h2h_id=${payload}`)).data;
         // Mapping of the response, until the backend fixes it
         const home_response = {
             home: {

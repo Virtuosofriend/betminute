@@ -22,6 +22,15 @@
         "secondaHalf":      "Second half",
         "fullMatch":        "Full match"
     },
+    "RightSidebar": {
+        "topTipsters": {
+            "title":        "Top tipsters",
+            "win_ratio":    "Win ratio",
+            "roi":          "ROI",
+            "net":          "Net",
+            "yield":        "Yield"
+        }
+    },
     "myFeed": {
         "livefeed":         "Live feed",
         "timeline":         "Timeline",

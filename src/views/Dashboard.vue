@@ -1,7 +1,5 @@
 <template>
-    <v-container 
-      fluid
-    >
+    <v-container fluid>
       <v-row>
         <v-col md="12">
           <div class="main--wrapper">

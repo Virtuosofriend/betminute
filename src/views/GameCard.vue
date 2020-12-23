@@ -133,9 +133,7 @@
 </template>
 
 <script>
-
 import { mapGetters } from "vuex";
-
 import GameHeader from "../components/Game/Header";
 
 export default {

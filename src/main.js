@@ -8,47 +8,26 @@ import "./assets/css/flag-css.min.css";
 import i18n from "./plugins/i18n";
 import HighchartsVue from "highcharts-vue"
 import Vuelidate from "vuelidate"
-import axios from "axios"
-import moment from "moment";
+import ApiService from "./commons/api.service";
 
 import NoDecimals from "./commons/number.filter";
+import DateOnly from "./commons/date_only.filter";
+import DateSmall from "./commons/date_small.filter";
 
 Vue.config.productionTip = false;
 Vue.use(HighchartsVue);
 Vue.use(Vuelidate);
 
-/**  Axios configuration **/
-axios.defaults.headers.common = {
-  "Content-Type": "application/json",
-};
-
-// axios.defaults.baseURL = "https://staging.api.microproducer.draxis.gr/";
-axios.defaults.baseURL = process.env.VUE_APP_baseURL || "https://bet-minute.com/service/requests";
-/** End of config **/
-
 Vue.filter("noDecimals", NoDecimals);
+Vue.filter("dateOnly", DateOnly);
+Vue.filter("dateSmall", DateSmall);
 
-Vue.filter("dateOnly", value => {
-    if (!value){
-        return ""
-    }
-
-    return moment(value).format("DD-MM-YYYY");
-});
-
-Vue.filter("dateSmall", value => {
-    if (!value){
-        return ""
-    }
-
-    return moment(value).format("DD-MM");
-});
+ApiService.init();
 
 new Vue({
   router,
   store,
   vuetify,
   i18n,
-  axios,
   render: h => h(App)
 }).$mount("#app")
