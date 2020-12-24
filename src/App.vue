@@ -24,23 +24,19 @@ export default {
 		}),
   	},
 
-	methods: {
-		sendGlobalData() {         
-			this.$store.dispatch("feed/globaldata", {...this.userInfo})
-		}
-	},
+	
 
-	watch: {
-		user(newValue, oldValue) {
+	// watch: {
+	// 	user(newValue, oldValue) {
 		
-			if ( newValue.paid ) {
-				this.sendGlobalData();
-			}
-		}
-	},
+	// 		if ( newValue.paid ) {
+	// 			this.sendGlobalData();
+	// 		}
+	// 	}
+	// },
 
 	mounted() {
-		this.$store.dispatch("auth/socketLogin");
+		
 		console.log(`Bet minute - v${process.env.VUE_APP_VERSION}`);
 	}
 };

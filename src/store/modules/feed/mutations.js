@@ -25,20 +25,24 @@ const overgoalslists = (state, payload) => {
 };
 
 const topTipsters = (state, list) => {  
-  state.topTipsters = list;
+    state.topTipsters = list;
 };
 
 const saveLivescore = (state, payload) => {
-  state.livescore = payload;
+    state.livescore = payload;
 };
 
 const saveNotStarted = (state, payload) => {  
-  state.notStarted = payload;
+    state.notStarted = payload;
 };
 
 const saveFinished = (state, payload) => {
-  state.finished = payload;
+    state.finished = payload;
 };
+
+const saveTipsterSelection = (state, selection) => {
+    state.top_tipsters_selection = selection;
+}
   
 export default {
   savePrefs,
@@ -47,5 +51,6 @@ export default {
   topTipsters,
   saveLivescore,
   saveNotStarted,
-  saveFinished
+  saveFinished,
+  saveTipsterSelection
 };

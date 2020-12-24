@@ -8,7 +8,7 @@ import "./assets/css/flag-css.min.css";
 import i18n from "./plugins/i18n";
 import HighchartsVue from "highcharts-vue"
 import Vuelidate from "vuelidate"
-import ApiService from "./commons/api.service";
+import axios from "axios";
 
 import NoDecimals from "./commons/number.filter";
 import DateOnly from "./commons/date_only.filter";
@@ -22,12 +22,11 @@ Vue.filter("noDecimals", NoDecimals);
 Vue.filter("dateOnly", DateOnly);
 Vue.filter("dateSmall", DateSmall);
 
-ApiService.init();
-
 new Vue({
   router,
   store,
   vuetify,
   i18n,
+  axios,
   render: h => h(App)
 }).$mount("#app")

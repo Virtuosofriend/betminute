@@ -45,7 +45,7 @@
             >
                 <div class="tipsters">
                     <div class="tipsters__avatar">
-                        <img :src="`${imagePath}${values.picture}`">
+                        <img :src="`${values.picture}`">
                     </div>
                     <div class="tipsters__username">
                         <p class="mb-0">{{ values.user_name }}</p>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
     name: "topTipsters",
@@ -70,7 +70,6 @@ export default {
     data() {
         return {
             imagePath:      "https://www.socialtipsters.com/content/uploads/",
-            selection:      "win_ratio",
             closeOnClick:    true,
             selection_options:  [{
                 id:     1,
@@ -93,30 +92,38 @@ export default {
             topTipsters:    "feed/topTipsters"
         }),
 
+        ...mapState({
+            selection:  state => state.feed.top_tipsters_selection
+        }),
+
         filtered_tipsters() {
-            let arr = this.topTipsters[`best_${this.selection}`].map(elem => {
-                if ( elem.picture == null ) {
-                    return {
-                        user_name:              elem.user_name,
-                        picture:                "/img/avatars/default.png",
-                        [this.selection]:       elem[this.selection]
+            if ( Object.keys(this.topTipsters).length > 0 ) {
+                let arr = this.topTipsters[`best_${this.selection}`];
+
+                return arr.map(elem => {
+                    if ( elem.picture == null ) {
+                        return {
+                            user_name:              elem.user_name,
+                            picture:                `${process.env.BASE_URL}img/avatars/default.png`,
+                            [this.selection]:       elem[this.selection]
+                        }
                     }
-                }
-                return {
-                    ...elem
-                }
-            });
-            if ( arr ) {
+                    return {
+                        user_name:          elem.user_name,
+                        picture:            `${this.imagePath}${elem.picture}`,
+                        [this.selection]:   elem[this.selection]
+                    }
+                }).splice(0,9);
                 
-                return arr.splice(0,9);
             }
+        
             return [];
         }
     },
 
     methods: {
         changeSelection(value) {
-            this.selection = value;
+            this.$store.dispatch("feed/setTipstersSelection", value);
         }
     }
 }

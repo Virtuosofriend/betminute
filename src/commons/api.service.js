@@ -3,10 +3,6 @@ import axios from "axios";
 import { API_URL } from "@/commons/config";
 
 const ApiService = {
-    init() {
-        Vue.use(axios);
-    },
-
     bet_minute() {
         return axios.create ({
             baseURL : API_URL.main,

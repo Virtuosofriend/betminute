@@ -21,8 +21,7 @@ const gameInfo = async ({ commit }, payload) => {
         
 
     } catch(e) {
-        console.log(e.response);
-        
+        return false;
     }
 };
 
@@ -503,8 +502,7 @@ const fetch_h2h = async( {commit }, payload) => {
         };
         commit("saveH2H", result);
     } catch(e) {
-        console.log(e.response);
-        commit("saveH2H", e.response);
+        commit("saveH2H", null);
     }
 };
 
@@ -522,8 +520,7 @@ const sendGameTip = async ({ commit }, payload) => {
         
 
     } catch(e) {
-        console.log(e.response);
-        
+       return false;        
     }
 };
 

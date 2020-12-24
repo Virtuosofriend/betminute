@@ -37,7 +37,7 @@ const globaldata = async ({ commit } , payload) => {
 
         // Socket.send(message2);
     } catch(e) {
-        return console.log(e.response);
+        return false;
     }
 };
 
@@ -56,8 +56,13 @@ const userPrefs = async ({ commit }, data) => {
     }
 };
 
+const setTipstersSelection = ({ commit }, payload) => {
+    commit("saveTipsterSelection", payload);
+};
+
 export default {
     globaldata,
     userPrefs,
+    setTipstersSelection
   };
 

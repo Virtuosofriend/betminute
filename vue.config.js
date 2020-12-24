@@ -5,7 +5,7 @@ module.exports = {
     "vuetify"
   ],
   publicPath: process.env.NODE_ENV === "production"
-    ? "/bet-minute/betmin/dist/"
+    ? "./"
     : "/",
   chainWebpack: config => {
     config

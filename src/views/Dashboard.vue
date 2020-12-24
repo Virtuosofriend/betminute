@@ -24,23 +24,41 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
-import panelOver05 from '../views/Dashboard/PanelOver05.vue';
-import panelOver15 from '../views/Dashboard/PanelOver15.vue';
+import panelOver05 from "../views/Dashboard/PanelOver05.vue";
+import panelOver15 from "../views/Dashboard/PanelOver15.vue";
 
 export default {
-  name: 'dashboard',
-
-  components: {
-    panelOver05,
-    panelOver15
-  },
+    name: "Dashboard",
   
-  data() {
-    return {      
-    }
-  },
+    data() {
+        return {      
+        }
+    },
+
+    computed: {
+		...mapGetters({
+			loggedIn: "auth/isLoggedIn",
+			userInfo: "auth/userInformation",
+			user:     "feed/information"
+		}),
+    },
+      
+    methods: {
+		sendGlobalData() {         
+			this.$store.dispatch("feed/globaldata", {...this.userInfo})
+		}
+    },
+    
+    mounted() {
+        return this.$store.dispatch("auth/socketLogin").then(() => this.sendGlobalData());
+    },
+
+    components: {
+        panelOver05,
+        panelOver15
+    },
 }
 </script>
 

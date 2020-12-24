@@ -84,10 +84,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-    name: 'myfeed',
+    name: "Livescore__feed",
 
     data() {
         return {
@@ -98,8 +98,19 @@ export default {
     computed: {
         ...mapGetters({
             feed:         "feed/liveAndnotStarted",
-            finished:     "feed/finished"
+            finished:     "feed/finished",
+            userInfo:     "auth/userInformation",
         })
+    },
+
+    methods: {
+		sendGlobalData() {         
+			this.$store.dispatch("feed/globaldata", {...this.userInfo})
+		}
+    },
+
+    mounted() {
+        return this.sendGlobalData();
     },
 
     components: {
