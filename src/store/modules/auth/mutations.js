@@ -1,16 +1,16 @@
 const session = (state, data) => {    
-    state.user = data;
-  };
+        state.user = data;
+};
   
-  const logout = (state) => {
+const logout = (state) => {
     state.user = {
       status: "",
       token: "",
       username: ""
     };
-  };
+};
   
-  export default {
-    session,
-    logout
-  };
+export default {
+    logout,
+    session
+};

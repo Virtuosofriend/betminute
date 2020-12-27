@@ -26,11 +26,16 @@
 import topTipsters from "../views/RightSidebar/PanelTopTipsters.vue";
 
 export default {
-  name: "layout",
+    name: "Main__layout",
+    
+    components: {
+        topTipsters
+    },
 
-  components: {
-      topTipsters
-  },
-
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.$store.dispatch("auth/socketLogin");
+        });
+    }
 }
 </script>

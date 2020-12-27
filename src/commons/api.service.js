@@ -1,11 +1,11 @@
 import Vue from "vue";
 import axios from "axios";
-import { API_URL } from "@/commons/config";
+import { CONFIG } from "@/commons/config";
 
 const ApiService = {
     bet_minute() {
         return axios.create ({
-            baseURL : API_URL.main,
+            baseURL : CONFIG.main_api,
             headers: {"Accept": "application/json"}
         });
     },

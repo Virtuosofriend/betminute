@@ -39,20 +39,18 @@ export default {
 
     computed: {
 		...mapGetters({
-			loggedIn: "auth/isLoggedIn",
-			userInfo: "auth/userInformation",
-			user:     "feed/information"
+			userInfo: "auth/userInformation"
 		}),
     },
       
     methods: {
 		sendGlobalData() {         
-			this.$store.dispatch("feed/globaldata", {...this.userInfo})
+			this.$store.dispatch("feed/fetchDashboard", {...this.userInfo})
 		}
     },
     
     mounted() {
-        return this.$store.dispatch("auth/socketLogin").then(() => this.sendGlobalData());
+        return this.sendGlobalData();
     },
 
     components: {

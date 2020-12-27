@@ -24,19 +24,7 @@ export default {
 		}),
   	},
 
-	
-
-	// watch: {
-	// 	user(newValue, oldValue) {
-		
-	// 		if ( newValue.paid ) {
-	// 			this.sendGlobalData();
-	// 		}
-	// 	}
-	// },
-
 	mounted() {
-		
 		console.log(`Bet minute - v${process.env.VUE_APP_VERSION}`);
 	}
 };

@@ -23,10 +23,10 @@ Vue.filter("dateOnly", DateOnly);
 Vue.filter("dateSmall", DateSmall);
 
 new Vue({
-  router,
-  store,
-  vuetify,
-  i18n,
-  axios,
-  render: h => h(App)
+    router,
+    store,
+    vuetify,
+    i18n,
+    axios,
+    render: h => h(App)
 }).$mount("#app")

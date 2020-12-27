@@ -1,12 +1,32 @@
-import moment from 'moment';
-import Socket from '../../../plugins/socket'
+import Socket from "../../../plugins/socket"
 
-const globaldata = async ({ commit } , payload) => {    
+const fetchDashboard = ({ commit }, payload) => {
+    const message = [
+        `{
+            "fetchdata":{
+                "globaldata": ["dashboard", "top_20_tipsters"]
+                }
+            }
+        `,
+        `{
+            "getusertipinfo": {
+                "user_id": ${ payload.id }
+                }
+            }
+        `
+    ];
+
+    for (let i =0; i < message.length; i++) {
+        Socket.send(message[i]);
+    }
+};
+
+const fetchFeedData = async ({ commit } , payload) => {    
     try {
         const message = [
             `{
                 "fetchdata":{
-                    "globaldata": ["livescore", "notstarted_livescore", "finished_livescore", "dashboard", "top_20_tipsters"]
+                    "globaldata": ["livescore", "notstarted_livescore", "finished_livescore", "top_20_tipsters"]
                     }
                 }
             `,
@@ -17,42 +37,13 @@ const globaldata = async ({ commit } , payload) => {
                 }
             `
         ];
-        // let message = `{
-        //     "fetchdata":{
-        //         "globaldata": ["livescore", "notstarted_livescore", "finished_livescore", "dashboard", "top_20_tipsters"]
-        //         }
-        //     }
-        // `;
 
-        // let message2 = `{
-        //     "getusertipinfo": {
-        //         "user_id": ${ payload.id }
-        //         }
-        //     }
-        // `;
         for (let i =0; i < message.length; i++) {
             Socket.send(message[i]);
         }
-        // Socket.send(message);
 
-        // Socket.send(message2);
     } catch(e) {
         return false;
-    }
-};
-
-const userPrefs = async ({ commit }, data) => {
-    try {
-        let payload = {
-            preferences: data.preferences,
-            paid: data.has_paid,
-            premiumUntil: moment(data.valid_until * 1000).format("DD/MM/YYYY")
-        };
-
-        commit("savePrefs", payload);
-    } catch(e) {
-        console.log(e.response);
-        
     }
 };
 
@@ -61,8 +52,8 @@ const setTipstersSelection = ({ commit }, payload) => {
 };
 
 export default {
-    globaldata,
-    userPrefs,
+    fetchDashboard,
+    fetchFeedData,
     setTipstersSelection
   };
 

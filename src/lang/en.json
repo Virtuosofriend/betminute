@@ -1,10 +1,12 @@
 {
     "Sidebar": {
         "dashboard":        "Dashboard",
-        "myFeed":           "My feed",
+        "myFeed":           "Feed",
         "bmcenter":         "BM Center",
         "payments":         "Payments",
-        "settings":         "Settings"
+        "settings":         "Settings",
+        "paid_true":        "Premium user",
+        "paid_false":       "Free user"
     },
     "Banka": {
         "total":            "Total",

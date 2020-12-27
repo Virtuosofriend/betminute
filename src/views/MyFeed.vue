@@ -105,7 +105,7 @@ export default {
 
     methods: {
 		sendGlobalData() {         
-			this.$store.dispatch("feed/globaldata", {...this.userInfo})
+			this.$store.dispatch("feed/fetchFeedData", {...this.userInfo})
 		}
     },
 

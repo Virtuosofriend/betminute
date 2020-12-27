@@ -3,17 +3,17 @@ import getters from './getters';
 import mutations from './mutations';
 
 const state = {
-  user: {
-    token: localStorage.getItem('token') || '',
-    username: localStorage.getItem('user') || '',
-    id: localStorage.getItem('userID') || ''
-  },
+    user: {
+        token: localStorage.getItem('token') || '',
+        username: localStorage.getItem('user') || '',
+        id: localStorage.getItem('userID') || ''
+    }
 };
 
 export default {
-  namespaced: true,
-  state,
-  actions,
-  getters,
-  mutations,
+    namespaced: true,
+    state,
+    actions,
+    getters,
+    mutations
 };

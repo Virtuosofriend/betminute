@@ -16,7 +16,7 @@
                         <p class="username">
                             Virtuosofriend
                             <span class="d-block">
-                                Premium | {{ user.premiumUntil }}
+                                {{ $t( `Sidebar.paid_${user.paid}` ) }}
                             </span>
                         </p>
 
@@ -35,7 +35,6 @@
                             </div> 
                         </div>
                     </div>
-                    
                 </div>
 
                 <div class="sidebar--menu">
@@ -54,22 +53,34 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import menu from '../components/General/Menu';
 
 export default {
+    name:   "Menu__sidebar",
+
     data() {
         return {
-            menubar: menu.menubar
+            menubar:    menu.menubar
         }
     },
+
     computed: {
         ...mapGetters({
-            user:    "feed/information",
-            banka:   "feed/banka"
+            user:       "user/information",
+            banka:      "user/banka"
+        }),
+
+        ...mapState({
+            socket:     state => state.socket.socket
         })
     },
+
     methods: {
+        fetchUserBanka() {
+            this.$store.dispatch("user/fetchUserBank");
+        },
+
         logout() {
             this.$store.dispatch('auth/logout').then(() => {
                 this.$router.push('/login');
@@ -77,9 +88,12 @@ export default {
         },
     },
 
-    mounted() {
-
-        
+    watch: {
+        socket(newVal) {
+            if ( newVal == 1) {
+                this.fetchUserBanka();
+            }
+        }
     }
 }
 </script>

@@ -1,7 +1,8 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import Socket from "../plugins/socket";
+import Socket from "../plugins/socket"; // do not delete
 import store from "../store";
+import { CONFIG } from "../commons/config";
 
 import Layout from "../layout/Layout.vue";
 import Sidebar from "../layout/Sidebar.vue";
@@ -64,13 +65,13 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {  
   if (to.matched.some(record => record.meta.authentication)) {   
-    if (store.getters["auth/isLoggedIn"]) {      
-      next()
-      return
+    if (store.getters["auth/isLoggedIn"]) {  
+        store.commit("socket/changeSocketTimer", CONFIG.default_socket_timer)    
+        return next();
     }
-    next("/login") 
+    next("/login");
   } else {
-    next() 
+    next();
   }     
 });
 

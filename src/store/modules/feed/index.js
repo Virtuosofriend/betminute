@@ -8,10 +8,6 @@ const state = {
     listsOver1_5ft: { open:[] },
     topTipsters: {},
     top_tipsters_selection: "win_ratio",
-    user: {},
-    banka: {
-        banka_info: {}
-    },
     livescore: [],
     notStarted: [],
     finished: []

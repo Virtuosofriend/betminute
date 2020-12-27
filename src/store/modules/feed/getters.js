@@ -1,6 +1,3 @@
-const information = state => state.user;
-const banka = state => state.banka;
-
 const listsOver1_5ft = state => state.listsOver1_5ft;
 const listsOver0_5ht = state => state.listsOver0_5ht;
 const listsOver0_5secondhalf = state => state.listsOver0_5secondhalf;
@@ -18,15 +15,13 @@ const allGames = state => {
 }
 
 export default {
-  allGames,
-  banka,
-  information,
-  finished,
-  listsOver1_5ft,
-  listsOver0_5ht,
-  listsOver0_5secondhalf,
-  livescore,
-  liveAndnotStarted,
-  notStarted,
-  topTipsters
+    allGames,
+    finished,
+    listsOver1_5ft,
+    listsOver0_5ht,
+    listsOver0_5secondhalf,
+    livescore,
+    liveAndnotStarted,
+    notStarted,
+    topTipsters
 };
