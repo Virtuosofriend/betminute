@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <v-container>
+    <v-container>
             <div class="sidebar--wrapper">
                 <div class="sidebar--intro">
                     <div class="sidebar--logo">
@@ -45,11 +44,20 @@
                     >
                         {{ $t( `Sidebar.${links.path}` ) }}
                     </router-link>
+
+                    <div class="sidebar--menu__logout">
+                        <v-btn
+                            text
+                            color="error"
+                            small
+                            @click="logout()"
+                        >
+                            Logout
+                        </v-btn>
+                    </div>
                 </div>  
             </div>
         </v-container>
-        
-    </div>
 </template>
 
 <script>
@@ -82,8 +90,8 @@ export default {
         },
 
         logout() {
-            this.$store.dispatch('auth/logout').then(() => {
-                this.$router.push('/login');
+            this.$store.dispatch("auth/logout").then(() => {
+                this.$router.push("/login");
             });
         },
     },
@@ -121,7 +129,7 @@ export default {
 }
 
 .sidebar--logo img {
-    width: 35px;
+    width: 36px;
     object-fit: contain;
 }
 
@@ -202,7 +210,7 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     padding: 4em  1.5em;
 }
 
@@ -217,6 +225,18 @@ export default {
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
     color: var(--theme-dark);
+}
+
+.sidebar--menu .sidebar--menu__logout {
+    padding-left: 8px;
+    margin-top: 50px;
+}
+
+.sidebar--menu__logout button {
+    text-transform: initial;
+    letter-spacing: initial;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .sidebar--menu a:last-child {

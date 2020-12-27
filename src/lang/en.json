@@ -1,4 +1,12 @@
 {
+    "Login": {
+        "subtitle":         "please login",
+        "username":         "Username",
+        "password":         "Password"
+    },
+    "ErrorMessages": {
+        "required":         "This field is mandatory"
+    },
     "Sidebar": {
         "dashboard":        "Dashboard",
         "myFeed":           "Feed",

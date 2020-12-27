@@ -4,9 +4,9 @@ import mutations from './mutations';
 
 const state = {
     user: {
-        token: localStorage.getItem('token') || '',
-        username: localStorage.getItem('user') || '',
-        id: localStorage.getItem('userID') || ''
+        token:      localStorage.getItem("bm_token") || "",
+        username:   localStorage.getItem("bm_user") || "",
+        id:         localStorage.getItem("bm_userID") || ""
     }
 };
 

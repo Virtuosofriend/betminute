@@ -3,7 +3,11 @@
         <div class="login--wrapper-overlay"></div>
         <div class="login--box">
             <div class="mb-4">
-                <h1>BetMinute<span>please login</span></h1>
+                <h1>BetMinute
+                    <span>
+                        {{ $t( `Login.subtitle` ) }}
+                    </span>
+                </h1>
             </div>
             <div class="login--form mt-4">
                 <v-form
@@ -11,28 +15,40 @@
                 	full-width
                 >
                 <v-text-field
-                    v-model="loginData.name"
-                    label="Username"
+                    v-model="formData.name"
+                    :label="`${ $t('Login.username')}`"
                     flat
+                    solo
                     full-width
                     background-color="#dadada"
                     class="login--fields"
+                    :error-messages="errorMessage('name')"
+                    @input="$v.formData.name.$touch()"
+                    @blur="$v.formData.name.$touch()"
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="loginData.pass"
-                    label="Password"
+                    v-model="formData.pass"
+                    :label="`${ $t('Login.password')}`"
                     type="password"
                     flat
+                    solo
                     full-width
                     background-color="#dadada"
                     class="login--fields"
+                    :error-messages="errorMessage('pass')"
+                    @input="$v.formData.pass.$touch()"
+                    @blur="$v.formData.pass.$touch()"
                 ></v-text-field>
 
                 <v-btn
-                    color="primary"
+                    color="success"
                     block
+                    dark
+                    depressed
                     @click="login()"
+                    :disabled="$v.$invalid"
+                    class="mt-4"
                 >
                     Login
                 </v-btn>
@@ -56,28 +72,96 @@
                 >Create one</v-btn>
             </div>
         </div>
+
+        <login-notification
+            :status="loading"
+            :message="message"
+            @resetDialog="resetDialog()"
+        ></login-notification>
   </v-container>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { required } from "vuelidate/lib/validators";
+import LoginNotification from '../components/General/Notifications/LoginNotification.vue';
+import { CONFIG } from "../commons/config";
 
 export default {
-    data() {
-        return {
-            loginData: {}
+    name:   "Login__page",
+
+    validations: {
+        formData: {
+            name:  {
+                required
+            },
+            pass: {
+                required
+            }
         }
     },
+
+    data() {
+        return {
+            formData:   {},
+            loading:    false,
+            message:    ""
+        }
+    },
+
     methods: {
         login() {
-			this.$store.dispatch("auth/socketLogin", this.loginData).then((res) => {               
-                this.$router.push("/");
-            });
+            this.loading = true;
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", `${CONFIG.login_api}login.php`, true);
+            xhttp.responseType = "json";
+            xhttp.send(JSON.stringify(this.formData));
+
+            xhttp.onload = res => {
+                if ( xhttp.response != null ) {
+                    const { user } = xhttp.response;
+                    if ( user ) {
+                        localStorage.setItem("bm_token", user.session_token);
+                        localStorage.setItem("bm_user", user.user_name);
+                        localStorage.setItem("bm_userID", +user.user_id);
+                        this.$store.commit("auth/session", { token: user.session_token, user: user.user_name, id: +user.user_id});
+                        this.loading = false;
+                        return this.$router.push({ name: "dashboard" });
+                    }
+
+                    return this.message = xhttp.response.message;
+                }
+
+                return this.message = `You have to choose an email and a password`;
+            };
+
+            xhttp.onerror = error => {
+                console.log(error)
+                return error;
+            };
+        },
+
+        errorMessage(field) {
+            const errors = [];
+                if (!this.$v.formData[field].$dirty) return errors
+                !this.$v.formData[field].required && errors.push(this.$i18n.t(`ErrorMessages.required`))
+                return errors
+        },
+
+        resetDialog() {
+            this.loading = false;
+            this.message = ""
         }
+    },
+
+    components: { 
+        LoginNotification 
     }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .login--wrapper {
         height: 100vh;
         width: 100%;
@@ -101,23 +185,21 @@ export default {
     .login--box {
         background-color: var(--theme-darkblue);
         width: 550px;
-        height: 420px;
+        height: 50%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 2em;
+        padding: 2em 3em;
         z-index: 10;
         background-color: var(--theme-dark-60);
-        border-radius: 15px;
+        border-radius: 10px;
     }
 
     .login--form {
         width: 100%;
     }
-    .login--fields {
-        height: 60px;
-    }
+
     h1 {
         line-height: 1em;
     }

@@ -6,7 +6,7 @@ const ApiService = {
     bet_minute() {
         return axios.create ({
             baseURL : CONFIG.main_api,
-            headers: {"Accept": "application/json"}
+            headers: { "Content-Type": "application/json" }
         });
     },
 
