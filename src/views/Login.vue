@@ -125,7 +125,13 @@ export default {
                         localStorage.setItem("bm_token", user.session_token);
                         localStorage.setItem("bm_user", user.user_name);
                         localStorage.setItem("bm_userID", +user.user_id);
-                        this.$store.commit("auth/session", { token: user.session_token, user: user.user_name, id: +user.user_id});
+                        localStorage.setItem("bm_avatar", user.user_picture);
+                        this.$store.commit("auth/session", { 
+                            token:  user.session_token, 
+                            user:   user.user_name, 
+                            id:     +user.user_id, 
+                            avatar: user.user_picture 
+                        });
                         this.loading = false;
                         return this.$router.push({ name: "dashboard" });
                     }

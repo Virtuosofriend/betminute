@@ -11,19 +11,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   name: "App",
   
-  computed: {
-    ...mapGetters({
-      loggedIn: "auth/isLoggedIn",
-      userInfo: "auth/userInformation",
-      user:     "feed/information"
-    }),
-    },
-
   mounted() {
     console.log(`Bet minute - v${process.env.VUE_APP_VERSION}`);
   }

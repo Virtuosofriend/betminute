@@ -6,7 +6,7 @@ import el from '../lang/el.json';
 Vue.use(VueI18n);
 
 export default new VueI18n({
-    locale: "en",
+    locale:         localStorage.getItem("bm_lang"),
     fallbackLocale: "en",
     messages: {
         en,

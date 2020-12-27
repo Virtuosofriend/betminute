@@ -8,7 +8,7 @@
                     </div>
 
                     <div class="sidebar--user">
-                        <img src="../assets/avatars/avatar.png">
+                        <img :src="avatar">
                     </div>
 
                     <div class="sidebar--user-info">
@@ -52,7 +52,7 @@
                             small
                             @click="logout()"
                         >
-                            Logout
+                            {{ $t( `Sidebar.logout` ) }}
                         </v-btn>
                     </div>
                 </div>  
@@ -76,6 +76,7 @@ export default {
     computed: {
         ...mapGetters({
             user:       "user/information",
+            avatar:     "user/avatar",
             banka:      "user/banka"
         }),
 

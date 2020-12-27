@@ -5,9 +5,13 @@ export default {
             icon:   "",
             path:   "dashboard"
         },{
-            label:  "My feed",
+            label:  "Feed",
             icon:   "",
-            path:   "myFeed"
+            path:   "feed"
+        },{
+            label:  "Settings",
+            icon:   "",
+            path:   "settings"
         }
     ]
 }

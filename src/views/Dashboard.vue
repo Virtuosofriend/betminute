@@ -7,12 +7,16 @@
               
               <div class="daily--tip-wrapper">
                 <div>
-                  <h2>Daily suggestion</h2>
+                  <h2>
+                      {{ $t( `Dashboard.topTitle` ) }}
+                  </h2>
                 </div>
 
               </div>
             </div>
-            <h2 class="main--title">System picks</h2>
+            <h2 class="main--title">
+                {{ $t( `Dashboard.title` ) }}
+            </h2>
             <panelOver05></panelOver05>
               
             <panelOver15 class="mt-5"></panelOver15>

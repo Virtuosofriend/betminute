@@ -27,7 +27,12 @@ const fetchUserBank = ({ commit }) => {
         Socket.send(message);        
 };
 
+const setLanguage = ( {commit}, payload ) => {
+    localStorage.setItem("bm_lang", payload);
+};
+
 export default {
     fetchUserBank,
-    fetchUserPreferences
+    fetchUserPreferences,
+    setLanguage
 };

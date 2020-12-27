@@ -4,8 +4,8 @@ const socketLogin = async ({ commit, state }, data) => {
     try {
         let message = `{
             "authenticateuser": {
-                "user_id": ${ state.user.id },
-                "token": "${ state.user.token }"
+                "user_id":  ${ state.user.id },
+                "token":    "${ state.user.token }"
             }
         }`;   
         Socket.send(message);
@@ -19,10 +19,11 @@ const logout = ({ commit }) => {
     localStorage.removeItem("bm_token");
     localStorage.removeItem("bm_user");
     localStorage.removeItem("bm_userID");
-    commit("session", { token: "", user: "", id: ""});
+    localStorage.removeItem("bm_avatar");
+    commit("session", { token: "", user: "", id: "", avatar: `${process.env.BASE_URL}img/avatars/default.png`});
 };
 
 export default {
-    socketLogin,
-    logout
+    logout,
+    socketLogin
 };

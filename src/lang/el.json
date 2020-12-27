@@ -1,33 +1,175 @@
 {
+    "Login": {
+        "subtitle":         "please login",
+        "username":         "Username",
+        "password":         "Password"
+    },
+    "ErrorMessages": {
+        "required":         "This field is mandatory"
+    },
     "Sidebar": {
         "dashboard":        "Αρχική",
-        "myFeed":           "Ροή αγώνων",
-        "bmcenter":         "Κέντρο BM",
-        "payments":         "Πληρωμές",
-        "settings":         "Επιλογές"
+        "feed":             "Ροή παιχνιδιών",
+        "bmcenter":         "BM Center",
+        "payments":         "Payments",
+        "settings":         "Ρυθμίσεις",
+        "paid_true":        "Premium χρήστης",
+        "paid_false":       "Δωρεάν χρήστης",
+        "logout":           "Αποσύνδεση"
+    },
+    "Banka": {
+        "total":            "Total",
+        "daily":            "Daily"
     },
     "General": {
-        "continue":         "Continue",
-        "ok":               "OK",
-        "previous":         "Previous step",
-        "listSelect":       "Select one from the list",
-        "pickDate":         "Pick date",
-        "Yes":              "Yes",
-        "No":               "No",
-        "addDocuments":     "Add documents",
-        "cancel":           "Cancel",
-        "save":             "Save",
-        "update":           "Update",
-        "send":             "Send",
-        "saveApplication":  "Save application",
-        "saveFiles":        "Save files",
-        "page":             "Page",
+        "home":             "Home",
+        "away":             "Away",
+        "overall":          "Overall",
+        "noContent":        "No data available",
         "of":               "of",
-        "itemsPerPage":     "Items per page",
-        "search":           "Search",
-        "filesUploaded":    "Files were uploaded successfully",
-        "sortBy":           "Sort by",
-        "back":             "Back",
-        "logout":           "Logout"
+        "results":          "Results per page",
+        "firstHalf":        "First half",
+        "secondaHalf":      "Second half",
+        "fullMatch":        "Full match"
+    },
+    "RightSidebar": {
+        "topTipsters": {
+            "title":        "Top tipsters",
+            "win_ratio":    "Win ratio",
+            "roi":          "ROI",
+            "net":          "Net",
+            "yield":        "Yield"
+        }
+    },
+    "Dashboard": {
+        "title":            "System picks",
+        "topTitle":         "Daily suggestion"
+    },
+    "myFeed": {
+        "livefeed":         "Live feed",
+        "timeline":         "Timeline",
+        "favorites":        "Favorites"
+    },
+    "Games": {
+        "backToFeed":       "Back to feed",
+        "finished":         "Finished",
+        "live":             "Live now",
+        "starts":           "Starts",
+        "minute":           "Minute",
+        "gameInformation":  "Game information",
+        "h2h":              "H2H",
+        "teamStats":        "Team Stats",
+        "pastMeetings":     "Past meetings",
+        "standings":        "Standings",
+        "gameEvents": {
+            "match_mobility_1": "Match mobility 1",
+            "match_mobility_2": "Match mobility 2",
+            "match_mobility_3": "Match mobility 3",
+            "hot70":            "Goal to be scored after 70'",
+            "hot30":            "First goal to be scored after 30'",
+            "wait_goal":        "Late goal to be scored",
+            "missed_penalty":   "Missed penalty",
+            "redcard":          "Red card",
+            "yellowcard":       "Yellow card",
+            "event_corner":     "Corner kick",
+            "event_goal":       "Goal scored"
+        },
+        "suggestions":  {
+            "title":                "Pre-game Suggestions",
+            "overmisoimixrono":     "Over 0.5",
+            "overenamisiagona":     "Over 1.5",
+            "overdiomisiagona":     "Over 2.5",
+            "goalgoal":             "Both teams to score",
+            "hot30":                "At least one goal to be scored before 30'",
+            "hot70":                "At least one goal to be scored before 70'",
+            "late":                 "At least one goal to be scored after 75'",
+            "simeio":               "Suggested match outcome"
+        },
+        "textbot": {
+            "title":                "System suggestions"
+        },
+        "tipping": {
+            "title":                "Tipping"
+        },
+        "attacks":                  "Attacks",
+        "dangerousAttacks":         "Dangerous Attacks",
+        "teamStatsTab": {
+            "title1":               "For-Against goals",
+            "title2":               "For-Against corners",
+            "title3":               "Over/Under matches",
+            "description1":         "This panel shows the number of goals (for and against) for each team per specific time interval. The default value is 10mins but you can change it from the dropdown menu.",
+            "description2":         "This panel shows the number of corners (for and against) for each team per specific time interval. The default value is 10mins but you can change it from the dropdown menu.",
+            "description3":         "This panel shows the number of matches that each team has scored more than 0.5 goals, 1.5 goals and 2.5 goals per each half and in total.",
+            "corners":              "Number of corners",
+            "goals":                "Number of goals",
+            "matches":              "Number of matches",
+            "forTeam":              "For",
+            "againstTeam":          "Against",
+            "dropDown": {
+                "10mins":           "10 mins interval",
+                "15mins":           "15 mins interval",
+                "30mins":           "30 mins interval",
+                "45mins":           "45 mins interval"
+            }
+        },
+        "H2HTab": {
+            "title":                    "H2H stats",
+            "goals":                    "For - Against goals",
+            "matches":                  "Goals scored per match",
+            "numberOfGames":            "Matches",
+            "numberOfGoal":             "goal",
+            "in":                       "in",
+            "numberOfMatch":            "match",
+            "specificBettingMarkets":   "Specific markets",
+            "specific_markets": {
+                "total_goal_goal":        "Goal goal",
+                "first_half_goal_goal":   "First half goal-goal",
+                "second_half_goal_goal":  "Second half goal-goal",
+                "true_goal_goal":         "True goal-goal",
+                "over_15_home":           "Over 1.5 at home",
+                "over_15_away":           "Over 1.5 away",
+                "over_25_goal_goal":      "Over 2.5 & goal-goal",
+                "over_25_contribution":   "Over 2.5 contribution"
+            },
+            "scoredFailedscore":            "Scored - Failed to score",
+            "cleanSheetTitle":              "Clean sheet - Conceded",
+            "percentageSubTitle":           "(% in matches)",
+            "winLossDraw":                  "Win - Loss - Draw",
+            "drawGamesExplanation":         "of the draw games, ended in 0-0",
+            "clean_sheet_win":              "games with a clean sheet and win the match",
+            "scoreless_defeat":             "games with a scoreless defeat"
+        },
+        "pastMeetingsTab": {
+            "title1":                "Past meetings",
+            "title2":                "Past form",
+            "table_fields": {
+                "date":             "Date",
+                "specification":    "League",
+                "agwnistiki":       "Round",
+                "htskor":           "HT",
+                "skor":             "FT",
+                "htover1":          "Goal in HT",
+                "htover2":          "Over 1.5 in HT",
+                "away":             "Opponent"
+            }
+        },
+        "standingsTab": {
+            "dropdownMenu":         "Make a selection",
+            "position":             "Pos.",
+            "logo":                 "Team",
+            "result":               "Status",
+            "games_played":         "MP",
+            "won":                  "W",
+            "draw":                 "D",
+            "lost":                 "L",
+            "goals_scored":         "F",
+            "goals_against":        "A",
+            "goal_difference":      "D",
+            "points":               "Pts",
+            "recent_form":          "Form"
+        }
+    },
+    "Settings": {
+        "title":                    "My settings"
     }
 }

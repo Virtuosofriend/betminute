@@ -32,8 +32,6 @@ let sendWaiting = msg  => {
 let tmp_static = "";
 //
 
-let TIMER = store.getters["socket/getSocketTimer"];
-
 const emitter = new Vue({
     store,
     data: {
@@ -83,18 +81,19 @@ const emitter = new Vue({
 })
 
 socket.onmessage = response => {
-    TIMER++;
-    if ( TIMER > 15 ) {
+    let TIMER = store.getters["socket/getSocketTimer"];
+    store.dispatch("socket/incrementSocket");
 
-        let socketResponse = JSON.parse(response.data); 
-            // console.log(socketResponse);
-        
-        if ( socketResponse.action == "authenticateuser" ) {
-            if ( socketResponse.data.status == "OK" ) {
-                return emitter.storeUser(socketResponse.data);
-            }
+    const socketResponse = JSON.parse(response.data);
+    if ( socketResponse.action == "authenticateuser" ) {
+        if ( socketResponse.data.status == "OK" ) {
+            return emitter.storeUser(socketResponse.data);
         }
-    
+    }
+
+    if ( TIMER > CONFIG.default_socket_timer ) {
+        //  console.log(socketResponse);
+         
         if ( socketResponse.action == "getusertipinfo" ) {
             return emitter.storeUserBanka(socketResponse.data);
         }
@@ -150,7 +149,7 @@ socket.onmessage = response => {
             }
         }
 
-        TIMER = 0;
+        store.dispatch("socket/setTimerSocket", 0);
     }
 }
 

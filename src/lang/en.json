@@ -9,12 +9,13 @@
     },
     "Sidebar": {
         "dashboard":        "Dashboard",
-        "myFeed":           "Feed",
+        "feed":             "Feed",
         "bmcenter":         "BM Center",
         "payments":         "Payments",
         "settings":         "Settings",
         "paid_true":        "Premium user",
-        "paid_false":       "Free user"
+        "paid_false":       "Free user",
+        "logout":           "Logout"
     },
     "Banka": {
         "total":            "Total",
@@ -24,7 +25,6 @@
         "home":             "Home",
         "away":             "Away",
         "overall":          "Overall",
-        "logout":           "Logout",
         "noContent":        "No data available",
         "of":               "of",
         "results":          "Results per page",
@@ -40,6 +40,10 @@
             "net":          "Net",
             "yield":        "Yield"
         }
+    },
+    "Dashboard": {
+        "title":            "System picks",
+        "topTitle":         "Daily suggestion"
     },
     "myFeed": {
         "livefeed":         "Live feed",
@@ -164,5 +168,9 @@
             "points":               "Pts",
             "recent_form":          "Form"
         }
+    },
+    "Settings": {
+        "title":                    "My settings",
+        "langSelection":            "Language selection"
     }
 }

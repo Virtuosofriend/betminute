@@ -8,9 +8,9 @@ import Layout from "../layout/Layout.vue";
 import Sidebar from "../layout/Sidebar.vue";
 import Login from "../views/Login.vue";
 import Home from "../views/Dashboard.vue";
-import MyFeed from "../views/MyFeed.vue";
+import Feed from "../views/Feed.vue";
 import GameCard from "../views/GameCard.vue";
-
+import Settings from "../views/Settings.vue";
 
 Vue.use(VueRouter)
 
@@ -30,10 +30,10 @@ const routes = [
                 sidebar:  Sidebar
             },
         },{
-            name:       "myFeed",
-            path:       "/my-feed",
+            name:       "feed",
+            path:       "/feed",
             components: {
-                main:     MyFeed,
+                main:     Feed,
                 sidebar:  Sidebar
             },
         },{
@@ -44,8 +44,12 @@ const routes = [
                 sidebar:  Sidebar
             }
         },{
-            name:       "controlPanel",
-            path:       "/control-panel"
+            name:       "settings",
+            path:       "/settings",
+            components: {
+                main:     Settings,
+                sidebar:  Sidebar
+            }
         }]
     },{
         name: "login",
@@ -66,7 +70,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {  
   if (to.matched.some(record => record.meta.authentication)) {   
     if (store.getters["auth/isLoggedIn"]) {  
-        store.commit("socket/changeSocketTimer", CONFIG.default_socket_timer)    
+        store.commit("socket/changeSocketTimer", CONFIG.default_socket_timer); 
         return next();
     }
     next("/login");
