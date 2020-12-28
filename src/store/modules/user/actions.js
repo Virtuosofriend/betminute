@@ -27,6 +27,16 @@ const fetchUserBank = ({ commit }) => {
         Socket.send(message);        
 };
 
+const fetchUserTipsBanka = ({ commit }) => {
+    const user_ID = localStorage.getItem("userID");
+    const message = 
+        `{
+            "getuserbankainfo": "true"
+        }`;
+        console.log(message);
+        Socket.send(message);        
+};
+
 const setLanguage = ( {commit}, payload ) => {
     localStorage.setItem("bm_lang", payload);
 };
@@ -34,5 +44,6 @@ const setLanguage = ( {commit}, payload ) => {
 export default {
     fetchUserBank,
     fetchUserPreferences,
+    fetchUserTipsBanka,
     setLanguage
 };

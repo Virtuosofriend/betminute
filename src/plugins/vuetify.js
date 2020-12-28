@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuetify from "vuetify/lib";
-
 Vue.use(Vuetify);
 
 export default new Vuetify({
@@ -21,7 +20,7 @@ export default new Vuetify({
             success:    		    "#4bb288",
             warning:    		    "#ffd058",
             background: 		    "#181e23",
-        sidebar:    		    "#16191c",
+            sidebar:    		    "#16191c",
             yellowWarning:	        "#f9f871",
             orange:                 "#A24E3D"
         },

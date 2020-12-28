@@ -1,6 +1,6 @@
 <template>
     <v-container 
-      fluid
+        fluid
     >
       <v-row>
         <v-col md="12">
@@ -10,7 +10,7 @@
               <div class="daily--tip-wrapper">
                 <div>
                   <h2>
-                    {{ $t( `Sidebar.myFeed` ) }}
+                    {{ $t( `Sidebar.feed` ) }}
                   </h2>
                 </div>
               </div>

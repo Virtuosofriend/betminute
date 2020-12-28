@@ -13,7 +13,7 @@
 
                     <div class="sidebar--user-info">
                         <p class="username">
-                            Virtuosofriend
+                            {{ username }}
                             <span class="d-block">
                                 {{ $t( `Sidebar.paid_${user.paid}` ) }}
                             </span>
@@ -69,14 +69,15 @@ export default {
 
     data() {
         return {
-            menubar:    menu.menubar
+            menubar:    menu.menubar,
+            username:   localStorage.getItem("bm_user"),
+            avatar:     localStorage.getItem("bm_avatar")
         }
     },
 
     computed: {
         ...mapGetters({
             user:       "user/information",
-            avatar:     "user/avatar",
             banka:      "user/banka"
         }),
 

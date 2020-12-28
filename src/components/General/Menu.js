@@ -9,6 +9,10 @@ export default {
             icon:   "",
             path:   "feed"
         },{
+            label:  "My tips",
+            icon:   "",
+            path:   "myTips"
+        },{
             label:  "Settings",
             icon:   "",
             path:   "settings"

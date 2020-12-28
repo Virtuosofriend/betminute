@@ -10,8 +10,7 @@
     "Sidebar": {
         "dashboard":        "Dashboard",
         "feed":             "Feed",
-        "bmcenter":         "BM Center",
-        "payments":         "Payments",
+        "myTips":           "My tips",
         "settings":         "Settings",
         "paid_true":        "Premium user",
         "paid_false":       "Free user",
@@ -19,7 +18,14 @@
     },
     "Banka": {
         "total":            "Total",
-        "daily":            "Daily"
+        "daily":            "Daily",
+        "played_units":     "Total units played",
+        "played_tips":      "Total tips placed",
+        "units":            "units",
+        "tips":             "tips",
+        "roi":              "ROI",
+        "yield":            "Yield",
+        "avg_odd":          "Average odd"
     },
     "General": {
         "home":             "Home",
@@ -167,6 +173,23 @@
             "goal_difference":      "D",
             "points":               "Pts",
             "recent_form":          "Form"
+        }
+    },
+    "Mytips": {
+        "title":                    "My tips",
+        "myprofile":                "My tipping profile",
+        "tips_table": {
+            "country":              "Country",
+            "league":               "League",
+            "teams":                "Teams",
+            "minute":               "Minute",
+            "market_name":          "Market",
+            "odd":                  "Odd",
+            "units":                "Units",
+            "status":               "Status",
+            "open":                 "Open",
+            "win":                  "Won",
+            "lost":                 "Lost"
         }
     },
     "Settings": {

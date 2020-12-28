@@ -92,7 +92,7 @@ socket.onmessage = response => {
     }
 
     if ( TIMER > CONFIG.default_socket_timer ) {
-        //  console.log(socketResponse);
+         console.log(socketResponse);
          
         if ( socketResponse.action == "getusertipinfo" ) {
             return emitter.storeUserBanka(socketResponse.data);

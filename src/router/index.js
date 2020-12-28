@@ -11,6 +11,7 @@ import Home from "../views/Dashboard.vue";
 import Feed from "../views/Feed.vue";
 import GameCard from "../views/GameCard.vue";
 import Settings from "../views/Settings.vue";
+import MyTips from "../views/MyTips.vue";
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,13 @@ const routes = [
             path:       "/settings",
             components: {
                 main:     Settings,
+                sidebar:  Sidebar
+            }
+        },{
+            name:       "myTips",
+            path:       "/my-tips",
+            components: {
+                main:     MyTips,
                 sidebar:  Sidebar
             }
         }]
