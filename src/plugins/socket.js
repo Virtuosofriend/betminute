@@ -1,4 +1,5 @@
 import Vue from "vue";
+import i18n from "../plugins/i18n";
 import store from "../store";
 import helper from "./helper";
 import { CONFIG } from "../commons/config";
@@ -38,7 +39,7 @@ const emitter = new Vue({
         status: socket.readyState
     },
     methods: {
-        send(message) { 
+        send(message) {
             sendWaiting(message);
         },
 
@@ -76,6 +77,26 @@ const emitter = new Vue({
         
         storeOdds(data) {
             this.$store.commit("game/saveOdds", data);
+        },
+
+        storeSuccessTip() {
+            const payload = {
+                message:    i18n.t(`Games.tipping.tipSuccess`),
+                status:     true,
+                color:      "success"
+            };
+            this.$store.commit("general/showNotification", payload);
+        },
+
+        storeErrorTip(error) {
+            let errors = error.filter(elem => elem != null);
+            const payload = {
+                message:    errors.join(","),
+                status:     true,
+                color:      "error"
+            };
+
+            this.$store.commit("general/showNotification", payload);
         }
     }
 })
@@ -85,19 +106,24 @@ socket.onmessage = response => {
     store.dispatch("socket/incrementSocket");
 
     const socketResponse = JSON.parse(response.data);
+    // console.log(socketResponse);
+
     if ( socketResponse.action == "authenticateuser" ) {
         if ( socketResponse.data.status == "OK" ) {
             return emitter.storeUser(socketResponse.data);
         }
     }
-
-    if ( TIMER > CONFIG.default_socket_timer ) {
-         console.log(socketResponse);
-         
-        if ( socketResponse.action == "getusertipinfo" ) {
-            return emitter.storeUserBanka(socketResponse.data);
-        }
     
+    if ( socketResponse.action == "pushslip" ) {
+        socketResponse.data.status == "OK" ? emitter.storeSuccessTip() : emitter.storeErrorTip(socketResponse.data.reason);
+    }
+
+    if ( socketResponse.action == "getusertipinfo" ) {
+        return emitter.storeUserBanka(socketResponse.data);
+    }
+
+    if ( TIMER >= CONFIG.default_socket_timer ) {
+
         if ( socketResponse.action == "fetchdata" ) {
     
             // dashboard lists
@@ -125,9 +151,9 @@ socket.onmessage = response => {
             
             if ( socketResponse.data.livescore_lineup ) {
         
-            if ( socketResponse.data.bm_static_data != null ) {
-                tmp_static = socketResponse.data.bm_static_data;
-            }
+                if ( socketResponse.data.bm_static_data != null ) {
+                    tmp_static = socketResponse.data.bm_static_data;
+                }
             
             let obj = {
                 lineup:         socketResponse.data.livescore_lineup || "",
@@ -135,7 +161,7 @@ socket.onmessage = response => {
                 match_stats:    socketResponse.data.match_stats || "",
                 bm_static:      socketResponse.data.bm_static_data != null ? socketResponse.data.bm_static_data : null,
                 textbot:        socketResponse.data.textbot != null ? helper.removeNullProperties(socketResponse.data.textbot) : null,
-            };      
+            };
                 emitter.storeGame(obj);
             }
             
@@ -148,13 +174,13 @@ socket.onmessage = response => {
                 emitter.storeOdds(odds);
             }
         }
-
         store.dispatch("socket/setTimerSocket", 0);
     }
 }
 
 socket.onerror = error => {
-  console.log("Error in socket:", error);
+    console.log("Error in socket:", error);
+    store.dispatch("general/setOverlay");
 }
 
 

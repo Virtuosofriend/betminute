@@ -5,7 +5,8 @@
         "password":         "Password"
     },
     "ErrorMessages": {
-        "required":         "This field is mandatory"
+        "required":         "This field is mandatory",
+        "integer":          "Use only integers"
     },
     "Sidebar": {
         "dashboard":        "Dashboard",
@@ -95,7 +96,10 @@
             "title":                "System suggestions"
         },
         "tipping": {
-            "title":                "Tipping"
+            "title":                "Tipping",
+            "betSlip":              "Bet Slip",
+            "sendTip":              "Send tip",
+            "tipSuccess":           "Your tip was submitted!"
         },
         "attacks":                  "Attacks",
         "dangerousAttacks":         "Dangerous Attacks",

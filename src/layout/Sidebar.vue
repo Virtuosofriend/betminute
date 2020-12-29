@@ -63,6 +63,7 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import menu from '../components/General/Menu';
+import { CONFIG } from "../commons/config";
 
 export default {
     name:   "Menu__sidebar",
@@ -71,7 +72,7 @@ export default {
         return {
             menubar:    menu.menubar,
             username:   localStorage.getItem("bm_user"),
-            avatar:     localStorage.getItem("bm_avatar")
+            avatar:     localStorage.getItem("bm_avatar") || CONFIG.default_avatar
         }
     },
 

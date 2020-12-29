@@ -39,7 +39,7 @@ const routes = [
             },
         },{
             name:       "gameCard",
-            path:       "/my-feed/:status/game/:gameID",
+            path:       "/feed/:status/game/:gameID",
             components: {
                 main:     GameCard,
                 sidebar:  Sidebar

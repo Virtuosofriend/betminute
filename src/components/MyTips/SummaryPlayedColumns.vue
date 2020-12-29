@@ -93,7 +93,6 @@ export default {
                                 fontSize:       "10px"
                             },
                             formatter: function() {
-                                console.log(this)
                                 return this.y > 0 ? `${this.key}<br>${Math.floor(this.y)}` : ""
 
                             },

@@ -15,25 +15,24 @@ const fetchUserPreferences = async ({ commit }, data) => {
 };
 
 const fetchUserBank = ({ commit }) => {
-    const user_ID = localStorage.getItem("userID");
-    const message = 
+    const user_ID = localStorage.getItem("bm_userID");
+    const message =
         `{
             "getusertipinfo": {
                 "user_id": ${ user_ID }
                 }
-            }
-        `;
-        
-        Socket.send(message);        
+        }`;
+    
+        Socket.send(message);
+             
 };
 
 const fetchUserTipsBanka = ({ commit }) => {
-    const user_ID = localStorage.getItem("userID");
+    const user_ID = localStorage.getItem("bm_userID");
     const message = 
         `{
             "getuserbankainfo": "true"
         }`;
-        console.log(message);
         Socket.send(message);        
 };
 

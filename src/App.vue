@@ -6,17 +6,21 @@
         >   
             <router-view />
         </v-container>
-   
+        <app-overlay></app-overlay>
     </v-app>
 </template>
 
 <script>
 export default {
-  name: "App",
+    name: "App",
+
+    components: {
+        AppOverlay: () => import("./components/General/Notifications/AppOverlay.vue")
+    },
   
-  mounted() {
-    console.log(`Bet minute - v${process.env.VUE_APP_VERSION}`);
-  }
+    mounted() {
+        console.log(`Bet minute - v${process.env.VUE_APP_VERSION}`);
+    }
 };
 </script>
 

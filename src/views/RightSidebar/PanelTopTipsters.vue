@@ -63,6 +63,7 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
+import { CONFIG } from "../../commons/config";
 
 export default {
     name: "topTipsters",
@@ -104,7 +105,7 @@ export default {
                     if ( elem.picture == null ) {
                         return {
                             user_name:              elem.user_name,
-                            picture:                `${process.env.BASE_URL}img/avatars/default.png`,
+                            picture:                CONFIG.default_avatar,
                             [this.selection]:       elem[this.selection]
                         }
                     }

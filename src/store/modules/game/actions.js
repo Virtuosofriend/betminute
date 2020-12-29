@@ -14,10 +14,11 @@ const gameInfo = async ({ commit }, payload) => {
                 } 
             }
         }`;     
-          
-        setTimeout(() =>{
-            Socket.send(message);
-        }, 500);
+        
+        Socket.send(message);
+        // setTimeout(() =>{
+        //     Socket.send(message);
+        // }, 500);
         
 
     } catch(e) {
@@ -506,7 +507,7 @@ const fetch_h2h = async( {commit }, payload) => {
     }
 };
 
-const sendGameTip = async ({ commit }, payload) => {    
+const sendGameTip = async ({ commit, dispatch }, payload) => {    
     try {
         const message = `{
             "pushslip":
@@ -516,6 +517,7 @@ const sendGameTip = async ({ commit }, payload) => {
  
         setTimeout(() =>{
             Socket.send(message);
+            dispatch("user/fetchUserBank", "", { root:true });
         }, 500);
         
 

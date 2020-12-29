@@ -3,6 +3,7 @@ import Vuex from "vuex"
 import auth from "./modules/auth";
 import feed from "./modules/feed";
 import game from "./modules/game";
+import general from "./modules/general";
 import user from "./modules/user";
 import socket from "./modules/socket";
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
         auth,
         feed,
         game,
+        general,
         user,
         socket
     }

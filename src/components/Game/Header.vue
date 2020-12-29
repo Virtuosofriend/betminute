@@ -94,7 +94,7 @@
 							color="error darken-2"
 							depressed
 							small
-							:to="{ name: 'myFeed' }"
+							:to="{ name: 'feed' }"
 							class="text--initial"
 						>
 							{{ $t( `Games.backToFeed` ) }}

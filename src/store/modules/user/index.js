@@ -5,7 +5,7 @@ import { CONFIG } from "../../../commons/config";
 
 const state = {
     user:     {},
-    avatar:   localStorage.getItem("bm_avatar") || `${process.env.BASE_URL}img/avatars/default.png`,
+    avatar:   localStorage.getItem("bm_avatar") || CONFIG.default_avatar,
     language: localStorage.getItem("bm_lang") || CONFIG.default_language,
     banka: {
         banka_info: {}
