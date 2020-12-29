@@ -74,8 +74,8 @@ export default {
 
             const max_for = Math.max(...for_data.map(elem => Math.abs(elem)));
             const max_against = Math.max(...against_data.map(elem => Math.abs(elem)));
-        
             let max = ( max_for > max_against ) ? max_for : max_against;
+
             return {
                 chart: {
                     type:               "bar",
@@ -92,7 +92,11 @@ export default {
 					allowDecimals:          false,
                     reversed:               false,
                     labels: {
-                        step:   1
+                        step:                 1,
+                        style: {
+                            color:            "#727c86",
+                            fontSize:         "10px",
+                        }
                     },
                 }, {
                     opposite:               true,
@@ -120,7 +124,7 @@ export default {
                         },
 					style: {
 							fontSize:         "10px",
-							color:            "#eaf6f6"
+							color:            "#727c86"
 						}
 					}
                 },
@@ -142,7 +146,7 @@ export default {
                         dataLabels: {
                             enabled:            true,
                             inside:             false,
-                            color:              "#727c86",
+                            color:              "#c1c1c1",
                             style: {
                                 fontWeight:     "bold",
                                 textOutline:    "none"

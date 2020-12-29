@@ -1,10 +1,9 @@
 import Vue from "vue";
 import Vuetify from "vuetify/lib";
-
 Vue.use(Vuetify);
 
 export default new Vuetify({
-	theme: {
+  theme: {
         options: {
           customProperties: true,
         },
@@ -16,12 +15,12 @@ export default new Vuetify({
             dark_border:            "#2b3339",
             secondary:  		    "#181e23",
             accent:     		    "#2c343a",
-            error:      		    "#DA3F38",
+            error:      		    "#a61127",
             info:       		    "#5F86A3",
             success:    		    "#4bb288",
             warning:    		    "#ffd058",
             background: 		    "#181e23",
-		    sidebar:    		    "#16191c",
+            sidebar:    		    "#16191c",
             yellowWarning:	        "#f9f871",
             orange:                 "#A24E3D"
         },

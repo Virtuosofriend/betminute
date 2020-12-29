@@ -5,17 +5,13 @@ export default {
             icon:   "",
             path:   "dashboard"
         },{
-            label:  "My feed",
+            label:  "Feed",
             icon:   "",
-            path:   "myFeed"
+            path:   "feed"
         },{
-            label:  "BM Center",
+            label:  "My tips",
             icon:   "",
-            path:   "bmcenter"
-        },{
-            label:  "Payments",
-            icon:   "",
-            path:   "payments"
+            path:   "myTips"
         },{
             label:  "Settings",
             icon:   "",

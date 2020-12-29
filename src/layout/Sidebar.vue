@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <v-container>
+    <v-container>
             <div class="sidebar--wrapper">
                 <div class="sidebar--intro">
                     <div class="sidebar--logo">
@@ -9,14 +8,14 @@
                     </div>
 
                     <div class="sidebar--user">
-                        <img src="../assets/avatars/avatar.png">
+                        <img :src="avatar">
                     </div>
 
                     <div class="sidebar--user-info">
                         <p class="username">
-                            Virtuosofriend
+                            {{ username }}
                             <span class="d-block">
-                                Premium | {{ user.premiumUntil }}
+                                {{ $t( `Sidebar.paid_${user.paid}` ) }}
                             </span>
                         </p>
 
@@ -35,7 +34,6 @@
                             </div> 
                         </div>
                     </div>
-                    
                 </div>
 
                 <div class="sidebar--menu">
@@ -43,49 +41,75 @@
                         v-for="links in menubar" 
                         :key="links.label" 
                         :to="{ name: links.path }"
-                        exact
                     >
                         {{ $t( `Sidebar.${links.path}` ) }}
                     </router-link>
+
+                    <div class="sidebar--menu__logout">
+                        <v-btn
+                            text
+                            color="error"
+                            small
+                            @click="logout()"
+                        >
+                            {{ $t( `Sidebar.logout` ) }}
+                        </v-btn>
+                    </div>
                 </div>  
             </div>
         </v-container>
-        
-    </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import menu from '../components/General/Menu';
+import { CONFIG } from "../commons/config";
 
 export default {
+    name:   "Menu__sidebar",
+
     data() {
         return {
-            menubar: menu.menubar
+            menubar:    menu.menubar,
+            username:   localStorage.getItem("bm_user"),
+            avatar:     localStorage.getItem("bm_avatar") || CONFIG.default_avatar
         }
     },
+
     computed: {
         ...mapGetters({
-            user:    "feed/information",
-            banka:   "feed/banka"
+            user:       "user/information",
+            banka:      "user/banka"
+        }),
+
+        ...mapState({
+            socket:     state => state.socket.socket
         })
     },
+
     methods: {
+        fetchUserBanka() {
+            this.$store.dispatch("user/fetchUserBank");
+        },
+
         logout() {
-            this.$store.dispatch('auth/logout').then(() => {
-                this.$router.push('/login');
+            this.$store.dispatch("auth/logout").then(() => {
+                this.$router.push("/login");
             });
         },
     },
 
-    mounted() {
-
-        
+    watch: {
+        socket(newVal) {
+            if ( newVal == 1) {
+                this.fetchUserBanka();
+            }
+        }
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .sidebar--wrapper {
     display: flex;
     flex-direction: column;
@@ -108,7 +132,7 @@ export default {
 }
 
 .sidebar--logo img {
-    width: 35px;
+    width: 36px;
     object-fit: contain;
 }
 
@@ -189,7 +213,7 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     padding: 4em  1.5em;
 }
 
@@ -204,6 +228,18 @@ export default {
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
     color: var(--theme-dark);
+}
+
+.sidebar--menu .sidebar--menu__logout {
+    padding-left: 8px;
+    margin-top: 50px;
+}
+
+.sidebar--menu__logout button {
+    text-transform: initial;
+    letter-spacing: initial;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .sidebar--menu a:last-child {

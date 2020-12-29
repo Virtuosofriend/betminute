@@ -8,7 +8,7 @@
 
                     <game-suggestions
                         :suggestions="game.bm_static.suggestion"
-                        v-if="game.bm_static.suggestion"
+                        v-if="game.bm_static != null"
                     ></game-suggestions>
                     <no-data v-else 
                         class="pa-2 text-center"
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import ApiService from "../../commons/api.service";
 import { mapGetters } from "vuex";
 
 export default {
@@ -133,7 +133,7 @@ export default {
 
     methods: {
         fetchAttacksData() {
-            axios.post(`FetchBetMinNode.php?stats_match_id=${ this.game_id }`)
+            ApiService.bet_minute().post(`FetchBetMinNode.php?stats_match_id=${ this.game_id }`)
                 .then( res => {
                     
                     this.attacks_home = res.data.home.stats.map(elem => {

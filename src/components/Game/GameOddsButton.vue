@@ -42,7 +42,7 @@
         >
             <div class="betslip__title">
                 <h3 class="card__box-title">
-                    Bet Slip
+                    {{ $t( `Games.tipping.betSlip` )}}
                 </h3>
 
                 <v-btn
@@ -81,20 +81,23 @@
 
                 <div class="card__box-units">
                     <v-text-field
-                        label="Units"
+                        :label="`${$t( 'Banka.units' )}`"
                         solo
                         flat
                         dense
                         hide-details
                         color="primary"
-                        background-color="info"
+                        background-color="secondary"
                         width="50"
                         v-model.number="slip_units"
+                        :error-messages="errorsMessage"
+                        @input="$v.slip_units.$touch()"
+                        @blur="$v.slip_units.$touch()"
                         dark
                     >
                         <template v-slot:label>
-                            <small style="opacity: .6">
-                                Units
+                            <small style="opacity: .6; font-size:14px">
+                                {{ $t( `Banka.units` )}}
                             </small>
                         </template>
                     </v-text-field>
@@ -106,10 +109,11 @@
                     block
                     color="transparent"
                     depressed
+                    dark
                     :disabled="$v.$invalid"
                     @click="sendTip()"
                 >
-                    Send tip
+                    {{ $t( `Games.tipping.sendTip`) }}
                 </v-btn>
             </div>
         </v-sheet>
@@ -122,6 +126,13 @@ import { required, integer } from 'vuelidate/lib/validators'
 
 export default {
     name:   "Odds__button",
+
+    validations: {
+        slip_units: {
+            required,
+            integer
+        }
+    },
 
     props: {
         oddsId: {
@@ -151,13 +162,6 @@ export default {
         },
     },
 
-    validations: {
-        slip_units: {
-            required,
-            integer
-        }
-    },
-
     data() {
         return {
             sheet:      false,
@@ -168,7 +172,14 @@ export default {
     computed: {
         ...mapGetters({
             game:   "game/fetchgame"
-        })
+        }),
+
+        errorsMessage() {
+            const errors = [];
+                if (!this.$v.slip_units.$dirty) return errors
+                !this.$v.slip_units.integer && errors.push(this.$i18n.t(`ErrorMessages.integer`))
+                return errors
+        },
     },
 
 

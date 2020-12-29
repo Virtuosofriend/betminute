@@ -1,23 +1,56 @@
 {
+    "Login": {
+        "subtitle":         "please login",
+        "username":         "Username",
+        "password":         "Password"
+    },
+    "ErrorMessages": {
+        "required":         "This field is mandatory",
+        "integer":          "Use only integers"
+    },
     "Sidebar": {
         "dashboard":        "Dashboard",
-        "myFeed":           "My feed",
-        "bmcenter":         "BM Center",
-        "payments":         "Payments",
-        "settings":         "Settings"
+        "feed":             "Feed",
+        "myTips":           "My tips",
+        "settings":         "Settings",
+        "paid_true":        "Premium user",
+        "paid_false":       "Free user",
+        "logout":           "Logout"
     },
     "Banka": {
         "total":            "Total",
-        "daily":            "Daily"
+        "daily":            "Daily",
+        "played_units":     "Total units played",
+        "played_tips":      "Total tips placed",
+        "units":            "units",
+        "tips":             "tips",
+        "roi":              "ROI",
+        "yield":            "Yield",
+        "avg_odd":          "Average odd"
     },
     "General": {
         "home":             "Home",
         "away":             "Away",
         "overall":          "Overall",
-        "logout":           "Logout",
         "noContent":        "No data available",
         "of":               "of",
-        "results":          "Results per page"
+        "results":          "Results per page",
+        "firstHalf":        "First half",
+        "secondaHalf":      "Second half",
+        "fullMatch":        "Full match"
+    },
+    "RightSidebar": {
+        "topTipsters": {
+            "title":        "Top tipsters",
+            "win_ratio":    "Win ratio",
+            "roi":          "ROI",
+            "net":          "Net",
+            "yield":        "Yield"
+        }
+    },
+    "Dashboard": {
+        "title":            "System picks",
+        "topTitle":         "Daily suggestion"
     },
     "myFeed": {
         "livefeed":         "Live feed",
@@ -25,6 +58,7 @@
         "favorites":        "Favorites"
     },
     "Games": {
+        "backToFeed":       "Back to feed",
         "finished":         "Finished",
         "live":             "Live now",
         "starts":           "Starts",
@@ -62,7 +96,10 @@
             "title":                "System suggestions"
         },
         "tipping": {
-            "title":                "Tipping"
+            "title":                "Tipping",
+            "betSlip":              "Bet Slip",
+            "sendTip":              "Send tip",
+            "tipSuccess":           "Your tip was submitted!"
         },
         "attacks":                  "Attacks",
         "dangerousAttacks":         "Dangerous Attacks",
@@ -86,7 +123,31 @@
             }
         },
         "H2HTab": {
-            "title":                  "H2H stats"
+            "title":                    "H2H stats",
+            "goals":                    "For - Against goals",
+            "matches":                  "Goals scored per match",
+            "numberOfGames":            "Matches",
+            "numberOfGoal":             "goal",
+            "in":                       "in",
+            "numberOfMatch":            "match",
+            "specificBettingMarkets":   "Specific markets",
+            "specific_markets": {
+                "total_goal_goal":        "Goal goal",
+                "first_half_goal_goal":   "First half goal-goal",
+                "second_half_goal_goal":  "Second half goal-goal",
+                "true_goal_goal":         "True goal-goal",
+                "over_15_home":           "Over 1.5 at home",
+                "over_15_away":           "Over 1.5 away",
+                "over_25_goal_goal":      "Over 2.5 & goal-goal",
+                "over_25_contribution":   "Over 2.5 contribution"
+            },
+            "scoredFailedscore":            "Scored - Failed to score",
+            "cleanSheetTitle":              "Clean sheet - Conceded",
+            "percentageSubTitle":           "(% in matches)",
+            "winLossDraw":                  "Win - Loss - Draw",
+            "drawGamesExplanation":         "of the draw games, ended in 0-0",
+            "clean_sheet_win":              "games with a clean sheet and win the match",
+            "scoreless_defeat":             "games with a scoreless defeat"
         },
         "pastMeetingsTab": {
             "title1":                "Past meetings",
@@ -117,5 +178,26 @@
             "points":               "Pts",
             "recent_form":          "Form"
         }
+    },
+    "Mytips": {
+        "title":                    "My tips",
+        "myprofile":                "My tipping profile",
+        "tips_table": {
+            "country":              "Country",
+            "league":               "League",
+            "teams":                "Teams",
+            "minute":               "Minute",
+            "market_name":          "Market",
+            "odd":                  "Odd",
+            "units":                "Units",
+            "status":               "Status",
+            "open":                 "Open",
+            "win":                  "Won",
+            "lost":                 "Lost"
+        }
+    },
+    "Settings": {
+        "title":                    "My settings",
+        "langSelection":            "Language selection"
     }
 }

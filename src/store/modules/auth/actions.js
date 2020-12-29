@@ -1,30 +1,13 @@
-import Socket from '../../../plugins/socket';
-import axios from "axios";
+import Socket from "../../../plugins/socket";
 
-const login = async ({ commit }, payload) => {
-    try {
-        (await axios.post("https://bet-minute.com/api/login.php", payload))
-            .then( res => {
-                console.log(res);
-            });
-
-    } catch(e) {
-        console.log(e.response)
-    }
-};
-const socketLogin = async ({ commit }, data) => {
+const socketLogin = async ({ commit, state }, data) => {
     try {
         let message = `{
             "authenticateuser": {
-                "user_id": 4,
-                "token": "c54ef3978acc08279aa7f592471c11c4"
+                "user_id":  ${ state.user.id },
+                "token":    "${ state.user.token }"
             }
-        }`;
-        
-        localStorage.setItem("token", "c54ef3978acc08279aa7f592471c11c4");
-        localStorage.setItem("user", "Virtuosofriend");
-        localStorage.setItem("userID", 4);
-        commit("session", { token: "388cb1ab904d6455ad0e705f318eecb4", user: "Virtuosofriend", id: 4});    
+        }`;   
         Socket.send(message);
         return true;
     } catch(e) {
@@ -32,14 +15,15 @@ const socketLogin = async ({ commit }, data) => {
     }
 };
 
-const logout = ({ commit }, info) => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('tokenExpires');
-  };
+const logout = ({ commit }) => {
+    localStorage.removeItem("bm_token");
+    localStorage.removeItem("bm_user");
+    localStorage.removeItem("bm_userID");
+    localStorage.removeItem("bm_avatar");
+    commit("session", { token: "", user: "", id: "", avatar: `${process.env.BASE_URL}img/avatars/default.png`});
+};
 
 export default {
-    socketLogin,
-    login,
-    logout
-  };
-
+    logout,
+    socketLogin
+};

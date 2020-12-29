@@ -1,48 +1,26 @@
 <template>
-  <v-app>
-    <v-container 
-      fluid
-      class="container-top"
-    >
-    <router-view />
-  </v-container>
-   
-  </v-app>
+    <v-app>
+        <v-container 
+            fluid
+            class="container-top"
+        >   
+            <router-view />
+        </v-container>
+        <app-overlay></app-overlay>
+    </v-app>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
-	name: "App",
-	
-	computed: {
-		...mapGetters({
-			loggedIn: "auth/isLoggedIn",
-			userInfo: "auth/userInformation",
-			user:     "feed/information"
-		}),
-  	},
+    name: "App",
 
-	methods: {
-		sendGlobalData() {         
-			this.$store.dispatch("feed/globaldata", {...this.userInfo})
-		}
-	},
-
-	watch: {
-		user(newValue, oldValue) {
-		
-			if ( newValue.paid ) {
-				this.sendGlobalData();
-			}
-		}
-	},
-
-	mounted() {
-		this.$store.dispatch("auth/socketLogin");
-		console.log(`Bet minute - v${process.env.VUE_APP_VERSION}`);
-	}
+    components: {
+        AppOverlay: () => import("./components/General/Notifications/AppOverlay.vue")
+    },
+  
+    mounted() {
+        console.log(`Bet minute - v${process.env.VUE_APP_VERSION}`);
+    }
 };
 </script>
 
@@ -51,6 +29,12 @@ export default {
   .v-application {
     background-color: var(--v-background-base) !important;
   }
+
+  .container-top {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+  }
+
   :root {
     --theme-black: #000;
     --theme-dark: #363D44;
@@ -220,16 +204,16 @@ export default {
       border-top: 0 !important;
   }
 .highcharts-area.zone-0 {
-	fill: #f7a35c;
+  fill: #f7a35c;
 }
   /** Helpers **/
   .w-100 {
     width: 100%;
   }
   .letter-spacing-initial {
-	  letter-spacing: initial !important;
+    letter-spacing: initial !important;
   }
   .text-transform-initial {
-	  text-transform: initial !important;
+    text-transform: initial !important;
   }
 </style>

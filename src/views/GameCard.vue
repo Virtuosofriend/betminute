@@ -129,13 +129,13 @@
                 ></no-data>
             </v-col>
         </v-row>
+
+        <tipping-notification></tipping-notification>
     </v-container>
 </template>
 
 <script>
-
 import { mapGetters } from "vuex";
-
 import GameHeader from "../components/Game/Header";
 
 export default {
@@ -187,7 +187,8 @@ export default {
         teamstatsTab:       () => import("./GameCard/TeamStatsTab"),
         pastmeetingsTab:    () => import("./GameCard/PastMeetingsTab"),
         standingsTab:       () => import("./GameCard/StandingsTab"),
-        noData:             () => import("../components/General/NoData/GenericNoData")
+        noData:             () => import("../components/General/NoData/GenericNoData"),
+        TippingNotification:() => import("../components/General/Notifications/TippingNotification.vue")
     },
 
     mounted() {

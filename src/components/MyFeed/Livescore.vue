@@ -9,27 +9,25 @@
                 class="feed--box-league"
                 v-for="(league, index) in country.league_matches"
                 :key="index"
-            >
-                        
+            >   
                 <div
                     class="feed--box-header"
                 >
-
                     <div class="country">
-                        <span
-                            :class="`flag flag-fifa-${ country.code.toLowerCase().slice(0,3) }`"
-                        ></span>
-                        <p class="country-name">
-                            {{ country.country }}
-                        </p> 
-                    </div>
+                        <div>
+                            <span
+                                :class="`flag flag-fifa-${ country.code.toLowerCase().slice(0,3) }`"
+                            ></span>
+                            <p class="country-name">
+                                {{ country.country }}
+                            </p> 
+                        </div>
+                        <div>
 
-                    <div class="league">
-                        <p
-                            class="league-name"
-                        >
-                            {{ league.league_name }}
-                        </p>
+                            <p class="league-name">
+                                {{ league.league_name }}
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -65,7 +63,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

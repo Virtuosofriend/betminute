@@ -1,25 +1,22 @@
-import actions from './actions';
-import getters from './getters';
-import mutations from './mutations';
+import actions from "./actions";
+import getters from "./getters";
+import mutations from "./mutations";
 
 const state = {
-  listsOver0_5ht: { open:[] },
-  listsOver0_5secondhalf: { open:[] },
-  listsOver1_5ft: { open:[] },
-  topTipsters: [],
-  user: {},
-  banka: {
-    banka_info: {}
-  },
-  livescore: [],
-  notStarted: [],
-  finished: []
+    listsOver0_5ht: { open:[] },
+    listsOver0_5secondhalf: { open:[] },
+    listsOver1_5ft: { open:[] },
+    topTipsters: {},
+    top_tipsters_selection: "win_ratio",
+    livescore: [],
+    notStarted: [],
+    finished: []
 };
 
 export default {
-  namespaced: true,
-  state,
-  actions,
-  getters,
-  mutations,
+    namespaced: true,
+    state,
+    actions,
+    getters,
+    mutations,
 };

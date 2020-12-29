@@ -16,13 +16,15 @@
                 </div>
 
                 <v-container>
-                    <v-row>
+                    <v-row v-if="gameData.bm_static != null">
                         <v-col
                             cols="12"
                             md="6"
                         >
                             <div class="team">
-                                <img :src="gameData.lineup.home.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.home.logo"
+                                ></team-logo>
                                 <dropdown-selection
                                     :defaultValue="defaultValue_home_goal"
                                     @changeTimeInterval="defaultValue_home_goal = $event"
@@ -55,13 +57,13 @@
                             ></time-intervals>
                         </v-col>
                     </v-row>
+                    <no-data
+                        v-else
+                        class="pa-2 text-center"
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </v-container>
-                
-                <!-- <no-data
-                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
-                    class="pa-2 text-center"
-                    :data-text="`${ $t('General.noContent')}`"
-                ></no-data> -->
+
             </div>
         </v-col>
 
@@ -81,13 +83,15 @@
                 </div>
 
                 <v-container>
-                    <v-row>
+                    <v-row v-if="gameData.bm_static != null">
                         <v-col
                             cols="12"
                             md="6"
                         >
                             <div class="team">
-                                <img :src="gameData.lineup.home.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.away.logo"
+                                ></team-logo>
                                 <dropdown-selection
                                     :defaultValue="defaultValue_home_corner"
                                     @changeTimeInterval="defaultValue_home_corner = $event"
@@ -120,13 +124,12 @@
                             ></time-intervals>
                         </v-col>
                     </v-row>
+                    <no-data
+                        v-else
+                        class="pa-2 text-center"
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </v-container>
-                
-                <!-- <no-data
-                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
-                    class="pa-2 text-center"
-                    :data-text="`${ $t('General.noContent')}`"
-                ></no-data> -->
             </div>
         </v-col>
 
@@ -146,7 +149,7 @@
                 </div>
 
                 <v-container>
-                    <v-row>
+                    <v-row v-if="gameData.bm_static != null">
                         <v-col
                             cols="12"
                             md="6"
@@ -182,16 +185,14 @@
                             ></over-goals-graph>
                         </v-col>
                     </v-row>
+                    <no-data
+                        v-else
+                        class="pa-2 text-center"
+                        :data-text="`${ $t('General.noContent')}`"
+                    ></no-data>
                 </v-container>
-                
-                <!-- <no-data
-                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
-                    class="pa-2 text-center"
-                    :data-text="`${ $t('General.noContent')}`"
-                ></no-data> -->
             </div>
         </v-col>
-
     </v-row>
 </template>
 
@@ -200,6 +201,7 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import dropdownSelection from "../../components/Game/TeamStats/DropdownSelection"
 import dropdownHomeAway from "../../components/General/HomeAwayOverallDropdown"
+import TeamLogo from '../../components/General/TeamLogo.vue';
 
 export default {
     name:   "Teamstats__tab",
@@ -218,7 +220,6 @@ export default {
 
     computed: {
         ...mapGetters({
-            game:       "feed/allGames",
             gameData:   "game/fetchgame"
         })
     },
@@ -228,7 +229,8 @@ export default {
         overGoalsGraph: () => import("../../components/Game/TeamStats/OverGoalsMatches"),
         timeIntervals:  () => import("../../components/Game/TeamStats/TimeIntervals"),
         dropdownSelection,
-        dropdownHomeAway
+        dropdownHomeAway,
+        TeamLogo
     }
 }
 </script>

@@ -4,7 +4,7 @@
             cols="12"
             md="12"
         >
-            <div class="card__box">
+            <div class="card__box no__background">
                 <h3 class="card__box-title text-center">
                     {{ $t( `Games.H2HTab.title` ) }}
                 </h3>
@@ -16,7 +16,9 @@
                             md="6"
                         >
                             <div class="team">
-                                <img :src="gameData.lineup.home.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.home.logo"
+                                ></team-logo>
                                 <dropdown-home-away
                                     :defaultValue="defaultValue_home"
                                     @changeDefaultValue="defaultValue_home = $event"
@@ -25,8 +27,13 @@
                             <page-container
                                 team="home"
                                 :team_field="defaultValue_home"
+                                v-if="game_h2h != null"
                             ></page-container>
-
+                            <no-data
+                                v-else
+                                class="pa-2 text-center"
+                                :data-text="`${ $t('General.noContent')}`"
+                            ></no-data>
                         </v-col>
 
                         <v-col
@@ -34,25 +41,30 @@
                             md="6"
                         >
                             <div class="team">
-                                <img :src="gameData.lineup.away.logo" class="team__logo">
+                                <team-logo
+                                    :logo="gameData.lineup.away.logo"
+                                ></team-logo>
                                 <dropdown-home-away
                                     :defaultValue="defaultValue_away"
                                     @changeDefaultValue="defaultValue_away = $event"
                                 ></dropdown-home-away>
                             </div>
 
+                            <page-container
+                                team="away"
+                                :team_field="defaultValue_away"
+                                v-if="game_h2h != null"
+                            ></page-container>
+                            <no-data
+                                v-else
+                                class="pa-2 text-center"
+                                :data-text="`${ $t('General.noContent')}`"
+                            ></no-data>
                         </v-col>
                     </v-row>
                 </v-container>
-                
-                <!-- <no-data
-                    v-if="!gameData.bm_static.home || !gameData.bm_static.away"
-                    class="pa-2 text-center"
-                    :data-text="`${ $t('General.noContent')}`"
-                ></no-data> -->
             </div>
         </v-col>
-
     </v-row>
 </template>
 
@@ -61,6 +73,7 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import dropdownHomeAway from "../../components/General/HomeAwayOverallDropdown";
 import pageContainer from "../../components/Game/HeadToHeadContainer";
+import TeamLogo from '../../components/General/TeamLogo.vue';
 
 export default {
     name:   "H2H__tab",
@@ -75,8 +88,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            game:       "feed/allGames",
-            gameData:   "game/fetchgame"
+            game_h2h:       "game/getH2H",
+            gameData:       "game/fetchgame"
         })
     },
 
@@ -85,12 +98,16 @@ export default {
         overGoalsGraph: () => import("../../components/Game/TeamStats/OverGoalsMatches"),
         timeIntervals:  () => import("../../components/Game/TeamStats/TimeIntervals"),
         dropdownHomeAway,
-        pageContainer
+        pageContainer,
+        TeamLogo
     }
 }
 </script>
 
 <style lang="scss" scoped>
+.no__background {
+    background: transparent;
+}
 .card__box-description {
     display: flex;
     justify-content: flex-start;
@@ -103,11 +120,5 @@ export default {
 .team {
     display: flex;
     align-items: center;
-}
-.team__logo {
-    object-fit: contain;
-    width: 64px;
-    height: 64px;
-    margin-right: 4px;
 }
 </style>
