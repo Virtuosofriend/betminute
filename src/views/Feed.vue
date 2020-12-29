@@ -4,80 +4,71 @@
     >
       <v-row>
         <v-col md="12">
-          <div class="main--wrapper">
-            <div class="daily--tip">
-              
-              <div class="daily--tip-wrapper">
-                <div>
-                  <h2>
-                    {{ $t( `Sidebar.feed` ) }}
-                  </h2>
+            <div class="main--wrapper">
+                <div class="daily--tip">
+                    <div class="daily--tip-wrapper">
+                        <div>
+                            <h2>
+                                {{ $t( `Sidebar.feed` ) }}
+                            </h2>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <v-tabs
-                fixed-tabs
-                background-color="background"
-                dark
-                v-model="tabs"
-                slider-color="#2c343a"
-                slider-size="1"
-              >
-                <v-tab 
-                  class="tab--title"
-                  href="#live"
+                <v-tabs
+                    fixed-tabs
+                    background-color="background"
+                    dark
+                    v-model="tabs"
+                    slider-color="#2c343a"
+                    slider-size="1"
                 >
-                  {{ $t( `myFeed.livefeed` ) }} 
-                </v-tab>
+                        <v-tab 
+                            class="tab--title"
+                            href="#live"
+                        >
+                            {{ $t( `myFeed.livefeed` ) }} 
+                        </v-tab>
 
-                <v-tab 
-                  class="tab--title"
-                  href="#timeline"
+                        <v-tab 
+                            class="tab--title"
+                            href="#timeline"
+                        >
+                            {{ $t( `myFeed.timeline` ) }}
+                        </v-tab>
+                </v-tabs>
+
+                <v-tabs-items
+                    v-model="tabs"
+                    dark
+                    class="tabs--wrapper"
                 >
-                  {{ $t( `myFeed.timeline` ) }}
-                </v-tab>
+                    <v-tab-item
+                    style="background-color: transparent"
+                    value="live"
+                    >
+                        <v-responsive
+                            class="overflow-y-auto"
+                            max-height="960"
+                        >
+                            <livescore
+                                :data="feed"
+                            ></livescore>
+                        </v-responsive>
+                                
+                    </v-tab-item>
 
-                <v-tab 
-                  class="tab--title"
-                  href="#favs"
-                >
-                  {{ $t( `myFeed.favorites` ) }}
-                </v-tab>
-
-              </v-tabs>
-
-              <v-tabs-items
-                v-model="tabs"
-                dark
-                class="tabs--wrapper"
-              >
-                <v-tab-item
-                  style="background-color: transparent"
-                  value="live"
-                >
-                    <v-responsive
-                        class="overflow-y-auto"
-                        max-height="960"
+                    <v-tab-item
+                        style="background-color: transparent"
+                        class="scrollable overflow-y-auto"
+                        value="timeline"
                     >
                         <livescore
-                            :data="feed"
-                        ></livescore>
-                    </v-responsive>
-                               
-                </v-tab-item>
-
-                <v-tab-item
-                  style="background-color: transparent"
-                  class="scrollable overflow-y-auto"
-                  value="timeline"
-                >
-                  <livescore
-                    :data="finished"
-                  ></livescore>                  
-                </v-tab-item>
-                
-              </v-tabs-items>
-          </div>
+                            :data="finished"
+                        ></livescore>                  
+                    </v-tab-item>
+                    
+                </v-tabs-items>
+            </div>
         </v-col>
       </v-row>
     </v-container>
@@ -182,19 +173,22 @@ export default {
 
 .country {
     margin-left: 2em;
+    display: flex;
+    flex-direction: column;
 }
 .feed--box-header p {
     margin-bottom: 0;
     display: inline-flex;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 p.country-name {
-    color: var(--theme-dark-subtitle);
-    margin-left: 1em;
+    color: var(--v-accent-lighten3);
+    margin-left: 8px;
 }
 
 p.league-name {
-    color: var(--theme-dark-30);
+    color: var(--v-primary-base);
+    font-weight: 600;
 }
 </style>
