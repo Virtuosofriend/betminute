@@ -32,7 +32,8 @@ const saveFinished = (state, payload) => {
 
 const saveTipsterSelection = (state, selection) => {
     state.top_tipsters_selection = selection;
-}
+};
+
   
 export default {
     overgoalslists,

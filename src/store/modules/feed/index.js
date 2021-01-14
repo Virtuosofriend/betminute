@@ -8,9 +8,10 @@ const state = {
     listsOver1_5ft: { open:[] },
     topTipsters: {},
     top_tipsters_selection: "win_ratio",
-    livescore: [],
-    notStarted: [],
-    finished: []
+    livescore:              [],
+    notStarted:             [],
+    finished:               [],
+    searchable_feed:        []
 };
 
 export default {

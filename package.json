@@ -1,6 +1,6 @@
 {
     "name": "betmin",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
@@ -35,26 +35,27 @@
         "sass-loader": "^8.0.0",
         "vue-cli-plugin-vuetify": "^2.0.7",
         "vue-template-compiler": "^2.6.12",
-        "vuetify-loader": "^1.6.0"
+        "vuetify-loader": "^1.6.0",
+        "ws": "3.3.2"
     },
     "eslintConfig": {
         "root": true,
         "env": {
-        "node": true
+            "node": true
         },
         "extends": [
-        "plugin:vue/essential",
-        "eslint:recommended"
+            "plugin:vue/essential",
+            "eslint:recommended"
         ],
         "rules": {
-        "no-console": 0,
-        "no-unused-vars": 0,
-        "vue/no-unused-vars": 0,
-        "vue/no-unused-components": 0,
-        "no-mixed-spaces-and-tabs": 0
+            "no-console": 0,
+            "no-unused-vars": 0,
+            "vue/no-unused-vars": 0,
+            "vue/no-unused-components": 0,
+            "no-mixed-spaces-and-tabs": 0
         },
         "parserOptions": {
-        "parser": "babel-eslint"
+            "parser": "babel-eslint"
         }
     },
     "browserslist": [

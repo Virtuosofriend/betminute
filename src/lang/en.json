@@ -37,7 +37,8 @@
         "results":          "Results per page",
         "firstHalf":        "First half",
         "secondaHalf":      "Second half",
-        "fullMatch":        "Full match"
+        "fullMatch":        "Full match",
+        "search":           "Search..."
     },
     "RightSidebar": {
         "topTipsters": {

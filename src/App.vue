@@ -203,9 +203,6 @@ export default {
       background-color: var(--v-background-lighten2);
       border-top: 0 !important;
   }
-.highcharts-area.zone-0 {
-  fill: #f7a35c;
-}
   /** Helpers **/
   .w-100 {
     width: 100%;

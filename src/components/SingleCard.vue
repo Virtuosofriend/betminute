@@ -2,14 +2,13 @@
      <v-lazy
         v-model="isActive"
         :options="{
-          threshold: .5
+            threshold: .5
         }"
         transition="fade-transition"
         class="card--content"
     >
         <div 
             class="card--content cursor"
-            @click="goToGame()"
         >
             <div 
                 class="game--starts"
@@ -17,25 +16,25 @@
                 <p 
                     class="game--starts-date"
                 >
-                    {{ games.starting_at | properStartingTime }}
+                    {{ startingAt | properStartingTime }}
                 </p>
                 <p 
                     class="game--starts-status"
                 >
                     <span 
-                        v-if="games.status == 'FT'"
+                        v-if="gameStatus == 'FT'"
                     > 
                         {{ $t( `Games.finished` ) }}
                     </span>
                     <span 
-                        v-if="games.status == 'LIVE' || games.status == 'HT'"
+                        v-if="gameStatus == 'LIVE' || gameStatus == 'HT'"
                     >
                         {{ $t( `Games.live` ) }}
                     </span>
                     <span 
-                        v-if="games.status == 'NS'"
+                        v-if="gameStatus == 'NS'"
                     >
-                        {{ $t( `Games.starts` ) }} {{ displaytime(games.starting_at) }}
+                        {{ $t( `Games.starts` ) }} {{ displaytime(startingAt) }}
                     </span>
                 </p>
             </div>
@@ -45,8 +44,8 @@
                 <h5 
                     class="team-names"
                 >
-                    {{ games.home_team }}
-                        <span> {{ games.local_pos }} </span>
+                    {{ homeTeam }}
+                        <span> {{ homePos }} </span>
                 </h5>
             </div>
             <div 
@@ -61,20 +60,20 @@
                             :rotate="minuteBar.rotate"
                             :size="minuteBar.size"
                             :width="minuteBar.width"
-                            :value="games.minute || 0"
+                            :value="minute || 0"
                             color="#a72693"
                             v-on="on"
                         >
                             <p>
-                                {{ games.local_scr }}
+                                {{ homeScore }}
                                 :
-                                {{ games.visit_scr }}
+                                {{ awayScore }}
 
                                 <small 
                                     class="extra-time"
-                                    v-if="games.added_time > 0 && games.added_time <= 10"
+                                    v-if="addedTime > 0 && addedTime <= 10"
                                 >
-                                    {{ `+${games.added_time}'` }}
+                                    {{ `+${ addedTime }'` }}
                                 </small>
                             </p>
                         </v-progress-circular>
@@ -83,7 +82,7 @@
                     <span
                         class="tooltip--message"
                     >
-                        {{ $t( `Games.minute` ) }}: {{ games.minute }}'
+                        {{ $t( `Games.minute` ) }}: {{ minute }}'
                     </span>
                 </v-tooltip>
                 
@@ -92,14 +91,14 @@
                 class="w-100"
             >
                 <h5 class="team-names">
-                    {{ games.away_team }}
-                        <span> {{ games.visitor_pos }} </span>
+                    {{ awayTeam }}
+                        <span> {{ awayPos }} </span>
                 </h5>
             </div>
             <div 
                 class="events-box"
             >
-                <div 
+                <!-- <div 
                     class="events-wrapper"
                     v-for="(value, key , index) in events"
                     :key="index"
@@ -111,7 +110,7 @@
                         :tooltip="events[key].tooltip"
                     >
                     </tooltip>
-                </div>
+                </div> -->
             </div>
         </div>
      </v-lazy>
@@ -119,25 +118,51 @@
 
 <script>
 import moment from 'moment';
-import image1 from '../assets/livescore/number_1.png';
-import image2 from '../assets/livescore/number_2.png';
-import image3 from '../assets/livescore/number_3.png';
-import hot70 from '../assets/livescore/hot70.png';
-import hot30 from '../assets/livescore/hot30.png';
-import wait_goal from '../assets/livescore/wait_goal.png';
-import event_missed_penalty from '../assets/livescore/event_missed_penalty.png';
-import redcard from '../assets/livescore/redcard.png';
-import yellowcard from '../assets/livescore/yellowcard.png';
-import event_corner from '../assets/livescore/event_corner.png';
-import event_goal from '../assets/livescore/event_goal.png';
 
 export default {
     name: "singleCard",
 
     props: {
-        games: {
-            type:       Object,
-            required:   true
+        addedTime: {
+            required:   true,
+            type:       Number
+        },
+        awayScore: {
+            required:   true,
+            type:       Number
+        },
+        awayPos: {
+            required:   true,
+            type:       Number
+        },
+        awayTeam: {
+            required:   true,
+            type:       String
+        },
+        gameStatus: {
+            required:   true,
+            type:       String
+        },
+        homeScore: {
+            required:   true,
+            type:       Number
+        },
+        homeTeam: {
+            required:   true,
+            type:       String
+        },
+        homePos: {
+            required:   true,
+            type:       Number
+        },
+        startingAt: {
+            required:   true,
+            type:       String
+        },
+
+        minute: {
+            required:   true,
+            type:       Number
         }
     },
 
@@ -145,68 +170,10 @@ export default {
         return {
             isActive:   false,
             minuteBar: {
-              rotate: -90,
-              size: 50,
-              width: 4
-            },
-            events: {
-                image1: {
-                    image:      image1,
-                    tooltip:    this.$i18n.t("Games.gameEvents.match_mobility_1"),
-                    status:     (this.games.match_mobility != null && this.games.match_mobility != 0) ? this.games.match_mobility : false
-                },
-                image2: {
-                    image:      image2,
-                    tooltip:    this.$i18n.t("Games.gameEvents.match_mobility_2"),
-                    status:     (this.games.match_mobility != null && this.games.match_mobility != 0) ? this.games.match_mobility : false
-                },
-                image3: {
-                    image:      image3,
-                    tooltip:    this.$i18n.t("Games.gameEvents.match_mobility_3"),
-                    status:     (this.games.match_mobility != null && this.games.match_mobility != 0) ? this.games.match_mobility : false
-                },
-                hot70: {
-                    image:      hot70,
-                    tooltip:    this.$i18n.t("Games.gameEvents.hot70"),
-                    status:     (this.games.hot70 != null && this.games.hot70) ? true : false
-                },
-                hot30: {
-                    image:      hot30,
-                    tooltip:    this.$i18n.t("Games.gameEvents.hot30"),
-                    status:     (this.games.hot30 != null && this.games.hot30) ? true : false
-                },
-                wait_goal: {
-                    image:      wait_goal,
-                    tooltip:    this.$i18n.t("Games.gameEvents.wait_goal"),
-                    status:     this.games.wait_goal
-                },
-                event_missed_penalty: {
-                    image:      event_missed_penalty,
-                    tooltip:    this.$i18n.t("Games.gameEvents.missed_penalty"),
-                    status:     this.games.event_missed_penalty
-                },
-                redcard: {
-                    image:      redcard,
-                    tooltip:    this.$i18n.t("Games.gameEvents.redcard"),
-                    status:     this.games.redcard
-                },
-                yellowcard: {
-                    image:      yellowcard,
-                    tooltip:    this.$i18n.t("Games.gameEvents.yellowcard"),
-                    status:     this.games.yellowcard
-                },
-                event_corner: {
-                    image:      event_corner,
-                    tooltip:    this.$i18n.t("Games.gameEvents.event_corner"),
-                    status:     this.games.event_corner
-                },
-                event_goal: {
-                    image:      event_goal,
-                    tooltip:    this.$i18n.t("Games.gameEvents.event_goal"),
-                    status:     this.games.event_goal
-                }
-            },
-
+                rotate: -90,
+                size: 50,
+                width: 4
+            }
         }
     },
 
@@ -215,16 +182,6 @@ export default {
             let offset =  moment().utcOffset();
             let gametime = moment(time).add(offset, 'minutes');
             return moment(gametime).fromNow();
-        },
-
-        goToGame() {
-            this.$router.push({ 
-                name: "gameCard",
-                params: {
-                    status: this.games.status,
-                    gameID: this.games.id
-                }
-            });
         }
     },
 
@@ -234,9 +191,9 @@ export default {
 
     filters: {
         properStartingTime(value) {
-        let offset =  moment().utcOffset();
-        let date = moment(value).add(offset, 'minutes');
-        return date.format("HH:mm")
+            let offset =  moment().utcOffset();
+            let date = moment(value).add(offset, "minutes");
+            return date.format("HH:mm");
         }
     }
 }
@@ -244,9 +201,7 @@ export default {
 
 <style scoped>
 
-.cursor {
-    cursor: pointer;
-}
+
 
 .w-100 {
     width: 100%;

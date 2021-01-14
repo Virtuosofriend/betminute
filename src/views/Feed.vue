@@ -43,15 +43,16 @@
                     class="tabs--wrapper"
                 >
                     <v-tab-item
-                    style="background-color: transparent"
-                    value="live"
+                        style="background-color: transparent"
+                        value="live"
                     >
                         <v-responsive
                             class="overflow-y-auto"
                             max-height="960"
                         >
                             <livescore
-                                :data="feed"
+                                :gamesFeed="feed"
+                                v-if="feed.length > 0"
                             ></livescore>
                         </v-responsive>
                                 
@@ -59,7 +60,7 @@
 
                     <v-tab-item
                         style="background-color: transparent"
-                        class="scrollable overflow-y-auto"
+                        class="overflow-y-auto"
                         value="timeline"
                     >
                         <livescore
@@ -110,46 +111,44 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .daily--tip {
-  background: url("../assets/dashboard/dailytip.jpg") no-repeat 50% 30%;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  min-height: 350px;
-  border-radius: 15px;
+    background: url("../assets/dashboard/dailytip.jpg") no-repeat 50% 30%;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    min-height: 350px;
+    border-radius: 15px;
 }
 
 .daily--tip .overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0,0,0,.5);
-  z-index: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 0;
 }
 
 .daily--tip-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 1em;
-  position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1em;
+    position: relative;
 }
 
 .daily--tip-wrapper h2 {
-  font-weight: 400;
+    font-weight: 400;
 }
 
 .scrollable {
-  max-height: 960px;
-  overflow-y: scroll;
-  scrollbar-color: var(--theme-dark-border) var(--theme-dark-60);
-  scrollbar-width: none;
+    max-height: 960px;
+    overflow-y: scroll;
 }
 
 .feed--box {

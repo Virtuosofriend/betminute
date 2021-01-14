@@ -26,7 +26,7 @@ const fetchFeedData = async ({ commit } , payload) => {
         const message = [
             `{
                 "fetchdata":{
-                    "globaldata": ["livescore", "notstarted_livescore", "finished_livescore", "top_20_tipsters"]
+                    "globaldata": ["livescorev2", "notstarted_livescore", "finished_livescore", "top_20_tipsters"]
                     }
                 }
             `,
@@ -50,6 +50,7 @@ const fetchFeedData = async ({ commit } , payload) => {
 const setTipstersSelection = ({ commit }, payload) => {
     commit("saveTipsterSelection", payload);
 };
+
 
 export default {
     fetchDashboard,
