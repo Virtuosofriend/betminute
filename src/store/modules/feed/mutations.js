@@ -34,12 +34,16 @@ const saveTipsterSelection = (state, selection) => {
     state.top_tipsters_selection = selection;
 };
 
-  
+const saveFeedFilter = (state, filter) => {
+    state.filter_feed = filter;
+};
+
 export default {
     overgoalslists,
     topTipsters,
     saveLivescore,
     saveNotStarted,
     saveFinished,
-    saveTipsterSelection
+    saveTipsterSelection,
+    saveFeedFilter
 };

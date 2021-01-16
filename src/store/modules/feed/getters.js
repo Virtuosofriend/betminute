@@ -6,7 +6,25 @@ const topTipsters = state => state.topTipsters;
 const livescore = state => state.livescore;
 const notStarted = state => state.notStarted;
 const liveAndnotStarted = state => {
-    return state.livescore.concat(state.notStarted);
+
+    const feed = state.livescore.concat(state.notStarted);
+    const filters = state.filter_feed;
+    
+    if ( filters.length > 0 ) {
+        let results = [];
+
+        feed.forEach(elem => {
+            filters.forEach(filter => {
+                if ( elem.filters[filter] ) {
+                    results.push(elem);
+                }
+            });
+        });
+
+        return results;
+    }
+    
+    return feed;
 }
 const finished = state => state.finished;
 

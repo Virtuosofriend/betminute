@@ -65,7 +65,8 @@ const emitter = new Vue({
         },
 
         storeNotStarted(data) {
-            this.$store.commit("feed/saveNotStarted", data);
+            const payload = Object.values(data);
+            this.$store.commit("feed/saveNotStarted", payload);
         },
 
         storeFinished(data) {
@@ -141,8 +142,8 @@ socket.onmessage = response => {
             if ( socketResponse.data.livescorev2 ) {
                 emitter.storeLivescore(socketResponse.data.livescorev2);
             }
-            if ( socketResponse.data.notstarted_livescore ) {
-                emitter.storeNotStarted(socketResponse.data.notstarted_livescore);
+            if ( socketResponse.data.upcomming ) {
+                emitter.storeNotStarted(socketResponse.data.upcomming);
             }
             if ( socketResponse.data.finished_livescore ) {
                 emitter.storeFinished(socketResponse.data.finished_livescore);

@@ -38,7 +38,10 @@
         "firstHalf":        "First half",
         "secondaHalf":      "Second half",
         "fullMatch":        "Full match",
-        "search":           "Search..."
+        "search":           "Search...",
+        "noResultsGames":   "Unfortunately, we were unable to find what you are looking for!",
+        "noFilteringResult":"Oh, it seems that there are no games meeting your filtering options!",
+        "resetNoResults":   "Clear search"
     },
     "RightSidebar": {
         "topTipsters": {

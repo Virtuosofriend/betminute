@@ -41,6 +41,8 @@
 </template>
 
 <script>
+import { EventBus } from "../../plugins/EventBus";
+
 export default {
     name:   "Search__livescore",
 
@@ -58,6 +60,17 @@ export default {
         clear() {
             this.$emit("searchResult", null);
         }
+    },
+
+    mounted() {
+        EventBus.$on("resetSearch", ev => {
+            this.search = ev;
+            this.clear();
+        });
+    },
+
+    beforeDestroy() {
+        EventBus.$off("resetSearch");
     }
 }
 </script>

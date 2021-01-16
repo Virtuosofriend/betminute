@@ -52,7 +52,6 @@
                         >
                             <livescore
                                 :gamesFeed="feed"
-                                v-if="feed.length > 0"
                             ></livescore>
                         </v-responsive>
                                 
@@ -101,7 +100,7 @@ export default {
 		}
     },
 
-    mounted() {
+    created() {
         return this.sendGlobalData();
     },
 
@@ -118,8 +117,9 @@ export default {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    min-height: 350px;
+    min-height: 260px;
     border-radius: 15px;
+    background-position: bottom;
 }
 
 .daily--tip .overlay {
@@ -170,24 +170,10 @@ export default {
     width: 100%;
 }
 
-.country {
-    margin-left: 2em;
-    display: flex;
-    flex-direction: column;
-}
 .feed--box-header p {
     margin-bottom: 0;
     display: inline-flex;
     font-size: 14px;
 }
 
-p.country-name {
-    color: var(--v-accent-lighten3);
-    margin-left: 8px;
-}
-
-p.league-name {
-    color: var(--v-primary-base);
-    font-weight: 600;
-}
 </style>

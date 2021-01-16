@@ -98,19 +98,22 @@
             <div 
                 class="events-box"
             >
-                <!-- <div 
-                    class="events-wrapper"
-                    v-for="(value, key , index) in events"
-                    :key="index"
-                    v-show="value.status"
+                <v-chip 
+                    label
+                    small
+                    color="warning"
+                    v-if="matchTips"
                 >
-
-                    <tooltip
-                        :image="events[key].image"
-                        :tooltip="events[key].tooltip"
+                    <v-icon
+                        color="secondary"
+                        x-small
+                        class="mr-2"
                     >
-                    </tooltip>
-                </div> -->
+                        far fa-lightbulb
+                    </v-icon>
+                    <span class="secondary--text">Tips</span>
+                </v-chip>
+                
             </div>
         </div>
      </v-lazy>
@@ -124,8 +127,7 @@ export default {
 
     props: {
         addedTime: {
-            required:   true,
-            type:       Number
+            required:   true
         },
         awayScore: {
             required:   true,
@@ -133,7 +135,6 @@ export default {
         },
         awayPos: {
             required:   true,
-            type:       Number
         },
         awayTeam: {
             required:   true,
@@ -153,7 +154,10 @@ export default {
         },
         homePos: {
             required:   true,
-            type:       Number
+        },
+        matchTips: {
+            required:   false,
+            type:       Boolean
         },
         startingAt: {
             required:   true,
@@ -200,9 +204,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-
 .w-100 {
     width: 100%;
 }

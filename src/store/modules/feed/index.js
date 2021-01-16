@@ -11,7 +11,7 @@ const state = {
     livescore:              [],
     notStarted:             [],
     finished:               [],
-    searchable_feed:        []
+    filter_feed:            []
 };
 
 export default {
