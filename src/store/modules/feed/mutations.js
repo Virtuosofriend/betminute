@@ -38,12 +38,23 @@ const saveFeedFilter = (state, filter) => {
     state.filter_feed = filter;
 };
 
+const saveFavoriteInFeed = (state, data) => {
+    // state.favorite_games_ids.push(game_id);
+    state.favorite_games_ids = data;
+};
+
+const removeFavoriteInFeed = (state, game_id) => {
+    const position = state.favorite_games_ids.indexOf(game_id);
+    state.favorite_games_ids.splice(position, 1);
+}
 export default {
     overgoalslists,
+    removeFavoriteInFeed,
     topTipsters,
     saveLivescore,
     saveNotStarted,
     saveFinished,
     saveTipsterSelection,
+    saveFavoriteInFeed,
     saveFeedFilter
 };

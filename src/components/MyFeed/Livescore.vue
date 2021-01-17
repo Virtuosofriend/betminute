@@ -64,6 +64,29 @@
                         :minute="feed.minute"
                         :matchTips="feed.match_has_tips"
                     ></singleCard>
+
+                    <div class="ml-auto card--box_favorite">
+                        <add-to-favorites-btn
+                            :gameID="feed.id"
+                        >
+                            <template #icon>
+                                <v-icon
+                                    x-small
+                                    color="warning darken-2"
+                                    v-if="!feed.favorite"
+                                >
+                                    far fa-heart
+                                </v-icon>
+                                <v-icon
+                                    x-small
+                                    color="error lighten-2"
+                                    v-else
+                                >
+                                    fas fa-minus-circle
+                                </v-icon>
+                            </template>
+                        </add-to-favorites-btn>
+                    </div>
                 </div>
             </div>
         </template>
@@ -77,7 +100,8 @@ import { CONFIG } from "../../commons/config";
 import SearchLivescore from "./SearchLivescore.vue";
 import TableNoDataSearch from "../General/NoData/TableNoDataSearch.vue";
 import FiltersLivescore from "./FiltersLivescore.vue";
-import TableNoData from '../General/NoData/TableNoData.vue';
+import TableNoData from "../General/NoData/TableNoData.vue";
+import AddToFavoritesBtn from "./AddToFavoritesBtn.vue";
 
 export default {
     name: "Livescore",
@@ -101,7 +125,6 @@ export default {
     },
 
     methods: {
-        
         goToGame(id, status) {
             this.$router.push({ 
                 name: "gameCard",
@@ -110,7 +133,7 @@ export default {
                     gameID: id
                 }
             });
-        }
+        },
     },
 
     beforeDestroy() {
@@ -118,6 +141,7 @@ export default {
     },
 
     components: {
+        AddToFavoritesBtn,
         FiltersLivescore,
         singleCard: () => import("../SingleCard"),
         SearchLivescore,
@@ -128,6 +152,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card--box_favorite {
+    align-self: flex-end;
+}
 .cursor {
     cursor: pointer;
 }
@@ -137,7 +164,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     margin-left: 16px;
-    width: 150px;
+    width: 200px;
 }
 p.country-name {
     color: var(--v-accent-lighten3);

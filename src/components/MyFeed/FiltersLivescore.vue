@@ -1,51 +1,28 @@
 <template>
-    <v-btn-toggle
+    <v-select
+        :items="selection_items"
         v-model="selection"
-        small
-        background-color="transparent"
         dark
-        multiple
-        borderless
-        style="align-items:center"
-        @change="applyFilter()"
-      >
-        <v-btn 
-            depressed
-            color="accent lighten-1"
-            class="letter-spacing-initial text-transform-initial small-fs"
-            value="hot30"
-        >
-            <!-- <img :src="hot30"> -->
-            Hot <br>30
-        </v-btn>
-
-        <v-btn 
-            depressed
-            color="accent lighten-1"
-            class="letter-spacing-initial text-transform-initial small-fs"
-            value="hot70"
-        >
-            <!-- <img :src="hot70"> -->
-            Hot <br>70
-        </v-btn>
-
-        <v-btn 
-            depressed
-            color="accent lighten-1"
-            class="letter-spacing-initial text-transform-initial small-fs"
-            value="wait_goal"
-        >
-            <!-- <img :src="late"> -->
-            Late <br>Goal
-        </v-btn>
-      </v-btn-toggle>
+        solo
+        flat
+        dense
+        hide-details
+        label="Filters"
+        full-width
+        item-color="accent"
+        background-color="background lighten-2"
+        color="primary"
+        @change="emitSelection()"
+    >
+        <template #label>
+            <p class="small-fs">
+               {{ $t(`myFeed.filters.title`) }} 
+            </p>
+        </template>
+    </v-select>
 </template>
 
 <script>
-import hot30 from "../../assets/livescore/hot30.png";
-import hot70 from "../../assets/livescore/hot70.png";
-import late from "../../assets/livescore/lategoal.png";
-
 import { mapState } from "vuex";
 
 export default {
@@ -53,17 +30,31 @@ export default {
 
     data() {
         return {
-            selection:  [],
-            hot30,
-            hot70,
-            late
+            selection:  "",
+            
         }
     },
 
     computed: {
         ...mapState({
             filter: state => state.feed.filter_feed
-        })
+        }),
+
+        selection_items() {
+            return [{
+                id: 1,
+                text:   this.$i18n.t(`myFeed.filters.over05HT`),
+                value:  "over05HT"
+            },{
+                id: 2,
+                text:   this.$i18n.t(`myFeed.filters.over05FT`),
+                value:  "over05FT"
+            },{
+                id: 3,
+                text:   this.$i18n.t(`myFeed.filters.over15FT`),
+                value:  "over15FT"
+            }]
+        }
     },
 
     methods: {

@@ -11,7 +11,8 @@ const state = {
     livescore:              [],
     notStarted:             [],
     finished:               [],
-    filter_feed:            []
+    filter_feed:            "",
+    favorite_games_ids:     []
 };
 
 export default {

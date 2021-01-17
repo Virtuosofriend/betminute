@@ -45,6 +45,7 @@ const emitter = new Vue({
 
         storeUser(data) {      
             this.$store.dispatch("user/fetchUserPreferences", data);
+            this.$store.dispatch("feed/fetchFavsFromServer", data.preferences.favorite_games);
         },
 
         storeUserBanka(data) {

@@ -52,6 +52,9 @@
             "yield":        "Yield"
         }
     },
+    "FavoriteGames": {
+        "title":            "Favorite games"
+    },
     "Dashboard": {
         "title":            "System picks",
         "topTitle":         "Daily suggestion"
@@ -59,7 +62,13 @@
     "myFeed": {
         "livefeed":         "Live feed",
         "timeline":         "Timeline",
-        "favorites":        "Favorites"
+        "favorites":        "Favorites",
+        "filters": {
+            "title":        "Filters",
+            "over05HT":     "Over 0.5 in half time",
+            "over05FT":     "Over 0.5 in full time",
+            "over15FT":     "Over 1.5 in full time"
+        }
     },
     "Games": {
         "backToFeed":       "Back to feed",
