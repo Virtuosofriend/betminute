@@ -15,13 +15,13 @@
                 </h3>
 
                 <v-data-table
-                    v-if="active"
                     :headers="tableHeaders"
                     :items="active"
                     :items-per-page="50"
                     hide-default-footer
                     class="elevation-0 custom__table ma-3"
                     :item-class="itemRowBackground"
+                    :loading="loading"
                 >
                     <template
                         v-slot:item.logo="{ item }"
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "../../commons/api.service";
 import { mapGetters } from "vuex";
 
 export default {
@@ -73,45 +73,47 @@ export default {
             game_id:    this.$route.params.gameID,
             standings:  [],
             active:     [],
+            loading:    true,
             selection:  "sum"
         }
     },
 
     computed: {
         ...mapGetters({
-            game: "feed/allGames"
+            game: "feed/LiveUpcomingUnfiltered"
         }),
 
-        tableHeaders() { 
-            return Object.keys(this.active[0]).map(elem => {
-                return {
-                    text:   this.$i18n.t( `Games.standingsTab.${elem}` ),
-                    value:  elem
-                }
-            });
+        tableHeaders() {
+            if ( this.active.length > 0 ) {
+
+                return Object.keys(this.active[0]).map(elem => {
+                    return {
+                        text:   this.$i18n.t( `Games.standingsTab.${elem}` ),
+                        value:  elem
+                    }
+                });
+            }
+
+            return [];
         }
     },
 
     methods: {
         retrieveGameInformation() {
-            this.game.forEach( league => {
-                league.league_matches.forEach( game => {
-                    const result = game.match_data.find(elem => elem.id == this.game_id);
-                    if ( result ) {
-                        let { league_id, season_id, stage_id, group_id, round_id } = result;
-                        this.fetchData(league_id, season_id, stage_id, group_id, round_id);
-                    }
-                    
-                })
-            })
+            this.game.forEach( elem => {
+                if ( elem.id == this.game_id ) {
+                    return this.fetchData(elem.league_id, elem.season_id, elem.stage_id, elem.group_id, elem.round_id);
+                }
+            });
         },
 
 
         fetchData(league_id, season_id, stage_id, group_id, round_id) {
-            axios.get(`FetchBetMinNode.php?league_id=${ league_id }&stage_id=${ stage_id }&season_id=${ season_id }&group_id=${ group_id }&round_id=${ round_id }`)
+            api.bet_minute().get(`FetchBetMinNode.php?league_id=${ league_id }&stage_id=${ stage_id }&season_id=${ season_id }&group_id=${ group_id }&round_id=${ round_id }`)
                 .then( res => {
                     this.standings = res.data;
                     this.changeSelection();
+                    this.loading = false;
                 }).catch( e => {
                     console.log(e.response)
                 });
@@ -188,7 +190,7 @@ export default {
         dropdownSelection:  () => import("../../components/General/HomeAwayOverallDropdown"),
     },
 
-    mounted() {
+    created() {
         this.retrieveGameInformation()
     }
 }

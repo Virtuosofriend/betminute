@@ -16,6 +16,9 @@
                     <v-col cols="12">
                         <top-tipsters></top-tipsters>
                     </v-col>
+                    <v-col cols="12">
+                        <favorite-games></favorite-games>
+                    </v-col>
                 </v-row>            
             </v-container>
         </v-col>
@@ -23,13 +26,15 @@
 </template>
 
 <script>
+import FavoriteGames from "../components/RightSidebar/FavoriteGames.vue";
 import topTipsters from "../views/RightSidebar/PanelTopTipsters.vue";
 
 export default {
     name: "Main__layout",
     
     components: {
-        topTipsters
+        FavoriteGames,
+        topTipsters,
     },
 
     beforeRouteEnter(to, from, next) {

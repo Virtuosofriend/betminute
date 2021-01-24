@@ -134,7 +134,6 @@ export default {
     width: 100%;
     background-color: var(--theme-dark-10);
     border-radius: 15px;
-    flex-wrap: wrap;
     margin: .5em auto;
     min-height: 50px;
   }
@@ -197,14 +196,17 @@ export default {
       border: 0 !important;
   }
   tr.active {
-        background-color:var(--v-background-base) !important; 
+    background-color:var(--v-background-base) !important; 
   }
   .custom__table .v-data-footer {
-      background-color: var(--v-background-lighten2);
-      border-top: 0 !important;
+    background-color: var(--v-background-lighten2);
+    border-top: 0 !important;
   }
-.highcharts-area.zone-0 {
-  fill: #f7a35c;
+
+.custom__iterator .v-data-footer {
+    background-color: var(--v-accent-lighten1);
+    color: #fff;
+    border-radius: 6px;
 }
   /** Helpers **/
   .w-100 {

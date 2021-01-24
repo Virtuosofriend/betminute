@@ -3,8 +3,11 @@
         :value="overlay"
         z-index="999"
         color="background"
-        opacity="0.6"
+        opacity="0.9"
     >
+        <h2 style="text-transform:initial;">
+            Oh dang!
+        </h2>
         <p>
             Connection lost to the server, please reconnect!
         </p>

@@ -6,22 +6,63 @@ const topTipsters = state => state.topTipsters;
 const livescore = state => state.livescore;
 const notStarted = state => state.notStarted;
 const liveAndnotStarted = state => {
-  return state.livescore.concat(state.notStarted);
+
+    let feed = state.livescore.concat(state.notStarted);
+    const filter = state.filter_feed;
+    const fav_games = state.favorite_games_ids;
+
+    feed.filter(elem => {
+        elem.favorite = false;
+
+        fav_games.forEach(favorite => {
+            if ( favorite == elem.id ) {
+                elem.favorite = true;
+            }
+        });
+    });
+
+    if ( filter != "" ) {
+        let results = [];
+
+        results = feed.filter(elem => elem.filters[filter]);
+
+        return results;
+    }
+    
+    return feed;
 }
 const finished = state => state.finished;
 
-const allGames = state => {
-  return state.livescore.concat(state.finished).concat(state.notStarted);
+const LiveUpcomingUnfiltered = state => {
+  return state.livescore.concat(state.notStarted);
+};
+
+const favoriteFeed = state => {
+    const feed = state.livescore.concat(state.notStarted);
+    const fav_games = state.favorite_games_ids;
+    let results = [];
+    if ( fav_games.length > 0 ) {
+        feed.filter(elem => {
+            fav_games.forEach(games => {
+                if ( elem.id == games ) {
+                    results.push(elem);
+                }
+            })
+        });
+    }
+
+    return results;
 }
 
 export default {
-    allGames,
+    favoriteFeed,
     finished,
     listsOver1_5ft,
     listsOver0_5ht,
     listsOver0_5secondhalf,
     livescore,
     liveAndnotStarted,
+    LiveUpcomingUnfiltered,
     notStarted,
     topTipsters
 };
