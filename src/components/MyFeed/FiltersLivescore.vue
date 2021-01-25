@@ -12,7 +12,7 @@
         item-color="accent"
         background-color="background lighten-2"
         color="primary"
-        @change="emitSelection()"
+        @change="applyFilter()"
     >
         <template #label>
             <p class="small-fs">

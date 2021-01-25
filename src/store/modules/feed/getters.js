@@ -11,7 +11,7 @@ const liveAndnotStarted = state => {
     const filter = state.filter_feed;
     const fav_games = state.favorite_games_ids;
 
-    if ( fav_games && fav_games.length > 0 ) {
+    if ( fav_games.length > 0 ) {
         feed.filter(elem => {
             elem.favorite = false;
 
@@ -44,7 +44,7 @@ const favoriteFeed = state => {
     const fav_games = state.favorite_games_ids || [];
 
     let results = [];
-    if ( fav_games && fav_games.length > 0 ) {
+    if ( fav_games.length > 0 ) {
         feed.filter(elem => {
             fav_games.forEach(games => {
                 if ( elem.id == games ) {
