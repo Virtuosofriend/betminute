@@ -123,10 +123,7 @@
 
         <v-row v-else>
             <v-col cols="12">
-                <no-data 
-                    class="pa-2 text-center"
-                    :data-text="`${ $t('General.noContent')}`"
-                ></no-data>
+                <loading-state></loading-state>
             </v-col>
         </v-row>
 
@@ -135,7 +132,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import GameHeader from "../components/Game/Header";
 
 export default {
@@ -145,6 +142,7 @@ export default {
         return {
             game_id:                    this.$route.params.gameID,
             gameCardTab:                "",
+            loading:                    true,
         }
     },
 
@@ -176,8 +174,14 @@ export default {
 
     methods: {
         fetchAllGameData() {
+            const payload = this.$route.params;
+            this.$store.dispatch("game/gameInfo", payload);
             this.$store.dispatch("game/fetch_h2h", this.game_id);
-        }
+        },
+
+        ...mapMutations({
+            resetGameCard: "game/resetGame"
+        })
     },
 
     components: {
@@ -187,14 +191,17 @@ export default {
         teamstatsTab:       () => import("./GameCard/TeamStatsTab"),
         pastmeetingsTab:    () => import("./GameCard/PastMeetingsTab"),
         standingsTab:       () => import("./GameCard/StandingsTab"),
-        noData:             () => import("../components/General/NoData/GenericNoData"),
+        LoadingState:       () => import("../components/General/Notifications/LoadingState.vue"),
         TippingNotification:() => import("../components/General/Notifications/TippingNotification.vue")
     },
 
-    mounted() {
-        const payload = this.$route.params;
-        this.$store.dispatch("game/gameInfo", payload);
+    created() {
         this.fetchAllGameData();
+    },
+
+    beforeDestroy() {
+        this.resetGameCard();
+        this.$off("resetDialog");
     }
 }
 </script>

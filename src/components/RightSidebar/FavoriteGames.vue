@@ -43,6 +43,25 @@
                 </div>
             </v-col>
         </v-row>
+
+        <v-row v-else>
+            <v-col>
+            	<no-data
+			     	class="text-center"
+                	:data-text="`${ $t('General.noFavGames')}`"
+               	></no-data>
+
+               	<v-btn
+			   		color="accent"
+					small
+					depressed
+					class="button__gotofeed box__center"
+					@click="goToFeed()"
+				>
+					{{ $t( `FavoriteGames.addOne` )}}
+			   </v-btn>
+            </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -69,12 +88,19 @@ export default {
                     gameID: id
                 }
             });
-        },
+		},
+		
+		goToFeed() {
+			this.$router.push({
+				name:	"feed"
+			});
+		}
     },
 
     components: { 
         AddToFavoritesBtn, 
-        FavoriteGameCard, 
+        FavoriteGameCard,
+        noData: () => import("../General/NoData/GenericNoData")
     }
 }
 </script>
@@ -90,5 +116,14 @@ export default {
 
 .game__unfavorite {
     align-self: flex-end;
+}
+
+.box__center {
+	display: block;
+	margin: 12px auto;
+}
+.button__gotofeed {
+	text-transform: initial;
+	letter-spacing: 0;
 }
 </style>

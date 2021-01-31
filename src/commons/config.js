@@ -1,5 +1,8 @@
+const date = new Date();
+const day = date.getDay();
+
 export const CONFIG = {
-    default_socket_timer:       8,
+    default_socket_timer:       (day > 0 && day < 6) ? 4 : 0,
     main_api:                   process.env.VUE_APP_baseURL || "https://bet-minute.com/service/requests",
     login_api:                  "https://bet-minute.com/api/",
     default_language:           "en",

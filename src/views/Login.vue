@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import { required } from "vuelidate/lib/validators";
 import LoginNotification from '../components/General/Notifications/LoginNotification.vue';
 import { CONFIG } from "../commons/config";
@@ -159,6 +158,10 @@ export default {
             this.loading = false;
             this.message = ""
         }
+    },
+
+    beforeDestroy() {
+        this.$off("resetDialog");
     },
 
     components: { 

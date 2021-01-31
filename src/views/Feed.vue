@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
     name: "Livescore__feed",
@@ -97,11 +97,19 @@ export default {
     methods: {
 		sendGlobalData() {         
 			this.$store.dispatch("feed/fetchFeedData", {...this.userInfo})
-		}
+        },
+        
+        ...mapMutations({
+            clearFeed: "feed/resetFeed"
+        })
     },
 
     created() {
         return this.sendGlobalData();
+    },
+
+    beforeDestroy() {
+        this.clearFeed();
     },
 
     components: {

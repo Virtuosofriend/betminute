@@ -24,9 +24,8 @@
                         :gameData="game.bm_live_data"
                         :homeTeam="homeTeam.logo"
                         :awayTeam="awayTeam.logo"
-                        v-if="game.bm_live_data"
-                    >
-                    </game-live-stats>
+                        v-if="game.bm_live_data || game.bm_live_data != null"
+                    ></game-live-stats>
 
                     <no-data v-else 
                         class="pa-2 text-center"
