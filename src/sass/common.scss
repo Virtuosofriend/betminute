@@ -1,0 +1,52 @@
+body,html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    color: var(--v-background-base);
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color: var(--v-primary-base);
+    text-transform: uppercase;
+}
+
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
+    text-transform: lowercase;
+    font-size: 70%;
+    color: var(--v-primary-darken2);
+}
+
+button:focus {
+    outline:0 !important;
+}
+
+a {
+   outline: 0;
+}
+
+.v-application {
+    background-color: var(--v-background-base) !important;
+  }
+
+.container-top {
+    padding: 0 !important;
+}
+
+/** Helpers **/
+.h-100 {
+    height: 100%;
+}
+.w-100 {
+    width: 100%;
+}
+.letter-spacing-initial {
+    letter-spacing: initial !important;
+}
+.text-transform-initial {
+    text-transform: initial !important;
+}

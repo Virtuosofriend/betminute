@@ -358,6 +358,7 @@ export default {
 					}())
 				}],
 				annotations: [{
+                    draggable:          false,
 					labels: (function() {
 
 						let data_array = [{
@@ -367,7 +368,7 @@ export default {
 							useHTML: 			true,
 							text: 				`<img src="${ Home.logo }" style="width: 24px; height: 24px; object-fit: contain;">`,
 							backgroundColor: 	null,
-							borderWidth: 		0
+                            borderWidth: 		0,
 						}, {
 							y: 					5,
 							x: 					0,

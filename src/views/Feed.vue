@@ -19,7 +19,7 @@
                     background-color="background"
                     dark
                     v-model="tabs"
-                    slider-color="#2c343a"
+                    slider-color="transparent"
                     slider-size="1"
                 >
                         <v-tab 
@@ -47,14 +47,15 @@
                         value="live"
                     >
                         <v-responsive
-                            class="overflow-y-auto"
-                            max-height="960"
+                            class="overflow-y-auto pr-2"
+                            style="scrollbar-width: thin;"
+                            max-height="620"
                         >
                             <livescore
                                 :gamesFeed="feed"
                             ></livescore>
                         </v-responsive>
-                                
+                                                        
                     </v-tab-item>
 
                     <v-tab-item
@@ -128,6 +129,7 @@ export default {
     min-height: 260px;
     border-radius: 15px;
     background-position: bottom;
+    margin-bottom: 6px;
 }
 
 .daily--tip .overlay {
@@ -182,6 +184,10 @@ export default {
     margin-bottom: 0;
     display: inline-flex;
     font-size: 14px;
+}
+
+.tabs--wrapper {
+    margin-top: 6px;
 }
 
 </style>

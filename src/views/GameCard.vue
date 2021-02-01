@@ -3,6 +3,7 @@
       fluid
     >
         <v-row
+            no-gutters
             v-if="game.lineup"
         >
             <v-col 
@@ -24,7 +25,7 @@
                     background-color="background"
                     dark
                     v-model="gameCardTab"
-                    slider-color="info"
+                    slider-color="transparent"
                     slider-size="1"
                 >
                     <v-tab 

@@ -111,6 +111,10 @@ export default {
 .team-names {
     font-weight: 600;
     text-transform: initial;
+    width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .team-names span {

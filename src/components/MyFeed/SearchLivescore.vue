@@ -12,7 +12,7 @@
             clearable
             color="primary"
             background-color="accent lighten-1"
-            @keyup.enter="emit()"
+            @input="emit()"
             @click:clear="clear()"
         >
             <template v-slot:label>

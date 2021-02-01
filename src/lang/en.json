@@ -121,6 +121,16 @@
             "sendTip":              "Send tip",
             "tipSuccess":           "Your tip was submitted!"
         },
+        "belowHeader": {
+            "corners":              "Corners",
+            "yellowCards":          "Yellow cards",
+            "redCards":             "Red cards",
+            "attacks":              "Attacks",
+            "dAttacks":             "D.Attacks",
+            "shotsOn":              "Shots on target",
+            "shotsOff":             "Shots off target",
+            "posession":            "Posession"
+        },
         "attacks":                  "Attacks",
         "dangerousAttacks":         "Dangerous Attacks",
         "teamStatsTab": {

@@ -152,7 +152,7 @@ export default {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    border: 2px solid var(--theme-dark-10);
+    border: 2px solid var(--v-accent-base);
 }
 
 .sidebar--user-info {
@@ -165,13 +165,13 @@ export default {
 .username {
     padding: 2em 0em 1em 0em;
     width: 100%;
-    color: var(--theme-dark-30);
+    color: var(--v-primary-base);
     font-weight: 600;
     text-align: center;
 }
 
 .username span {
-    color: var(--theme-dark);
+    color: var(--v-dark-base);
     font-size: 80%;
 }
 
@@ -188,23 +188,23 @@ export default {
 }
 
 .sidebar--user-info .stats > .stats--box:last-of-type {
-    border-left: 1px solid var(--theme-dark-border);
+    border-left: 1px solid var(--v-dark_border-base);
 }
 
 .sidebar--user-info .stats i {
-    color: var(--theme-dark);
+    color: var(--v-dark-base);
     margin-right: .5em;
 }
 
 .sidebar--user-info .stats p {
-    color: var(--theme-dark-30);
+    color: var(--v-primary-base);
     font-size: 12px;
     display: inline-block;
     font-weight: 600;
 }
 
 .sidebar--user-info .stats p span {
-    color: var(--theme-dark);
+    color: var(--v-dark-base);
     display: block;
     font-weight: 300;
 }
@@ -227,7 +227,7 @@ export default {
     font-weight: 400;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
-    color: var(--theme-dark);
+    color: var(--v-dark-base);
 }
 
 .sidebar--menu .sidebar--menu__logout {
@@ -249,11 +249,11 @@ export default {
 .sidebar--menu a:hover {
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear;
-    color: var(--theme-dark-active);
+    color: var(--v-primary-base);
 }
 
 .sidebar--menu a.router-link-active {
-    color: var(--theme-dark-active);
+    color: var(--v-primary-base);
 }
 
 .sidebar--actions {
@@ -273,7 +273,7 @@ export default {
 }
 
 .sidebar--actions-low a:first-child {
-    border-top: 1px solid var(--theme-dark-10);
+    border-top: 1px solid var(--v-accent-base);
     padding-top: 2em;
 }
 </style>

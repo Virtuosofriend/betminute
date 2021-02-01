@@ -8,14 +8,14 @@
             <thead>
                 <tr> 
                     <th class="text-left"></th>
-                    <th class="text-left">Corners</th>
-                    <th class="text-left">Yellow cards</th>
-                    <th class="text-left">Red cards</th>
-                    <th class="text-left">Attacks</th>
-                    <th class="text-left">D.Attacks</th>
-                    <th class="text-left">Shots on target</th>
-                    <th class="text-left">Shots off target</th>
-                    <th class="text-left">Posession</th>
+                    <th class="text-left">{{ $t( `Games.belowHeader.corners`) }}</th>
+                    <th class="text-left">{{ $t( `Games.belowHeader.yellowCards`) }}</th>
+                    <th class="text-left">{{ $t( `Games.belowHeader.redCards`) }}</th>
+                    <th class="text-left">{{ $t( `Games.belowHeader.attacks`) }}</th>
+                    <th class="text-left">{{ $t( `Games.belowHeader.dAttacks`) }}</th>
+                    <th class="text-left">{{ $t( `Games.belowHeader.shotsOn`) }}</th>
+                    <th class="text-left">{{ $t( `Games.belowHeader.shotsOff`) }}</th>
+                    <th class="text-left">{{ $t( `Games.belowHeader.posession`) }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -106,17 +106,17 @@ export default {
 }
 
 .team__stats tr {
-    background-color: var(--theme-dark-10);
+    background-color: var(--v-accent-base);
 }
 
 .team__stats thead tr th {
     font-weight: 400;
-    color: var(--theme-dark-30);
+    color: var(--v-primary-base);
     border: 0 !important;
 }
 
 .team__stats td {
-    background-color: var(--theme-dark-60);
+    background-color: var(--v-background-base);
     border: 0 !important;
 }
 </style>
