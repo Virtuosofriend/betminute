@@ -13,7 +13,6 @@ export default new Vuetify({
             dark:                   "#363D44",
             dark_subtitle:          "#727c86",
             dark_border:            "#2b3339",
-            secondary:  		    "#181e23",
             accent:     		    "#2c343a",
             error:      		    "#a61127",
             info:       		    "#5F86A3",

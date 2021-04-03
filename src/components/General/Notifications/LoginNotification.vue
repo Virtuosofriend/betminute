@@ -17,7 +17,7 @@
                     <v-col cols="12">
                         <div class="block">
                             <p class="mt-4">
-                                Please stand by
+                                {{ $t( `General.standyBy` ) }}
                             </p>
                         </div>
                     </v-col>
@@ -64,7 +64,7 @@
                     text
                     @click="reset()"
                 >
-                    Close
+                    {{ $t( `General.close` ) }}
                 </v-btn>
             </v-card-actions>
         </v-card>

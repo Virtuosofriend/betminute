@@ -1,0 +1,106 @@
+/*** Cards  ***/
+.card--box {
+    display: flex;
+    width: 100%;
+    background-color: var(--v-accent-base);
+    border-radius: 15px;
+    margin: .5em auto;
+    min-height: 50px;
+}
+
+.card--box__title {
+    padding-left: .5em;
+    margin: .5em 0;
+    font-weight: 600;
+    text-transform: initial;
+}
+
+.card--content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: .5em 1em;
+}
+
+.card--content div {
+    width: 100%;
+}
+
+.card__box {
+    width: 100%;
+    background-color: var(--v-accent-base);
+    border-radius: 15px;
+    margin: .5em auto;
+    min-height: 50px;
+}
+
+.card__box-title {
+    padding-left: 16px;
+    padding-top: 10px;
+    font-weight: 600;
+    text-transform: initial;
+    font-size: 14px;
+}
+
+.theme--dark.v-tabs-items {
+    background-color: transparent !important;
+}
+
+.v-progress-circular__underlay {
+    z-index: 1;
+    stroke: var(--v-accent-base) !important;
+}
+
+.v-slide-group__content.v-tabs-bar__content {
+    background-color: var(--v-background-base) !important;
+}
+
+/** Tabs **/
+.v-tab {
+    text-transform: initial !important;
+}
+
+.theme--dark.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active), .theme--dark.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) > .v-icon, .theme--dark.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) > .v-btn, .theme--dark.v-tabs > .v-tabs-bar .v-tab--disabled {
+    color: var(--v-accent-lighten2) !important
+}
+.theme--dark.v-tabs .v-tab--active:hover::before, .theme--dark.v-tabs .v-tab--active::before {
+    opacity: 0 !important;
+}
+
+
+/** Tables **/
+.custom__table tr {
+    background-color: var(--v-accent-base);
+}
+
+.custom__table thead tr {
+    background-color: var(--v-background-lighten2);
+}
+
+.custom__table thead th {
+    border: 0 !important;
+}
+
+.custom__table tr {
+    border: 0;
+}
+
+.custom__table tbody td {
+    border: 0 !important;
+}
+
+tr.active {
+    background-color:var(--v-background-base) !important; 
+}
+
+.custom__table .v-data-footer {
+    background-color: var(--v-background-lighten2);
+    border-top: 0 !important;
+}
+
+.custom__iterator .v-data-footer {
+    background-color: var(--v-accent-lighten1);
+    color: #fff;
+    border-radius: 6px;
+}

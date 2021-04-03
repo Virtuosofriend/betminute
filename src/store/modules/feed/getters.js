@@ -11,15 +11,17 @@ const liveAndnotStarted = state => {
     const filter = state.filter_feed;
     const fav_games = state.favorite_games_ids;
 
-    feed.filter(elem => {
-        elem.favorite = false;
+    if ( fav_games.length > 0 ) {
+        feed.filter(elem => {
+            elem.favorite = false;
 
-        fav_games.forEach(favorite => {
-            if ( favorite == elem.id ) {
-                elem.favorite = true;
-            }
+            fav_games.forEach(favorite => {
+                if ( favorite == elem.id ) {
+                    elem.favorite = true;
+                }
+            });
         });
-    });
+    }
 
     if ( filter != "" ) {
         let results = [];
@@ -39,7 +41,8 @@ const LiveUpcomingUnfiltered = state => {
 
 const favoriteFeed = state => {
     const feed = state.livescore.concat(state.notStarted);
-    const fav_games = state.favorite_games_ids;
+    const fav_games = state.favorite_games_ids || [];
+
     let results = [];
     if ( fav_games.length > 0 ) {
         feed.filter(elem => {

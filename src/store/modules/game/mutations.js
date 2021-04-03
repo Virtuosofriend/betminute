@@ -8,9 +8,12 @@ const saveOdds =  (state, payload) => {
 
 const saveH2H = (state, list) => {
     state.h2h = list;
-}
+};
+
+const resetGame = (state) => state.game = {};
 
 export default {
+    resetGame,
     saveGame,
     saveOdds,
     saveH2H

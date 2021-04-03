@@ -95,6 +95,12 @@
                                         :tableData="tips.tips_info"
                                     ></tipping-table>
                                 </v-col>
+                                <v-col v-else>
+                                    <no-data
+                                        class="pa-2 text-center"
+                                        :data-text="`${ $t('General.noContent')}`"
+                                    ></no-data>
+                                </v-col>
                             </v-row>
                         </v-container>
                     </div>
@@ -124,7 +130,8 @@ export default {
         TippingTable,
         TotalBanka,
         SummaryPlayedColumns,
-        ExtraTipsterInfoBar
+        ExtraTipsterInfoBar,
+        noData:         () => import("../components/General/NoData/GenericNoData"),
     },
 
    

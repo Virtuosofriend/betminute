@@ -1,11 +1,13 @@
 <template>
-    <v-row>
+    <v-row no-gutters>
         <v-col 
-            class="col-md-2 sidebar">
+            class="col-md-2 sidebar"
+        >
             <router-view name="sidebar" />
         </v-col>
         <v-col 
-            class="col-md-8 main">
+            class="col-md-8 h-100 pl-2"
+        >
             <router-view name="main" />
         </v-col>
         <v-col

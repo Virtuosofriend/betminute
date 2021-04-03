@@ -45,7 +45,7 @@ const emitter = new Vue({
 
         storeUser(data) {      
             this.$store.dispatch("user/fetchUserPreferences", data);
-            this.$store.dispatch("feed/fetchFavsFromServer", data.preferences.favorite_games);
+            this.$store.dispatch("feed/fetchFavsFromServer", data.preferences.favorite_games || []);
         },
 
         storeUserBanka(data) {
@@ -102,7 +102,7 @@ const emitter = new Vue({
             this.$store.commit("general/showNotification", payload);
         }
     }
-})
+});
 
 socket.onmessage = response => {
     let TIMER = store.getters["socket/getSocketTimer"];
@@ -124,7 +124,7 @@ socket.onmessage = response => {
     if ( socketResponse.action == "getusertipinfo" ) {
         return emitter.storeUserBanka(socketResponse.data);
     }
-
+   
     if ( TIMER >= CONFIG.default_socket_timer ) {
 
         if ( socketResponse.action == "fetchdata" ) {

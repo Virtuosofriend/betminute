@@ -40,6 +40,10 @@ const routes = [
         },{
             name:       "gameCard",
             path:       "/feed/:status/game/:gameID",
+            beforeEnter: (to, from, next) => {
+                store.dispatch("socket/setTimerSocket", CONFIG.default_socket_timer);
+                next();
+            },
             components: {
                 main:     GameCard,
                 sidebar:  Sidebar
@@ -78,7 +82,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {  
   if (to.matched.some(record => record.meta.authentication)) {   
     if (store.getters["auth/isLoggedIn"]) {  
-        store.commit("socket/changeSocketTimer", CONFIG.default_socket_timer); 
+        // store.dispatch("socket/setTimerSocket", CONFIG.default_socket_timer / 2); 
         return next();
     }
     next("/login");

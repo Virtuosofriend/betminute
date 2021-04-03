@@ -1,46 +1,33 @@
 import Socket from "../../../plugins/socket"
 
 const fetchDashboard = ({ commit }, payload) => {
-    const message = [
+    const message =
         `{
             "fetchdata":{
                 "globaldata": ["dashboard", "top_20_tipsters"]
-                }
-            }
-        `,
-        `{
+            },
             "getusertipinfo": {
                 "user_id": ${ payload.id }
-                }
             }
-        `
-    ];
+        }`;
 
-    for (let i =0; i < message.length; i++) {
-        Socket.send(message[i]);
-    }
+    Socket.send(message);
 };
 
 const fetchFeedData = async ({ commit } , payload) => {    
     try {
-        const message = [
+        const message = 
             `{
                 "fetchdata":{
                     "globaldata": ["livescorev2", "upcomming", "finished_livescore", "top_20_tipsters"]
-                    }
-                }
-            `,
-            `{
+                },
                 "getusertipinfo": {
                     "user_id": ${ payload.id }
-                    }
                 }
-            `
-        ];
-
-        for (let i =0; i < message.length; i++) {
-            Socket.send(message[i]);
-        }
+            }`;
+        
+        Socket.send(message);
+        
 
     } catch(e) {
         return false;

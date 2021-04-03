@@ -204,21 +204,18 @@ export default {
 </script>
 
 <style scoped>
-.w-100 {
-    width: 100%;
-}
 .game--starts {
-  font-size: 12px;
-  width: 25em;
+    font-size: 12px;
+    width: 25em;
 }
 
 .game--starts .game--starts-date {
-  color: var(--theme-dark-30);
-  margin-bottom: 0;
+    color: var(--v-primary-base);
+    margin-bottom: 0;
 }
 .game--starts .game--starts-status {
-  color: var(--theme-dark-subtitle);
-  margin-bottom: 0;
+    color: var(--v-dark_subtitle-base);
+    margin-bottom: 0;
 }
 
 .team-names {
@@ -228,26 +225,26 @@ export default {
 }
 
 .team-names span {
-    color: var(--theme-dark-subtitle);
+    color: var(--v-dark_subtitle-base);
     font-weight: 400;
     font-size: 10px;
     margin-left: .3em;
 }
 .game--score {
-  width: 50px;
-  margin: 0 auto;
-  background-color:#38424b;
-  border-radius: 50%;
+    width: 50px;
+    margin: 0 auto;
+    background-color:#38424b;
+    border-radius: 50%;
 }
 .game--score p {
-  color: var(--theme-dark-30);
-  font-size: 12px;
-  margin-bottom: 0;
-  line-height: 1;
+    color: var(--v-primary-base);
+    font-size: 12px;
+    margin-bottom: 0;
+    line-height: 1;
 }
 
 .extra-time {
-    color: var(--theme-dark-30);
+    color: var(--v-primary-base);
     display: block;
     text-align: center;
     padding-top: .2em;

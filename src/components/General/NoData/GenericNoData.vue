@@ -26,7 +26,7 @@ div {
 }
 h5 {
     text-transform: initial;
-    color: var(--theme-dark-30);
+    color: var(--v-primary-base);
     opacity: .5;
     font-weight: 400;
 }

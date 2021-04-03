@@ -39,17 +39,24 @@ const saveFeedFilter = (state, filter) => {
 };
 
 const saveFavoriteInFeed = (state, data) => {
-    // state.favorite_games_ids.push(game_id);
     state.favorite_games_ids = data;
 };
 
 const removeFavoriteInFeed = (state, game_id) => {
     const position = state.favorite_games_ids.indexOf(game_id);
     state.favorite_games_ids.splice(position, 1);
-}
+};
+
+const resetFeed = (state) => {
+    state.livescore = [];
+    state.notStarted = [];
+    state.finished = [];
+};
+
 export default {
     overgoalslists,
     removeFavoriteInFeed,
+    resetFeed,
     topTipsters,
     saveLivescore,
     saveNotStarted,

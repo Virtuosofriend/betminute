@@ -15,11 +15,7 @@ const gameInfo = async ({ commit }, payload) => {
             }
         }`;     
         
-        Socket.send(message);
-        // setTimeout(() =>{
-        //     Socket.send(message);
-        // }, 500);
-        
+        Socket.send(message);       
 
     } catch(e) {
         return false;

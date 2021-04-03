@@ -33,6 +33,7 @@
         "away":             "Away",
         "overall":          "Overall",
         "noContent":        "No data available",
+        "noFavGames":       "No games in your list",
         "of":               "of",
         "results":          "Results per page",
         "firstHalf":        "First half",
@@ -41,7 +42,12 @@
         "search":           "Search...",
         "noResultsGames":   "Unfortunately, we were unable to find what you are looking for!",
         "noFilteringResult":"Oh, it seems that there are no games meeting your filtering options!",
-        "resetNoResults":   "Clear search"
+        "resetNoResults":   "Clear search",
+        "standyBy":         "Please stand by",
+        "close":            "Close"
+    },
+    "Loading": {
+        "pleaseWait":       "Please wait while loading..."
     },
     "RightSidebar": {
         "topTipsters": {
@@ -53,7 +59,8 @@
         }
     },
     "FavoriteGames": {
-        "title":            "Favorite games"
+        "title":            "Favorite games",
+        "addOne":           "Add one"
     },
     "Dashboard": {
         "title":            "System picks",
@@ -113,6 +120,16 @@
             "betSlip":              "Bet Slip",
             "sendTip":              "Send tip",
             "tipSuccess":           "Your tip was submitted!"
+        },
+        "belowHeader": {
+            "corners":              "Corners",
+            "yellowCards":          "Yellow cards",
+            "redCards":             "Red cards",
+            "attacks":              "Attacks",
+            "dAttacks":             "D.Attacks",
+            "shotsOn":              "Shots on target",
+            "shotsOff":             "Shots off target",
+            "posession":            "Posession"
         },
         "attacks":                  "Attacks",
         "dangerousAttacks":         "Dangerous Attacks",

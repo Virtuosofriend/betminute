@@ -1,6 +1,6 @@
 {
     "name": "betmin",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
@@ -33,6 +33,7 @@
         "eslint-plugin-vue": "^6.2.2",
         "sass": "^1.27.1",
         "sass-loader": "^8.0.0",
+        "speed-measure-webpack-plugin": "^1.4.2",
         "vue-cli-plugin-vuetify": "^2.0.7",
         "vue-template-compiler": "^2.6.12",
         "vuetify-loader": "^1.6.0",
